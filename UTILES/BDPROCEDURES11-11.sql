@@ -198,7 +198,7 @@ IS
 BEGIN
 open cliente for 
 SELECT cliente.id_cliente,cliente.nombre FROM cliente, profesional,contrato_servicio where contrato_servicio.id_cliente=cliente.id_cliente
-and contrato_servicio.id_profesional=profesional.rut_profesional and profesional.rut_profesional=v_1;
+and contrato_servicio.id_profesional=profesional.rut_profesional and profesional.id_user=v_1;
 
 END;
 
@@ -486,10 +486,10 @@ tiposolicitud out
 sys_refcursor) 
 IS
 BEGIN
-open tiposolicitud for SELECT solicitud_asesoria.id_solicitud, cliente.nombre FROM tipo_solicitud,solicitud_asesoria,cliente 
+open tiposolicitud for SELECT solicitud_asesoria.id_solicitud, cliente.nombre FROM tipo_solicitud,solicitud_asesoria,cliente,profesional
 where tipo_solicitud.id_tiposolicitud=solicitud_asesoria.tipo_solicitud
 and cliente.id_cliente=solicitud_asesoria.id_cliente  and solicitud_asesoria.id_estado=1 and solicitud_asesoria.tipo_solicitud=1
-and solicitud_asesoria.id_profesional=v_1 ;
+and solicitud_asesoria.id_profesional=profesional.rut_profesional and profesional.id_user=v_1 ;
 END;
 
 create or replace NONEDITIONABLE procedure tipocapacitacion(v_1 in number,
@@ -530,14 +530,15 @@ IS
 BEGIN
 open tiposolicitud for SELECT solicitud_asesoria.id_solicitud, cliente.nombre,
 checklist.nro_checklist
-FROM tipo_solicitud,solicitud_asesoria,cliente, checklist
+FROM tipo_solicitud,solicitud_asesoria,cliente, checklist, profesional
 where tipo_solicitud.id_tiposolicitud=solicitud_asesoria.tipo_solicitud
 and cliente.id_cliente=solicitud_asesoria.id_cliente  
 and solicitud_asesoria.tipo_solicitud=3 
 and solicitud_asesoria.id_estado=1
 and checklist.id_cliente=cliente.id_cliente
-and solicitud_asesoria.id_profesional=v_1 ;
+and solicitud_asesoria.id_profesional=profesional.rut_profesional and profesional.id_user=v_1 ;
 END;
+
 
 create or replace NONEDITIONABLE procedure sp_listar_capacitacion(v_1 in number,
 capacitacion out 
@@ -550,4 +551,17 @@ and cliente.id_cliente=solicitud_asesoria.id_cliente
 and profesional.rut_profesional=solicitud_asesoria.id_profesional
 and profesional.id_user=v_1;
 
+END;
+
+
+create or replace NONEDITIONABLE procedure sp_listar_visita(v_1 in number,
+visita out 
+sys_refcursor) 
+IS
+BEGIN
+open visita for SELECT visita.id_visita,visita.fecha, visita.descripcion, visita.id_estado, cliente.nombre, profesional.rut_profesional
+FROM visita,cliente,profesional,solicitud_asesoria where visita.id_solicitud=solicitud_asesoria.id_solicitud
+and cliente.id_cliente=solicitud_asesoria.id_cliente
+and profesional.rut_profesional=solicitud_asesoria.id_profesional
+and profesional.id_user=v_1;
 END;

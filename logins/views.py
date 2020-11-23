@@ -147,13 +147,6 @@ def eliminarProfesionales(request, rut_profesional):
 
 ######################################################################## VISITAS
 
-def listadoVisitas(request):
-
-    visitas = Visita.objects.all() #Error boligatorio, si compila
-    datosvisi = {
-        'visitas':visitas
-    }
-    return render(request, "VisitasCRUD/listadoVisitas.html", datosvisi)
 
 def solicitudesV(x):
     django_cursor = connection.cursor()
@@ -166,10 +159,10 @@ def solicitudesV(x):
     return lista
 
 
-def crearVisitas(request):
+def crearVisitas(request,id):
     
     data = {
-        'solicitudes': solicitudesV(172876595),
+        'solicitudes': solicitudesV(id),
     }
     if request.method == 'POST':
         fecha = request.POST.get('fecha')
@@ -179,7 +172,6 @@ def crearVisitas(request):
         salida = crear_visita(fecha,id_solicitud,descripcion,nro_checklist)
         if salida == 1:
             data['mensaje'] = 'Visita Creada'
-            return redirect('listadoVisitas')
         else:
             data['mensaje'] = 'error'
 
@@ -293,9 +285,9 @@ def eliminarClientes(request, id_cliente):
 
 ######################################################################## ASESORIAS
 
-def listadoAsesorias(request):
+def listadoAsesorias(request,id):
     data = {
-        'asesoria':listado_Asesorias(172876595)
+        'asesoria':listado_Asesorias(id)
     }
     return render(request, 'AsesoriasCRUD/listadoAsesorias.html',data)
 
@@ -322,10 +314,10 @@ def solicitudesA(x):
     return lista
 
 
-def crearAsesorias(request):
+def crearAsesorias(request,id):
     
     data = {
-        'solicitudes': solicitudesA(172876595),
+        'solicitudes': solicitudesA(id),
     }
     if request.method == 'POST':
         fecha = request.POST.get('fecha')
@@ -417,10 +409,10 @@ def listado_clienteProfesional(x):
         lista.append(fila)
     return lista
 ################ID PROF3ESIONAL LOGEAOO PLSS (REQUEST, ID)
-def crearChecklist(request):
+def crearChecklist(request,id):
     
     data = {
-        'cliente' : listado_clienteProfesional(172876595),
+        'cliente' : listado_clienteProfesional(id),
     }
     if request.method == 'POST':
         descripcion = request.POST.get('descripcion_check')
@@ -1093,6 +1085,24 @@ def listado_capacitacion(id_pro):
     cursor = django_cursor.connection.cursor()
     out_cur = django_cursor.connection.cursor() 
     cursor.callproc("SP_LISTAR_capacitacion", [id_pro,out_cur])
+
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+    return lista
+
+def listadoVisitas(request,id):
+    visitas=listado_visita(id)
+    datosvisi = {
+        'visitas':visitas
+    }
+    return render(request, "VisitasCRUD/listadoVisitas.html", datosvisi)
+
+def listado_visita(id_pro):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor() 
+    cursor.callproc("SP_LISTAR_visita", [id_pro,out_cur])
 
     lista = []
     for fila in out_cur:

@@ -103,9 +103,8 @@
                       <th>N°</th>
                       <th>Fecha</th>
                       <th>Cantidad asistentes</th>
-                      <th>Capacitacion para cliente N°</th>
-                      <th>Profesional responsable</th>
-                      <th>Descripcion</th>
+                      <th>Empresa Cliente</th>
+                      <th>Estado capacitación</th>
                       <th>Opciones</th>
                   </tr>
               </thead>
@@ -116,9 +115,11 @@
                       <td>{{ capacitacion.1 }}</td>
                       <td>{{ capacitacion.2 }} </td>
                       <td>{{ capacitacion.3 }}</td>
-                      <td>{{ capacitacion.4 }}</td>
-                      <td>{{ capacitacion.5 }}</td>
-
+                      {% if capacitacion.4 == 1 %}
+                      <td>Pendiente</td>
+                      {% else %}
+                      <td>Listo</td>
+                      {% endif %}
                       <td>
                       <a input type="button" class="button button8" href="{% url 'eliminarCapacitaciones' capacitacion.0 %}" onclick="return confirm('¿Estás seguro de querer eliminar este dato?')">Listo</a>
                       </td>

@@ -200,9 +200,9 @@
     <div class="icon-box icon-box-pink">
       <div class="icon"><i class="bx bx-car"></i></div>
       <h4 class="title"><a href='listadoVisitas.html'>Visitas</a></h4>
-      <div><input type="button" onclick="location.href='crearVisitas.html';" value="Crear" class="button button5"/></div>
+      <div><input type="button" onclick="location.href='{% url 'crearVisitas' user.id %}'" value="Crear" class="button button5"/></div>
       <p class="description">Cree una visita para un cliente.</p>
-      <div><input type="button" onclick="location.href='listadoVisitas.html';" value="Ver" class="button button5"/></div>
+      <div><input type="button" onclick="location.href='{% url 'listadoVisitas' user.id %}'"value="Ver" class="button button5"/></div>
       <p class="description">Liste las visitas de sus clientes asociados, modique o cambie el estado.</p>
     </div>
   </div>
@@ -212,9 +212,9 @@
   <div class="icon-box icon-box-cyan">
     <div class="icon"><i class="bx bx-clipboard"></i></div>
       <h4 class="title"><a href='listadoAsesorias.html'>Asesorias</a></h4>
-      <div><input type="button" onclick="location.href='crearAsesorias.html';" value="Crear" class="button button5"/></div>
+      <div><input type="button" onclick="location.href='{% url 'crearAsesorias' user.id %}'" value="Crear" class="button button5"/></div>
       <p class="description">Cree una asesoria para un cliente. </p>
-      <div><input type="button" onclick="location.href='listadoAsesorias.html';" value="Ver" class="button button5"/></div>
+      <div><input type="button" onclick="location.href='{% url 'listadoAsesorias' user.id %}'" value="Ver" class="button button5"/></div>
       <p class="description">Vea las asesorias de sus clientes asociados.</p>
   </div>
 </div>
@@ -223,7 +223,7 @@
   <div class="icon-box icon-box-green">
     <div class="icon"><i class="bx bx-check-square"></i></div>
     <h4 class="title"><a href="">Checklist</a></h4>
-    <div><input type="button" onclick="location.href='crearChecklist.html';" value="Crear" class="button button5"/></div>
+    <div><input type="button" onclick="location.href='{% url 'crearChecklist' user.id %}'" value="Crear" class="button button5"/></div>
     <p class="description">Cree un checklist para una empresa a evaluar.</p>
     <div><input type="button" onclick="location.href='listadoChecklist.html';" value="Ver" class="button button5"/></div>
     <p class="description">Vea las checklist pendientes y completadas.</p>

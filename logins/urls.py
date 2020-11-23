@@ -31,8 +31,8 @@ urlpatterns = [
     path("editarCapacitaciones/<nro_capacitacion>", views.editarCapacitaciones, name="editarCapacitaciones"),
     path("eliminarCapacitaciones/<nro_capacitacion>", views.eliminarCapacitaciones, name="eliminarCapacitaciones"),
 
-    path("listadoVisitas.html", views.listadoVisitas, name="listadoVisitas"), 
-    path("crearVisitas.html", views.crearVisitas, name="crearVisitas"), 
+    path("listadoVisitas.html/<id>", views.listadoVisitas, name="listadoVisitas"), 
+    path("crearVisitas.html/<id>", views.crearVisitas, name="crearVisitas"), 
     path('editarVisitas/<id_visita>', editarVisitas, name='editarVisitas'), 
     path('eliminarVisitas/<id_visita>', eliminarVisitas, name = 'eliminarVisitas'),
 
@@ -41,8 +41,8 @@ urlpatterns = [
     path('editarProfesionales/<rut_profesional>', editarProfesionales, name='editarProfesionales'), 
     path('eliminarProfesionales/<rut_profesional>', eliminarProfesionales, name = 'eliminarProfesionales'),
 
-    path("listadoAsesorias.html", views.listadoAsesorias, name="listadoAsesorias"),
-    path("crearAsesorias.html", views.crearAsesorias, name="crearAsesorias"),
+    path("listadoAsesorias.html/<id>", views.listadoAsesorias, name="listadoAsesorias"),
+    path("crearAsesorias.html/<id>", views.crearAsesorias, name="crearAsesorias"),
     path('editarAsesorias/<id_asesoria>', editarAsesorias, name='editarAsesorias'), 
     path('eliminarAsesorias/<id_asesoria>', eliminarAsesorias, name = 'eliminarAsesorias'),
     
@@ -54,7 +54,7 @@ urlpatterns = [
     path('crearSolicitud.html', crearSolicitud, name = 'crearSolicitud'),
 
     path("listadoChecklist.html", views.listadoChecklist, name="listadoChecklist"),
-    path("crearChecklist.html", views.crearChecklist, name="crearChecklist"),
+    path("crearChecklist.html/<id>", views.crearChecklist, name="crearChecklist"),
     path("crearChecklist2.html", views.listadoDetSP, name="siguienteChecklist"),
     path('eliminarDetalle/<id>', eliminarDetalle, name = 'eliminarDetalle'),
     path('eliminarChecklist/<id>', eliminarChecklist, name = 'eliminarChecklist'),
