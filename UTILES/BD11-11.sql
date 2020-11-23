@@ -15,6 +15,47 @@ DROP TABLE ESTADO_ACTIVIDAD CASCADE CONSTRAINTS;
 DROP TABLE ESTADO_CONTRATO CASCADE CONSTRAINTS;
 DROP TABLE ACCIDENTE CASCADE CONSTRAINTS;
 DROP TABLE TIPO_SOLICITUD CASCADE CONSTRAINTS;
+---LIMPIAR BD NO MAS ACCIDENTES
+DROP TABLE ADMINISTRADOR CASCADE CONSTRAINTS;
+DROP TABLE ASESORIA CASCADE CONSTRAINTS;
+DROP TABLE CAPACITACION CASCADE CONSTRAINTS;
+DROP TABLE CHECKLIST CASCADE CONSTRAINTS;
+DROP TABLE CLIENTE CASCADE CONSTRAINTS;
+DROP TABLE CONDICION CASCADE CONSTRAINTS;
+DROP TABLE CONTRATO_SERVICIO CASCADE CONSTRAINTS;
+DROP TABLE DET_CHECKLIST CASCADE CONSTRAINTS;
+DROP TABLE PAGO CASCADE CONSTRAINTS;
+DROP TABLE PROFESIONAL CASCADE CONSTRAINTS;
+DROP TABLE SOLICITUD_ASESORIA CASCADE CONSTRAINTS;
+DROP TABLE VISITA CASCADE CONSTRAINTS;
+
+
+--LIMPIAR TALBAS DJANGO
+delete from auth_group;
+delete from auth_group_permissions;
+delete from auth_permission;
+delete from auth_user;
+delete from auth_user_groups;
+delete from auth_user_user_permissions;
+delete from django_admin_log;
+delete from django_content_type;
+delete from django_migrations;
+delete from django_session;
+
+--BORRAR TALBAS DJANGO
+
+DROP TABLE auth_group CASCADE CONSTRAINTS;
+DROP TABLE auth_group_permissions CASCADE CONSTRAINTS;
+DROP TABLE auth_permission CASCADE CONSTRAINTS;
+DROP TABLE auth_user CASCADE CONSTRAINTS;
+DROP TABLE auth_user_groups CASCADE CONSTRAINTS;
+DROP TABLE auth_user_user_permissions CASCADE CONSTRAINTS;
+DROP TABLE django_admin_log CASCADE CONSTRAINTS;
+DROP TABLE django_content_type CASCADE CONSTRAINTS;
+DROP TABLE django_migrations CASCADE CONSTRAINTS;
+DROP TABLE django_session CASCADE CONSTRAINTS;
+
+
 
 CREATE TABLE tipo_solicitud(
     id_tiposolicitud NUMBER(2) NOT NULL,
@@ -211,10 +252,6 @@ ALTER TABLE asesoria
         REFERENCES solicitud_asesoria ( id_solicitud );
 
 
-ALTER TABLE cliente
-    ADD CONSTRAINT cliente_administrador_fk FOREIGN KEY ( id_admin )
-        REFERENCES administrador ( id_admin );
-
 ALTER TABLE contrato_servicio
     ADD CONSTRAINT contrato_servicio_cliente_fk FOREIGN KEY ( id_cliente )
         REFERENCES cliente ( id_cliente );
@@ -230,10 +267,6 @@ ALTER TABLE det_checklist
 ALTER TABLE pago
     ADD CONSTRAINT pago_contrato_servicio_fk FOREIGN KEY ( id_servicio )
         REFERENCES contrato_servicio ( id_servicio );
-
-ALTER TABLE profesional
-    ADD CONSTRAINT profesional_administrador_fk FOREIGN KEY ( id_admin )
-        REFERENCES administrador ( id_admin );
 
 ALTER TABLE solicitud_asesoria
     ADD CONSTRAINT solicitud_asesoria_cliente_fk FOREIGN KEY ( id_cliente )
@@ -299,3 +332,4 @@ ALTER TABLE checklist
 ALTER TABLE checklist
     ADD CONSTRAINT checklist_cliente_fk FOREIGN KEY ( id_cliente )
         REFERENCES cliente ( id_cliente );
+
