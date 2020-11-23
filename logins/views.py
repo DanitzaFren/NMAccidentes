@@ -351,6 +351,7 @@ def crear_asesoria(fecha,id_solicitud):
     salida = cursor.var(cx_Oracle.NUMBER)
     cursor.callproc('AGREGAR_ASESORIA',[ fecha,id_solicitud,salida])
     return salida.getvalue()
+
 def editarAsesorias(request, id_asesoria):
     asesoria = Asesoria.objects.get(id_asesoria = id_asesoria) #Error obligatorio, si compila
     formularioAsesorias = {   
@@ -550,7 +551,7 @@ def eliminarChecklist(request, id ):
         eliminado.delete()
             
     else:
-            data['mensaje'] = 'error'
+        data['mensaje'] = 'error'
             
 
     return redirect(to="crearChecklist")
@@ -667,7 +668,6 @@ def crearCondicion(request):
             return redirect('listadoCondicion')
         else:
             data['mensaje'] = 'error'
-            
     return render(request, "CondicionCRUD/crearCondicion.html", data)
 
 def crear_condicion(nom_condicion):
@@ -676,6 +676,7 @@ def crear_condicion(nom_condicion):
     salida = cursor.var(cx_Oracle.NUMBER)
     cursor.callproc('AGREGAR_CONDICION',[ nom_condicion,salida])
     return salida.getvalue()
+
 def editarCondicion(request, id_condicion):
     condicion = Condicion.objects.get(id_condicion = id_condicion) #Error obligatorio, si compila
     formularioCon = {   
@@ -729,7 +730,8 @@ def crear_contrato(fecha_inicio,fecha_termino,id_cliente,id_profesional):
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
     cursor.callproc('AGREGAR_CONTRATO',[ fecha_inicio, fecha_termino, id_cliente, id_profesional,salida])           
-    return salida.getvalue()
+    return salida.getvalue()     
+
 def editarContrato(request, id_servicio):
     contrato = ContratoServicio.objects.get(id_servicio = id_servicio) #Error obligatorio, si compila
     formularioCon = {   
