@@ -232,12 +232,12 @@ def rubros():
     return lista
 
 
-def agregarcliente(id_cliente,direccion, nombre,rubro,correo,id_admin):
+def agregarcliente(id_cliente,direccion, nombre,rubro):
     
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
-    cursor.callproc('AGREGAR_CLIENTE',[id_cliente, direccion, nombre,rubro,correo,id_admin,salida])
+    cursor.callproc('AGREGAR_CLIENTE',[id_cliente, direccion, nombre,rubro,salida])
     
     return salida.getvalue()
 
@@ -264,11 +264,9 @@ def crearClientes(request):
     if request.method == 'POST':
         id_cliente = request.POST.get('id_cliente')
         direccion = request.POST.get('direccion')
-        correo = request.POST.get('correo')
-        id_admin = request.POST.get('id_admin')
         rubro = request.POST.get('rubro')
         nombre = request.POST.get('nombre')
-        salida = agregarcliente(id_cliente,direccion,nombre,rubro,correo,id_admin)
+        salida = agregarcliente(id_cliente,direccion,nombre,rubro)
         if salida == 1:
             data['mensaje'] = 'agregado'
             return redirect('register_Cliente')

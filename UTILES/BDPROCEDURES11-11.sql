@@ -539,31 +539,3 @@ checklist.id_cliente=cliente.id_cliente
 and solicitud_asesoria.id_profesional=v_1 ;
 END;
 
-
-CREATE OR REPLACE TRIGGER administrador_on_insert_ID
-  BEFORE INSERT ON administrador
-  FOR EACH ROW
-BEGIN
-  SELECT administrador_ID_sequence.nextval
-  INTO :new.id
-  FROM dual;
-END;
-
-
-CREATE OR REPLACE TRIGGER CLIENTE_on_insert_ID
-  BEFORE INSERT ON CLIENTE
-  FOR EACH ROW
-BEGIN
-  SELECT CLIENTE_ID_sequence.nextval
-  INTO :new.id
-  FROM dual;
-END;
-
-CREATE OR REPLACE TRIGGER PROFESIONAL_on_insert_ID
-  BEFORE INSERT ON PROFESIONAL
-  FOR EACH ROW
-BEGIN
-  SELECT PROFESIONAL_ID_sequence.nextval
-  INTO :new.id_d
-  FROM dual;
-END;
