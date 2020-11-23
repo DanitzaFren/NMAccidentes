@@ -12,7 +12,7 @@ from .views import  crearSolicitud
 from . import views
 from .views import crearCondicion, listadoCondicion, editarCondicion, eliminarCondicion
 from .views import crearContrato,listadoContrato, editarContrato, reporteAccidente, listadoAccidente, listadoPagos, actualizarPago, listadoActividadAdm, listadoAtrasos
-
+from .views import enviarCorreo
 # Definicion de las Urls
 urlpatterns = [
     path('', views.inicio, name="ndex"),
@@ -89,4 +89,6 @@ urlpatterns = [
 
     path("listadoChecklistCliente.html", views.verChecklistCliente, name="listadoChecklistCliente"),
     path("verChecklistsCliente/<id>", views.verChecklistCl, name="verChecklistCliente"),
+
+    path('enviarCorreo/<correo>', enviarCorreo, name = 'enviarCorreo'),
 ]

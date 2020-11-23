@@ -299,8 +299,8 @@ atrasos out
 sys_refcursor) 
 IS
 BEGIN
-open atrasos for select pago.id_pago,contrato_servicio.id_cliente, cliente.nombre ,fecha_vencimiento from pago, contrato_servicio,cliente where pago.id_servicio=contrato_servicio.id_servicio
-and cliente.id_cliente=contrato_servicio.id_cliente and fecha_vencimiento < sysdate and pago <=0;
+open atrasos for select pago.id_pago,contrato_servicio.id_cliente, cliente.nombre ,fecha_vencimiento,auth_user.email from pago, contrato_servicio,cliente,auth_user where pago.id_servicio=contrato_servicio.id_servicio
+and cliente.id_cliente=contrato_servicio.id_cliente and cliente.id_user = auth_user.id and fecha_vencimiento < sysdate and pago <=0;
         commit;
 END;
 

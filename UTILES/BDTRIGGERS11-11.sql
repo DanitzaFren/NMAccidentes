@@ -321,3 +321,13 @@ BEGIN
   INTO :new.id_estado
   FROM dual;
 END;
+
+create or replace NONEDITIONABLE TRIGGER pago_paago
+  BEFORE INSERT ON pago
+  FOR EACH ROW
+BEGIN
+
+  SELECT 0
+  INTO :new.pago
+  FROM dual;
+END;
