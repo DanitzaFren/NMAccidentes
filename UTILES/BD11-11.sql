@@ -223,7 +223,6 @@ ALTER TABLE profesional ADD CONSTRAINT profesional_pk PRIMARY KEY ( rut_profesio
 
 CREATE TABLE solicitud_asesoria (
     id_solicitud          NUMBER(4) NOT NULL,
-    solicitud             VARCHAR2(50) NOT NULL,
     id_cliente            VARCHAR2(50) NOT NULL,
     id_profesional            VARCHAR2(50) NOT NULL,
     tipo_solicitud         NUMBER NOT NULL,
