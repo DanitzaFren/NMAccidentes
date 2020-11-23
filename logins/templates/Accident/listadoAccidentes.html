@@ -95,7 +95,9 @@
       
           
           <h1>Lista Accidentes</h1>
-      
+          {% if user.is_authenticated %}	
+          <p name="id">Profesional {{user.id}}</p>
+          {% endif %}
         <div>
           <table>
               <thead>

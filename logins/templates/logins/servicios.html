@@ -194,7 +194,7 @@
 {% for groups in request.user.groups.values_list %}
 {% for group in groups %}
 {% if group == 'Profesional'%}
-
+{% if user.is_authenticated %}	
 <div class="row">
   <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up">
     <div class="icon-box icon-box-pink">
@@ -235,9 +235,9 @@
   <div class="icon-box icon-box-blue">
     <div class="icon"><i class="bx bx-body"></i></div>
     <h4 class="title"><a href="">Capacitaciones</a></h4>
-    <div><input type="button" onclick="location.href='crearCapacitaciones.html';" value="Crear" class="button button5"/></div>
+    <div><input type="button" onclick="location.href='{% url 'crearCapacitaciones' user.id %}'" value="Crear" class="button button5"/></div>
     <p class="description">Cree una capacitación para una empresa.</p>
-    <div><input type="button" onclick="location.href='listadoCapacitaciones.html';" value="Ver " class="button button5"/></div>
+    <div><input type="button" onclick="location.href='{% url 'listadoCapacitaciones' user.id %}'" value="Ver " class="button button5"/></div>
     <p class="description">Vea sus capacitaciones pendientes o listas de sus clientes asociados.</p>
   </div>
 </div>
@@ -246,7 +246,7 @@
   <div class="icon-box icon-box-pink">
     <div class="icon"><i class="bx bx-smile"></i></div>
     <h4 class="title"><a href="">Clientes</a></h4>
-    <div><input type="button" onclick="location.href='listadoMisClientes.html';" value="Ver" class="button button5"/></div>
+    <div><input type="button" onclick="location.href='{% url 'listadoMisClientes' user.id %}'" value="Ver" class="button button5"/></div>
     <p class="description">Vea la información de sus clientes asociados. Nombre de empresa, Rut, correo, dirección o Rubro</p>
   </div>
 </div>
@@ -254,10 +254,11 @@
   <div class="icon-box icon-box-cyan">
     <div class="icon"><i class="bx bxs-bell-ring"></i></div>
     <h4 class="title"><a href="">Reportes de Accidentes</a></h4>
-    <div><input type="button" onclick="location.href='listadoAccidentes.html';" value="Ver" class="button button5"/></div>
+    <div><input type="button" onclick="location.href='{% url 'listadoAccidente' user.id %}'" value="Ver" class="button button5"/></div>
     <p class="description">Vea todos los reportes de accidentes junto al nombre de la empresa, descripción y fecha del accidente. </p>
   </div>
 </div>
+{% endif %}
 {%endif%}
 {% endfor %}
 {% endfor %}

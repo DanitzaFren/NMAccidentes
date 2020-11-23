@@ -26,8 +26,8 @@ urlpatterns = [
     path("Contacto.html", views.Contacto, name="Contacto"),
     path("Somos.html", views.Somos, name="Somos"),
        
-    path("listadoCapacitaciones.html", views.listadoCapacitaciones, name="listadoCapacitaciones"),
-    path("crearCapacitaciones.html", views.crearCapacitaciones, name="crearCapacitaciones"),
+    path("listadoCapacitaciones.html/<id>", views.listadoCapacitaciones, name="listadoCapacitaciones"),
+    path("crearCapacitaciones.html/<id>", views.crearCapacitaciones, name="crearCapacitaciones"),
     path("editarCapacitaciones/<nro_capacitacion>", views.editarCapacitaciones, name="editarCapacitaciones"),
     path("eliminarCapacitaciones/<nro_capacitacion>", views.eliminarCapacitaciones, name="eliminarCapacitaciones"),
 
@@ -73,7 +73,7 @@ urlpatterns = [
     path('editarContrato/<id_servicio>', editarContrato, name='editarContrato'), 
 
     path("reportarAccidente.html", views.reporteAccidente, name="reporteAccidente"),
-    path('listadoAccidentes.html', views.listadoAccidente, name="listadoAccidente"),
+    path('listadoAccidentes.html/<id>', listadoAccidente, name="listadoAccidente"),
     path('listadoAccidentibilidad.html', views.listadoAccidentibilidad, name="listadoAccidentibilidad"),
     path('listadoClientePago.html', views.listadoClientePago, name="listadoClientePago"),
     path("verPagos/<id_cliente>", listadoPagos, name="verPagos"),
@@ -83,7 +83,7 @@ urlpatterns = [
     path('listadoActividadCliente.html', views.listadoActividadCliente, name="listadoActCliente"),
     path('listadoActividadProfesional.html', views.listadoActividadAdm, name="listadoActProfesional"),
     path('listadoAtrasos.html', views.listadoAtrasos, name="listadoAtrasos"),
-    path('listadoMisClientes.html', views.listadoMisClientes, name="listadoMisClientes"),
+    path('listadoMisClientes.html/<id>', views.listadoMisClientes, name="listadoMisClientes"),
 
     path("verChecklistPDF.html/<id>", views.render_pdf_view, name="verChecklistPDF"),
 
@@ -91,4 +91,5 @@ urlpatterns = [
     path("verChecklistsCliente/<id>", views.verChecklistCl, name="verChecklistCliente"),
 
     path('enviarCorreo/<correo>', enviarCorreo, name = 'enviarCorreo'),
+     path('listadoMisClientes.html/<id>', views.listadoMisClientes, name="listadoMisClientes"),
 ]

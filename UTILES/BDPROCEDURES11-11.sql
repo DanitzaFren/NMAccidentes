@@ -347,7 +347,7 @@ open accidente for Select accidente.id_accidente, cliente.nombre, accidente.desc
         WHERE contrato_servicio.id_cliente=cliente.id_cliente
         and contrato_servicio.id_profesional=profesional.rut_profesional
         and accidente.id_cliente=cliente.id_cliente
-        and profesional.rut_profesional=v_id
+        and profesional.id_user=v_id
         order by id_accidente;
         commit;
 END;
@@ -444,9 +444,9 @@ cliente out
 sys_refcursor) 
 IS
 BEGIN
-open cliente for select cliente.id_cliente, cliente.nombre, cliente.rubro, cliente.direccion, cliente.correo from cliente, contrato_servicio,profesional 
+open cliente for select cliente.id_cliente, cliente.nombre, cliente.rubro, cliente.direccion from cliente, contrato_servicio,profesional 
 where cliente.id_cliente=contrato_servicio.id_cliente
-and profesional.rut_profesional=contrato_servicio.id_profesional and profesional.rut_profesional=v_1;
+and profesional.rut_profesional=contrato_servicio.id_profesional and profesional.id_user=v_1;
         commit;
 END;
 
@@ -497,10 +497,10 @@ tiposolicitud out
 sys_refcursor) 
 IS
 BEGIN
-open tiposolicitud for SELECT solicitud_asesoria.id_solicitud, cliente.nombre FROM tipo_solicitud,solicitud_asesoria,cliente 
+open tiposolicitud for SELECT solicitud_asesoria.id_solicitud, cliente.nombre FROM tipo_solicitud,solicitud_asesoria,cliente, profesional
 where tipo_solicitud.id_tiposolicitud=solicitud_asesoria.tipo_solicitud
 and cliente.id_cliente=solicitud_asesoria.id_cliente  and solicitud_asesoria.id_estado=1 and solicitud_asesoria.tipo_solicitud=2
-and solicitud_asesoria.id_profesional=v_1 ;
+and solicitud_asesoria.id_profesional=profesional.rut_profesional and profesional.id_user=v_1 ;
 END;
 
 create or replace NONEDITIONABLE procedure tipomodificar(v_1 in number,
@@ -537,4 +537,17 @@ and solicitud_asesoria.tipo_solicitud=3
 and solicitud_asesoria.id_estado=1
 and checklist.id_cliente=cliente.id_cliente
 and solicitud_asesoria.id_profesional=v_1 ;
+END;
+
+create or replace NONEDITIONABLE procedure sp_listar_capacitacion(v_1 in number,
+capacitacion out 
+sys_refcursor) 
+IS
+BEGIN
+open capacitacion for SELECT capacitacion.nro_capacitacion,capacitacion.fecha, capacitacion.asistentes, cliente.nombre, capacitacion.id_estado
+FROM capacitacion,cliente,profesional,solicitud_asesoria where capacitacion.id_solicitud=solicitud_asesoria.id_solicitud
+and cliente.id_cliente=solicitud_asesoria.id_cliente
+and profesional.rut_profesional=solicitud_asesoria.id_profesional
+and profesional.id_user=v_1;
+
 END;

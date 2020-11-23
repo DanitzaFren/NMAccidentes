@@ -38,14 +38,7 @@ def Somos(request):
     return render(request, "logins/Somos.html")
 
 ######################################################################## CAPACITACION
-def listadoCapacitaciones(request):
 
-    capacitaciones = Capacitacion.objects.all() #Error boligatorio, si compila 
-    datoscapa = {
-        'capacitaciones':capacitaciones
-    }
-
-    return render(request, "CapacitacionesCRUD/listadoCapacitaciones.html", datoscapa)
 
 def solicitudesC(x):
     django_cursor = connection.cursor()
@@ -57,9 +50,9 @@ def solicitudesC(x):
         lista.append(fila)
     return lista
 
-def crearCapacitaciones(request):
+def crearCapacitaciones(request,id):
     data = {
-        'solicitudes' : solicitudesC(172876595),
+        'solicitudes' : solicitudesC(id),
     }
 
     if request.method == 'POST':
@@ -70,7 +63,6 @@ def crearCapacitaciones(request):
         salida = agregarcapacitacion(fecha,asistentes,id_solicitud,descripcion_capa)
         if salida == 1:
             data['mensaje'] = 'agregado'
-            return redirect('listadoCapacitaciones')
         else:
             data['mensaje'] = 'error'
 
@@ -781,11 +773,9 @@ def reporteAccidente(request):
             data['mensaje'] = 'Error Reporte NO enviado'
     return render(request, 'Accident/reportarAccidente.html',data)
 
-def listadoAccidente(request):
-
+def listadoAccidente(request,id):
     data = {
-        #Para cuando el incio usuario este bien
-        'accidente':listado_accidentes(172876595)
+        'accidente':listado_accidentes(id)
     }
     return render(request, 'Accident/listadoAccidentes.html',data)
 
@@ -960,9 +950,9 @@ def atrasos():
     return lista
 
 ###################################################################CLIENTES DEL PROFESIONAL
-def listadoMisClientes(request):
+def listadoMisClientes(request,id):
     #reemplazar pa cuando se logee el profesional
-    cliente = misclientes(172876595)
+    cliente = misclientes(id)
     datos = {
         'cliente':cliente
     }
@@ -1089,3 +1079,23 @@ def enviarCorreo(request,correo):
     recipient_list=[correo]
     send_mail(subject,message,email_from,recipient_list,)
     return redirect(to="listadoAtrasos")
+
+    ##############################################################
+
+def listadoCapacitaciones(request,id):
+    datoscapa = {
+        'capacitacion':listado_capacitacion(id)
+    }
+    return render(request, "CapacitacionesCRUD/listadoCapacitaciones.html", datoscapa)
+
+def listado_capacitacion(id_pro):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor() 
+    cursor.callproc("SP_LISTAR_capacitacion", [id_pro,out_cur])
+
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+    return lista
+
