@@ -99,13 +99,10 @@
           <table>
               <thead>
                   <tr>
-                      <th>ID</th>
+                      <th>Rut Empresa</th>
                       <th>Direccion</th>
                       <th>Nombre</th>
-                      <th>Rubro</th>
-                      <th>Correo</th>
-                      <th>Admin Asociado</th>
-                      <th>Opciones</th>
+                      <th>Acción</th>
                   </tr>
               </thead>
               <tbody>
@@ -114,10 +111,6 @@
                       <td>{{ cliente.0}}</td>
                       <td>{{ cliente.1}}</td>
                       <td>{{ cliente.2}}</td>
-
-                      <td>{{ cliente.3 }}</td>
-                      <td>{{ cliente.4 }}</td>
-                      <td>{{ cliente.5 }}</td>
       
                       <td>
                       <a href="{% url 'editarCliente' cliente.0 %}" class="button button7" >Editar</a>

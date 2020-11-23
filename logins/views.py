@@ -14,6 +14,8 @@ from .utils import render_to_pdf, link_callback
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.contrib.auth.models import User,Group
+from django.core.mail import send_mail
+from django.conf import settings
 # profesional prueba como logeado rut= 172876595
 # cliente prueba cmo logeado rut=2003901
 
@@ -196,7 +198,7 @@ def crear_visita(fecha,id_solicitud,descripcion,nro_checklist):
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
     cursor.callproc('AGREGAR_VISITA',[ fecha,id_solicitud,descripcion,nro_checklist,salida])
-
+    return salida.getvalue()
 
 def editarVisitas(request, id_visita):
     visita = Visita.objects.get(id_visita = id_visita) #Error obligatorio, si compila
@@ -232,12 +234,12 @@ def rubros():
     return lista
 
 
-def agregarcliente(id_cliente,direccion, nombre,rubro,correo,id_admin):
+def agregarcliente(id_cliente,direccion, nombre,rubro):
     
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
-    cursor.callproc('AGREGAR_CLIENTE',[id_cliente, direccion, nombre,rubro,correo,id_admin,salida])
+    cursor.callproc('AGREGAR_CLIENTE',[id_cliente, direccion, nombre,rubro,salida])
     
     return salida.getvalue()
 
@@ -264,11 +266,9 @@ def crearClientes(request):
     if request.method == 'POST':
         id_cliente = request.POST.get('id_cliente')
         direccion = request.POST.get('direccion')
-        correo = request.POST.get('correo')
-        id_admin = request.POST.get('id_admin')
         rubro = request.POST.get('rubro')
         nombre = request.POST.get('nombre')
-        salida = agregarcliente(id_cliente,direccion,nombre,rubro,correo,id_admin)
+        salida = agregarcliente(id_cliente,direccion,nombre,rubro)
         if salida == 1:
             data['mensaje'] = 'agregado'
             return redirect('register_Cliente')
@@ -303,16 +303,16 @@ def eliminarClientes(request, id_cliente):
 
 def listadoAsesorias(request):
     data = {
-        'asesoria':listado_Asesorias()
+        'asesoria':listado_Asesorias(172876595)
     }
     return render(request, 'AsesoriasCRUD/listadoAsesorias.html',data)
 
-def listado_Asesorias():
+def listado_Asesorias(id_pro):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     out_cur = django_cursor.connection.cursor() 
 
-    cursor.callproc("SP_LISTAR_ASESORIA", [out_cur])
+    cursor.callproc("SP_LISTAR_ASESORIA", [id_pro,out_cur])
 
     lista = []
     for fila in out_cur:
@@ -343,7 +343,6 @@ def crearAsesorias(request):
             data['mensaje'] = 'Asesoria Creada'
             return redirect('listadoAsesorias')
         else:
-            return redirect('listadoAsesorias')
             data['mensaje'] = 'error'
 
     return render(request, "AsesoriasCRUD/crearAsesorias.html", data)
@@ -353,6 +352,7 @@ def crear_asesoria(fecha,id_solicitud):
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
     cursor.callproc('AGREGAR_ASESORIA',[ fecha,id_solicitud,salida])
+    return salida.getvalue()
 
 def editarAsesorias(request, id_asesoria):
     asesoria = Asesoria.objects.get(id_asesoria = id_asesoria) #Error obligatorio, si compila
@@ -393,23 +393,22 @@ def crearSolicitud(request):
         'tiposolicitud': listado_tiposolicitud(),
     }
     if request.method == 'POST':
-        solicitud = request.POST.get('solicitud')
         id_cliente = request.POST.get('id_cliente')
         id_profesional = request.POST.get('id_profesional')
         tipo_solicitud = request.POST.get('tipo_solicitud')
         descripcion_asesoria = request.POST.get('descripcion')
-        salida = crear_solicitud(solicitud, id_cliente, id_profesional,tipo_solicitud,descripcion_asesoria)
+        salida = crear_solicitud(id_cliente, id_profesional,tipo_solicitud,descripcion_asesoria)
         if salida == 1:
             data['mensaje'] = 'agregado'
         else:
             data['mensaje'] = 'error'
     return render(request, "SolicitudCRUD/crearSolicitud.html", data)
 
-def crear_solicitud(solicitud, id_cliente, id_profesional,tipo_solicitud,descripcion_asesoria):
+def crear_solicitud( id_cliente, id_profesional,tipo_solicitud,descripcion_asesoria):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
-    cursor.callproc('AGREGAR_SOLICITUD',[ solicitud, id_cliente, id_profesional,tipo_solicitud,descripcion_asesoria,salida])
+    cursor.callproc('AGREGAR_SOLICITUD',[ id_cliente, id_profesional,tipo_solicitud,descripcion_asesoria,salida])
     
     return salida.getvalue()
 
@@ -554,7 +553,7 @@ def eliminarChecklist(request, id ):
         eliminado.delete()
             
     else:
-            data['mensaje'] = 'error'
+        data['mensaje'] = 'error'
             
 
     return redirect(to="crearChecklist")
@@ -599,6 +598,7 @@ def check_listo(idcheck):
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
     cursor.callproc('checklisto',[ idcheck,salida])
+    return salida.getvalue()
 
 def completardetalle(act_mejora, estado , iddetalle):
     django_cursor = connection.cursor()
@@ -670,7 +670,6 @@ def crearCondicion(request):
             return redirect('listadoCondicion')
         else:
             data['mensaje'] = 'error'
-            return redirect('listadoCondicion')
     return render(request, "CondicionCRUD/crearCondicion.html", data)
 
 def crear_condicion(nom_condicion):
@@ -678,6 +677,7 @@ def crear_condicion(nom_condicion):
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
     cursor.callproc('AGREGAR_CONDICION',[ nom_condicion,salida])
+    return salida.getvalue()
 
 def editarCondicion(request, id_condicion):
     condicion = Condicion.objects.get(id_condicion = id_condicion) #Error obligatorio, si compila
@@ -732,6 +732,7 @@ def crear_contrato(fecha_inicio,fecha_termino,id_cliente,id_profesional):
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
     cursor.callproc('AGREGAR_CONTRATO',[ fecha_inicio, fecha_termino, id_cliente, id_profesional,salida])           
+    return salida.getvalue()     
 
 def editarContrato(request, id_servicio):
     contrato = ContratoServicio.objects.get(id_servicio = id_servicio) #Error obligatorio, si compila
@@ -763,7 +764,7 @@ def reportarAccidente(id_cliente, descripcion):
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
     cursor.callproc('SP_REPORT_ACCIDENT',[ id_cliente, descripcion,salida])
-
+    return salida.getvalue()
 
 def reporteAccidente(request):
     accidente = ""
@@ -1080,3 +1081,11 @@ def register3(request):
     return render(request, 'registration/register_Administrador.html', {'form': form})
 
 ####################################################################
+
+def enviarCorreo(request,correo):
+    subject='Información No + Accidentes'
+    message='Comunicamos a usted que a la fecha mantiene una cuenta impaga de No+accidentes. Recuerde pagar sus cuentas a tiempo y evitará estos molestos contactos de cobranza.'
+    email_from=settings.EMAIL_HOST_USER
+    recipient_list=[correo]
+    send_mail(subject,message,email_from,recipient_list,)
+    return redirect(to="listadoAtrasos")

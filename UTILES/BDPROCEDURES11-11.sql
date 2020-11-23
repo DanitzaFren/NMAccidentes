@@ -6,14 +6,16 @@ is
 begin
 	insert into asesoria(fecha,id_solicitud)
 	values(v_1,v_2);
+    update solicitud_asesoria set id_estado=2 where id_solicitud=v_2;
 	commit;
     v_salida:=1; 
 
     exception
 
-    when others then
+    when others then 
         v_salida:=0;
 end;
+
 create or replace NONEDITIONABLE procedure agregar_capacitacion(
 	v_1 in date,
     v_2 in number,
@@ -24,6 +26,7 @@ is
 begin
 	insert into capacitacion(fecha,asistentes,id_solicitud,descripcion_capa)
 	values(v_1,v_2,v_4,v_3);
+    update solicitud_asesoria set id_estado=2 where id_solicitud=v_4;
 	commit;
     v_salida:=1; 
 
@@ -38,19 +41,17 @@ create or replace NONEDITIONABLE procedure agregar_cliente(
     v_3 in VARCHAR2,
     v_4 in varchar2,
     v_5 in number,
-    v_6 in varchar2,
-    v_7 in number,
     v_salida out number)
 is
 begin
-	insert into cliente(id_cliente,direccion,nombre,rubro,correo,id_admin)
-	values(v_2, v_3,v_4,v_5,v_6,v_7);
+	insert into cliente(id_cliente,direccion,nombre,rubro)
+	values(v_2, v_3,v_4,v_5);
 	commit;
     v_salida:=1; 
 
     exception
 
-    when others then
+    when others then 
         v_salida:=0;
 end;
 
@@ -73,8 +74,8 @@ end;
 create or replace NONEDITIONABLE procedure agregar_contrato(
     v_1 in contrato_servicio.fecha_inicio%type,
     v_2 in contrato_servicio.fecha_termino%type,
-    v_4 in number,
-    v_5 in number,
+    v_4 in VARCHAR2,
+    v_5 in VARCHAR2,
     v_salida out number)
 is
 begin
@@ -87,23 +88,22 @@ begin
 
     when others then
         v_salida:=0;
-end;
+end; 
 
 create or replace NONEDITIONABLE procedure agregar_solicitud(
-    v_1 in VARCHAR2,
-    v_2 in number,
-    v_4 in number,
+    v_2 in VARCHAR2,
+    v_4 in VARCHAR2,
     v_5 in number,
     v_3 in VARCHAR2,
     v_salida out number)
 is
 begin
-	insert into solicitud_asesoria(solicitud, id_cliente, id_profesional,tipo_solicitud,descripcion_asesoria)
-	values(v_1,v_2,v_4,v_5,v_3);
+	insert into solicitud_asesoria( id_cliente, id_profesional,tipo_solicitud,descripcion_asesoria)
+	values(v_2,v_4,v_5,v_3);
 	commit;
     v_salida:=1; 
 
-    exception
+    exception 
 
     when others then
         v_salida:=0;
@@ -119,11 +119,12 @@ is
 begin
 	insert into visita(fecha,id_solicitud,descripcion,nro_checklist)
 	values(v_1,v_2,v_3,v_4);
+    update solicitud_asesoria set id_estado=2 where id_solicitud=v_2;
 	commit;
     v_salida:=1; 
 
     exception
-
+ 
     when others then
         v_salida:=0;
 end;
@@ -298,8 +299,8 @@ atrasos out
 sys_refcursor) 
 IS
 BEGIN
-open atrasos for select pago.id_pago,contrato_servicio.id_cliente, cliente.nombre ,fecha_vencimiento from pago, contrato_servicio,cliente where pago.id_servicio=contrato_servicio.id_servicio
-and cliente.id_cliente=contrato_servicio.id_cliente and fecha_vencimiento < sysdate and pago <=0;
+open atrasos for select pago.id_pago,contrato_servicio.id_cliente, cliente.nombre ,fecha_vencimiento,auth_user.email from pago, contrato_servicio,cliente,auth_user where pago.id_servicio=contrato_servicio.id_servicio
+and cliente.id_cliente=contrato_servicio.id_cliente and cliente.id_user = auth_user.id and fecha_vencimiento < sysdate and pago <=0;
         commit;
 END;
 
@@ -351,18 +352,16 @@ open accidente for Select accidente.id_accidente, cliente.nombre, accidente.desc
         commit;
 END;
 
-create or replace NONEDITIONABLE procedure sp_listar_asesoria(asesoria out 
+create or replace NONEDITIONABLE procedure sp_listar_asesoria(v_1 in number,
+asesoria out 
 sys_refcursor) 
 IS
 BEGIN
-open asesoria for SELECT a.id_asesoria,s.id_solicitud, s.descripcion_asesoria, c.nombre, a.fecha
-FROM
-asesoria A JOIN solicitud_asesoria S
-on (a.id_solicitud = s.id_solicitud)
-join cliente C
-on (c.id_cliente = s.id_cliente); 
-END;
+open asesoria for SELECT asesoria.id_asesoria,asesoria.id_solicitud, solicitud_asesoria.descripcion_asesoria, cliente.nombre, asesoria.fecha, asesoria.id_estado
+FROM asesoria,solicitud_asesoria,cliente where asesoria.id_solicitud=solicitud_asesoria.id_solicitud and solicitud_asesoria.tipo_solicitud = 1
+and cliente.id_cliente=solicitud_asesoria.id_cliente and solicitud_asesoria.id_profesional=v_1 ; 
 
+END;
 
 create or replace NONEDITIONABLE procedure sp_listar_check(v_1 in det_checklist.act_mejora%TYPE, v_2 in det_checklist.estado%TYPE, v_3 out number) 
 IS
@@ -489,7 +488,7 @@ IS
 BEGIN
 open tiposolicitud for SELECT solicitud_asesoria.id_solicitud, cliente.nombre FROM tipo_solicitud,solicitud_asesoria,cliente 
 where tipo_solicitud.id_tiposolicitud=solicitud_asesoria.tipo_solicitud
-and cliente.id_cliente=solicitud_asesoria.id_cliente  and solicitud_asesoria.tipo_solicitud=1
+and cliente.id_cliente=solicitud_asesoria.id_cliente  and solicitud_asesoria.id_estado=1 and solicitud_asesoria.tipo_solicitud=1
 and solicitud_asesoria.id_profesional=v_1 ;
 END;
 
@@ -500,7 +499,7 @@ IS
 BEGIN
 open tiposolicitud for SELECT solicitud_asesoria.id_solicitud, cliente.nombre FROM tipo_solicitud,solicitud_asesoria,cliente 
 where tipo_solicitud.id_tiposolicitud=solicitud_asesoria.tipo_solicitud
-and cliente.id_cliente=solicitud_asesoria.id_cliente  and solicitud_asesoria.tipo_solicitud=2
+and cliente.id_cliente=solicitud_asesoria.id_cliente  and solicitud_asesoria.id_estado=1 and solicitud_asesoria.tipo_solicitud=2
 and solicitud_asesoria.id_profesional=v_1 ;
 END;
 
@@ -511,7 +510,7 @@ IS
 BEGIN
 open tiposolicitud for SELECT solicitud_asesoria.id_solicitud, cliente.nombre FROM tipo_solicitud,solicitud_asesoria,cliente 
 where tipo_solicitud.id_tiposolicitud=solicitud_asesoria.tipo_solicitud
-and cliente.id_cliente=solicitud_asesoria.id_cliente  and solicitud_asesoria.tipo_solicitud=4
+and cliente.id_cliente=solicitud_asesoria.id_cliente and solicitud_asesoria.id_estado=1 and solicitud_asesoria.tipo_solicitud=4
 and solicitud_asesoria.id_profesional=v_1 ;
 END;
 
@@ -534,36 +533,8 @@ checklist.nro_checklist
 FROM tipo_solicitud,solicitud_asesoria,cliente, checklist
 where tipo_solicitud.id_tiposolicitud=solicitud_asesoria.tipo_solicitud
 and cliente.id_cliente=solicitud_asesoria.id_cliente  
-and solicitud_asesoria.tipo_solicitud=3 and
-checklist.id_cliente=cliente.id_cliente
+and solicitud_asesoria.tipo_solicitud=3 
+and solicitud_asesoria.id_estado=1
+and checklist.id_cliente=cliente.id_cliente
 and solicitud_asesoria.id_profesional=v_1 ;
-END;
-
-
-CREATE OR REPLACE TRIGGER administrador_on_insert_ID
-  BEFORE INSERT ON administrador
-  FOR EACH ROW
-BEGIN
-  SELECT administrador_ID_sequence.nextval
-  INTO :new.id
-  FROM dual;
-END;
-
-
-CREATE OR REPLACE TRIGGER CLIENTE_on_insert_ID
-  BEFORE INSERT ON CLIENTE
-  FOR EACH ROW
-BEGIN
-  SELECT CLIENTE_ID_sequence.nextval
-  INTO :new.id
-  FROM dual;
-END;
-
-CREATE OR REPLACE TRIGGER PROFESIONAL_on_insert_ID
-  BEFORE INSERT ON PROFESIONAL
-  FOR EACH ROW
-BEGIN
-  SELECT PROFESIONAL_ID_sequence.nextval
-  INTO :new.id_d
-  FROM dual;
 END;

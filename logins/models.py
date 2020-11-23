@@ -15,7 +15,6 @@ class Administrador(models.Model):
     nombre = models.CharField('Nombres',max_length=50)
     paterno = models.CharField('Apellido Paterno',max_length=50)
     materno = models.CharField('Apellido Materno',max_length=50)
-    contrasena = models.CharField('Contraseña deseada',max_length=100)
 
     class Meta:
         managed = False
@@ -39,8 +38,6 @@ class Cliente(models.Model):
     direccion = models.CharField(max_length=50)
     nombre = models.CharField(max_length=50)
     rubro = models.ForeignKey(Rubro, models.DO_NOTHING, db_column='rubro')
-    correo = models.CharField(max_length=100, unique=True)
-    id_admin = models.ForeignKey(Administrador, models.DO_NOTHING, db_column='id_admin')
 
     class Meta:
         managed = False
@@ -75,9 +72,7 @@ class Profesional(models.Model):
     nombre = models.CharField(max_length=50)
     paterno = models.CharField(max_length=50)
     materno = models.CharField(max_length=50, blank=True, null=True)
-    correo = models.CharField(max_length=100)
     estado = models.ForeignKey(EstadoContrato, models.DO_NOTHING, db_column='estado')
-    id_admin = models.ForeignKey(Administrador, models.DO_NOTHING, db_column='id_admin')
 
     class Meta:
         managed = False
@@ -88,7 +83,6 @@ class Profesional(models.Model):
 
 class SolicitudAsesoria(models.Model):
     id_solicitud = models.AutoField(primary_key=True)
-    solicitud = models.CharField(max_length=50)
     id_cliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='id_cliente')
     id_profesional = models.ForeignKey(Profesional, models.DO_NOTHING, db_column='id_profesional')
     tipo_solicitud = models.ForeignKey(TipoSolicitud, models.DO_NOTHING, db_column='tipo_solicitud')
