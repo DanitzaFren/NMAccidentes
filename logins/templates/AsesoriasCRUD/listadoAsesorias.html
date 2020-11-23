@@ -105,6 +105,8 @@
                     <th>Descripcion</th>
                     <th>Nombre Cliente</th>
                     <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Accion</th>
                   </tr>
               </thead>
               <tbody>
@@ -114,7 +116,15 @@
                     <td>{{ asesoria.1 }}</td>
                     <td>{{ asesoria.2 }}</td>
                     <td>{{ asesoria.3 }}</td>
-                    <td>{{ asesoria.4 }}</td>      
+                    <td>{{ asesoria.4 }}</td>   
+                    {% if asesoria.5  == 1 %}
+                    <td>Pendiente</td>
+                    {% else %}
+                    <td>Listo</td>
+                    {% endif %}   
+                    <td>
+                      <a input type="button" class="button button8" href="{#}">Listo</a>
+                      </td>
                   </tr>
                   {% endfor %}
                </tbody>

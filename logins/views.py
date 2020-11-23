@@ -301,16 +301,16 @@ def eliminarClientes(request, id_cliente):
 
 def listadoAsesorias(request):
     data = {
-        'asesoria':listado_Asesorias()
+        'asesoria':listado_Asesorias(172876595)
     }
     return render(request, 'AsesoriasCRUD/listadoAsesorias.html',data)
 
-def listado_Asesorias():
+def listado_Asesorias(id_pro):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     out_cur = django_cursor.connection.cursor() 
 
-    cursor.callproc("SP_LISTAR_ASESORIA", [out_cur])
+    cursor.callproc("SP_LISTAR_ASESORIA", [id_pro,out_cur])
 
     lista = []
     for fila in out_cur:

@@ -352,18 +352,16 @@ open accidente for Select accidente.id_accidente, cliente.nombre, accidente.desc
         commit;
 END;
 
-create or replace NONEDITIONABLE procedure sp_listar_asesoria(asesoria out 
+create or replace NONEDITIONABLE procedure sp_listar_asesoria(v_1 in number,
+asesoria out 
 sys_refcursor) 
 IS
 BEGIN
-open asesoria for SELECT a.id_asesoria,s.id_solicitud, s.descripcion_asesoria, c.nombre, a.fecha
-FROM
-asesoria A JOIN solicitud_asesoria S
-on (a.id_solicitud = s.id_solicitud)
-join cliente C
-on (c.id_cliente = s.id_cliente); 
-END;
+open asesoria for SELECT asesoria.id_asesoria,asesoria.id_solicitud, solicitud_asesoria.descripcion_asesoria, cliente.nombre, asesoria.fecha, asesoria.id_estado
+FROM asesoria,solicitud_asesoria,cliente where asesoria.id_solicitud=solicitud_asesoria.id_solicitud and solicitud_asesoria.tipo_solicitud = 1
+and cliente.id_cliente=solicitud_asesoria.id_cliente and solicitud_asesoria.id_profesional=v_1 ; 
 
+END;
 
 create or replace NONEDITIONABLE procedure sp_listar_check(v_1 in det_checklist.act_mejora%TYPE, v_2 in det_checklist.estado%TYPE, v_3 out number) 
 IS
