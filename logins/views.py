@@ -1082,9 +1082,10 @@ def register3(request):
 
 ####################################################################
 
-def enviarCorreo(request, correo):
-    subject="Información No + Accidentes"
-    message="Comunicamos a ustede que a la fecha mantiene una cuenta impaga de No+accidentes. Recuerde pagar sus cuentas a tiempo y evitará estos molestos contactos de cobranza."
+def enviarCorreo(request,correo):
+    subject='Información No + Accidentes'
+    message='Comunicamos a usted que a la fecha mantiene una cuenta impaga de No+accidentes. Recuerde pagar sus cuentas a tiempo y evitará estos molestos contactos de cobranza.'
     email_from=settings.EMAIL_HOST_USER
-    send_mail=(subject,message,email_from,correo)
+    recipient_list=[correo]
+    send_mail(subject,message,email_from,recipient_list,)
     return redirect(to="listadoAtrasos")
