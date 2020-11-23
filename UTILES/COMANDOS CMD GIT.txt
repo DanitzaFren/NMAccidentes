@@ -1,0 +1,30 @@
+Para crear un nuevo branch que aun no esta "subido" al repositorio,
+osea que solamente esta local.
+git branch Nombredelbranch
+
+Para "subir" el branch al repositorio y quede en la nube.
+git push origin Nombredelbranch:master
+
+Para ver todos los branch que existen en la nube, si un branch no esta pusheado
+no se puede visualizar aqui.
+git branch
+
+Para cambiar de un branch a otro
+git checkout Nombredelbranch
+
+Una vez termines de hacer cambios, ingresa este comando
+git add . 
+
+Para guardar tus cambios en el branch, luego debes hacer git push para "subirlos" a la nube
+git commit -m "Texto"
+
+Para "subir" los cambios en el branch que estas posicionado actualmente
+git push
+
+Para traer los cambios de otro branch, importante: siempre hacer commit antes de un git pull
+git pull
+
+PRECAUCIÓN: idealmente solo una persona debe encargarse de hacer este comando
+sirve para mezclar todos los branch en uno solo(en este caso el Master), asi que
+hay que ser cuidadoso con los cambios que mergeamos y no.
+git merge NombreBranch

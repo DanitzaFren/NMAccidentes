@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>LISTADO</h1>
+
+    <H2>nueva asesoria</H2>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <label >fecha</label>
+            <input type="date" name="fecha">
+            <br>
+            <label>Tipo Asesoria</label>
+            <input type="text" name="tipo_asesoria">
+            <br>
+            <label>Nro Asesoria</label>
+            <input type="number" name="nro_asesoria">
+            <br>
+            <label> Descripcion Asesoria </label>
+            <input type="text" name="descripcion_asesoria">
+            <br>
+            <input type="submit" value="guardar">
+            
+        </form>
+       {{mensaje}}
+       
+
+
+
+
+    <h2>Asesorias</h2>
+    <table>
+        <tr>
+            <th>id asesoria</th>
+            <th>fecha</th>
+            <th>tipo asesoria</th>
+            <th>nro asesoria</th>
+            <th>descripcion</th>
+        </tr>
+        {% for a in asesoria %}
+            <tr>
+                <td>{{ a.0 }}</td>
+                <td>{{ a.1 }}</td>
+                <td>{{ a.2 }}</td>
+                <td>{{ a.3 }}</td>
+                <td>{{ a.4 }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

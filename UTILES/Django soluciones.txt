@@ -1,0 +1,2 @@
+A-. Los views generan erorres, sin embargo, el código compila sin errores
+B-. Hay que definir en la BD que es posible borrra en cascade las FOREING KEY (FK) - Esto para eliminar desde la página web

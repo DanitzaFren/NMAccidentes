@@ -1,0 +1,462 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Servicios</title>
+  <meta content="" name="descriptison">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'principal/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'principal/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
+ 
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'principal/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'principal/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static 'principal/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+  <link href="{% static 'principal/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'principal/vendor/venobox/venobox.css' %}" rel="stylesheet">
+  <link href="{% static 'principal/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+  <link href="{% static 'principal/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'principal/css/servicios.css' %}" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link rel="stylesheet" type="text/css" href="{% static 'principal/css/style.css' %}"/>
+
+  <!-- =======================================================
+  * Template Name: Moderna - v2.1.0
+  * Template URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header - MENU PRINCIPAL ======= -->
+  <header id="header" class="fixed-top header-transparent">
+    <div class="container">
+
+      <div class="logo float-left">
+        <h1 class="text-light"><a href="{% url 'ndex' %}"><span>No + Accidentes</span></a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+
+      <nav class="nav-menu float-right d-none d-lg-block">
+        <ul>
+          
+          <li><a href="{% url 'ndex' %}" >Inicio</a></li>
+          <li><a href="{% url 'Somos' %}">Quienes Somos</a></li>
+          <li><a href="{% url 'Contacto' %}">Contactos</a></li>
+
+          {% if user.is_authenticated %}	
+          <li><a href="{% url 'servicios' %}">Servicios</a></li>
+          <li><a href="#">Usuario: {{ user.username }}</a></li>
+          <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>   
+            {% else %}	
+          <li><a href="{% url 'login' %}">Iniciar sesion</a></li>
+          {% endif %}	
+
+        </ul>
+      </nav><!-- .nav-menu -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex justify-cntent-center align-items-center">
+    <div id="heroCarousel" class="container carousel carousel-fade" data-ride="carousel">
+
+      <!-- Slide 1 informacion -->
+      <div class="carousel-item active">
+        <div class="carousel-container">
+          <h2 class="animate__animated animate__fadeInDown">Usted se encuentra en la sección de servicios</h2>
+          <p class="animate__animated animate__fadeInUp"></p>
+          <a href="" class="btn-get-started animate__animated animate__fadeInUp">Saber mas...</a>
+        </div>
+      </div>
+
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- If Servicios/login requerido-->
+{% if user.is_authenticated %}	
+
+    <!-- ======= Services Section ======= -->
+    <section class="services">
+      <div class="container">
+        <h1 >Servicios disponibles para: {{ user.username }}</h1>
+
+
+        <!-- Servicios para el usuario Adminsitrador -->
+{% for groups in request.user.groups.values_list %}
+{% for group in groups %}
+{% if group == 'Administrador'%}
+<div class="row">
+  <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up">
+    <div class="icon-box icon-box-pink">
+      <div class="icon"><i class="bx bx-user"></i></div>
+      <h4 class="title"><a href='listadoProfesionales.html'>Profesionales</a></h4>
+      <div><input type="button" onclick="location.href='crearProfesionales_N.html';" value="Crear" class="button button5"/></div>
+      <div><input type="button" onclick="location.href='listadoProfesionales_N.html';" value="Ver" class="button button5"/></div> 
+      <p class="description">Registre, modifique y vea profesionales.</p>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+    <div class="icon-box icon-box-cyan">
+      <div class="icon"><i class="bx bx-user"></i></div>
+      <h4 class="title"><a href='listadoCliente.html'>Clientes</a></h4>
+      <div><input type="button" onclick="location.href='crearCliente.html';" value="Crear" class="button button5"/></div>
+      <div><input type="button" onclick="location.href='listadoCliente.html';" value="Ver" class="button button5"/></div> 
+      <p class="description">Registre, modifique y vea los clientes de la empresa.</p>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+    <div class="icon-box icon-box-green">
+      <div class="icon"><i class="bx bx-buildings"></i></div>
+      <h4 class="title"><a href='listadoCondicion.html'>Condiciones </a></h4>
+      <div><input type="button" onclick="location.href='crearCondicion.html';" value="Crear" class="button button5"/></div>
+      <div><input type="button" onclick="location.href='listadoCondicion.html';" value="Ver" class="button button5"/></div> 
+      <p class="description">Agregue, elimine o modifique condiciones con las cuales los profesionales evaluarán a las empresas.</p>
+    </div>
+  </div>
+
+  
+  <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+    <div class="icon-box icon-box-blue">
+      <div class="icon"><i class="bx bx-file"></i></div>
+      <h4 class="title"><a href="">Contratos de servicio</a></h4>
+      <div><input type="button" onclick="location.href='crearContrato.html';" value="Crear" class="button button5"/></div>
+      <div><input type="button" onclick="location.href='listadoContrato.html';" value="Ver" class="button button5"/></div> 
+      <p class="description">Ingrese, modifique o vea los contratos de servicios de las empresas.</p>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+    <div class="icon-box icon-box-pink">
+      <div class="icon"><i class="bx bx-bar-chart-square"></i></div>
+      <h4 class="title"><a href="">Accidentibilidad</a></h4>
+      <div><input type="button" onclick="location.href='listadoAccidentibilidad.html';" value="Ver" class="button button5"/></div> 
+      <p class="description">En esta sección puede ver los porcentajes de accidentibilidad de los profesionales.</p>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+    <div class="icon-box icon-box-cyan">
+      <div class="icon"><i class="bx bx-calendar-x"></i></div>
+      <h4 class="title"><a href="">Atrasos</a></h4>
+      <div><input type="button" onclick="location.href='listadoAtrasos.html';" value="Ver" class="button button5"/></div> 
+      <p class="description">Vea y notifique a los clientes que estén atrasados en sus pagos.</p>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+    <div class="icon-box icon-box-green">
+      <div class="icon"><i class="bx bx-group"></i></div>
+      <h4 class="title"><a >Actividades</a></h4>
+      <div><input type="button"  onclick="location.href='listadoActividadAdmin.html';"value="Ver" class="button button5"/></div> 
+      <p class="description">Visualice las actividades de cada cliente y profesional.</p>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+    <div class="icon-box icon-box-blue">
+      <div class="icon"><i class="bx bx-money"></i></div>
+      <h4 class="title"><a href="">Pagos</a></h4>
+      <div><input type="button" onclick="location.href='listadoClientePago.html';" value="Ver" class="button button5"/></div>
+      <p class="description">Controle los pagos de los clientes.</p> 
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+    <div class="icon-box icon-box-pink">
+      <div class="icon"><i class="bx bxs-report"></i></div>
+      <h4 class="title"><a href="">Reportes</a></h4>
+      <div><input type="button" onclick="location.href='listadoCondicion.html';" value="Ver" class="button button5"/></div> 
+      <p class="description">Genere reporte por cliente o global.</p> 
+    </div>
+  </div>
+{%endif%}
+{% endfor %}
+{% endfor %}
+<!-- Fin if Adminsitrador-->
+
+
+
+          <!-- Servicios exclusivos para el usuario Profesional -->
+{% for groups in request.user.groups.values_list %}
+{% for group in groups %}
+{% if group == 'Profesional'%}
+
+<div class="row">
+  <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up">
+    <div class="icon-box icon-box-pink">
+      <div class="icon"><i class="bx bx-car"></i></div>
+      <h4 class="title"><a href='listadoVisitas.html'>Visitas</a></h4>
+      <div><input type="button" onclick="location.href='crearVisitas.html';" value="Crear" class="button button5"/></div>
+      <p class="description">Cree una visita para un cliente.</p>
+      <div><input type="button" onclick="location.href='listadoVisitas.html';" value="Ver" class="button button5"/></div>
+      <p class="description">Liste las visitas de sus clientes asociados, modique o cambie el estado.</p>
+    </div>
+  </div>
+
+
+<div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+  <div class="icon-box icon-box-cyan">
+    <div class="icon"><i class="bx bx-clipboard"></i></div>
+      <h4 class="title"><a href='listadoAsesorias.html'>Asesorias</a></h4>
+      <div><input type="button" onclick="location.href='crearAsesorias.html';" value="Crear" class="button button5"/></div>
+      <p class="description">Cree una asesoria para un cliente. </p>
+      <div><input type="button" onclick="location.href='listadoAsesorias.html';" value="Ver" class="button button5"/></div>
+      <p class="description">Vea las asesorias de sus clientes asociados.</p>
+  </div>
+</div>
+
+<div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+  <div class="icon-box icon-box-green">
+    <div class="icon"><i class="bx bx-check-square"></i></div>
+    <h4 class="title"><a href="">Checklist</a></h4>
+    <div><input type="button" onclick="location.href='crearChecklist.html';" value="Crear" class="button button5"/></div>
+    <p class="description">Cree un checklist para una empresa a evaluar.</p>
+    <div><input type="button" onclick="location.href='listadoChecklist.html';" value="Ver" class="button button5"/></div>
+    <p class="description">Vea las checklist pendientes y completadas.</p>
+  </div>
+</div>
+
+
+<div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+  <div class="icon-box icon-box-blue">
+    <div class="icon"><i class="bx bx-body"></i></div>
+    <h4 class="title"><a href="">Capacitaciones</a></h4>
+    <div><input type="button" onclick="location.href='crearCapacitaciones.html';" value="Crear" class="button button5"/></div>
+    <p class="description">Cree una capacitación para una empresa.</p>
+    <div><input type="button" onclick="location.href='listadoCapacitaciones.html';" value="Ver " class="button button5"/></div>
+    <p class="description">Vea sus capacitaciones pendientes o listas de sus clientes asociados.</p>
+  </div>
+</div>
+
+<div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+  <div class="icon-box icon-box-pink">
+    <div class="icon"><i class="bx bx-smile"></i></div>
+    <h4 class="title"><a href="">Clientes</a></h4>
+    <div><input type="button" onclick="location.href='listadoMisClientes.html';" value="Ver" class="button button5"/></div>
+    <p class="description">Vea la información de sus clientes asociados. Nombre de empresa, Rut, correo, dirección o Rubro</p>
+  </div>
+</div>
+<div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+  <div class="icon-box icon-box-cyan">
+    <div class="icon"><i class="bx bxs-bell-ring"></i></div>
+    <h4 class="title"><a href="">Reportes de Accidentes</a></h4>
+    <div><input type="button" onclick="location.href='listadoAccidentes.html';" value="Ver" class="button button5"/></div>
+    <p class="description">Vea todos los reportes de accidentes junto al nombre de la empresa, descripción y fecha del accidente. </p>
+  </div>
+</div>
+{%endif%}
+{% endfor %}
+{% endfor %}
+<!-- Fin if Profesional-->
+
+
+
+
+<!-- Servicios para el usuario Cliente -->
+{% for groups in request.user.groups.values_list %}
+{% for group in groups %}
+{% if group == 'Cliente'%}
+<section class="services">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up">
+        <div class="icon-box icon-box-pink">
+          <div class="icon"><i class="bx bx-calendar-check"></i></div>
+          <h4 class="title"><a href='crearSolicitud.html'>Solicitar servicio</a></h4>
+          <div><input type="button" onclick="location.href='crearSolicitud.html';" value="Solicitar" class="button button5"/></div>
+          <!-- <div><input type="button" onclick="location.href='listadoVisitas.html';" value="Ver listado" class="button button6"/></div>  -->
+          <p class="description">Realize una solicitud para capacitacion, asesoria o visita.</p>
+          <div><input type="button" onclick="location.href='crearSolicitud.html';" value="ver" class="button button5"/></div>
+        </div>
+      </div>
+
+
+  <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+    <div class="icon-box icon-box-cyan">
+      <div class="icon"><i class="bx bx-like"></i></div>
+      <h4 class="title"><a href="">Servicios</a></h4>
+      <div><input type="button" onclick="location.href='listadoActividadCliente.html';" value="Ver" class="button button5"/></div>
+      <p class="description">Puede ver todas las capacitaciones, asesorias y visitas que estén asociadas a su empresa.</p>
+    </div>
+  </div>
+
+<div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+  <div class="icon-box icon-box-green">
+    <div class="icon"><i class="bx bx-bell"></i></div>
+    <h4 class="title"><a href="">Reportar Accidente</a></h4>
+    <div><input type="button" onclick="location.href='reportarAccidente.html';" value="Reportar" class="button button5"/></div>
+    <p class="description">Esta alerta debe abre un canal de
+      comunicación entre su empresa y el profesional asignado para que de inmediato se puedan prestar
+      las asesorías necesarias para tal efecto.</p>
+  </div>
+</div>
+
+
+<div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+  <div class="icon-box icon-box-blue">
+    <div class="icon"><i class="bx bx-check-square"></i></div>
+    <h4 class="title"><a href="">Checklists</a></h4>
+    <div><input type="button" onclick="location.href='listadoChecklistCliente.html';" value="Ver" class="button button5"/></div>
+    <p class="description">Puede ver los checklists completados por el profesional en la visita a su empresa, tambien tiene la opción de descargarlo.</p>
+  </div>
+</div>
+<!-- End Services Section -->
+{%endif%}
+{% endfor %}
+{% endfor %}
+<!-- Fin if Cliente-->
+
+  {% else %} 
+  <center>
+
+    <script type="text/javascript">
+      function mensaje() {
+        Swal.fire({
+        icon: 'error',
+        title: 'Algo salio mal...',
+        allowOutsideClick :false,
+        alloEscapeKey:false,
+        text: 'No tiene privilegios para administrar este sitio o no ha iniciado sesion',
+        footer: '<a href="/accounts/login/" >¿Desea iniciar sesion?</a>'
+        });
+      }
+      
+      window.onload = mensaje;
+    </script>
+
+    <div class="col-lg-3">
+    <button id="btn2" class="btn btn-outline-danger btn-lg btn-block"> Error <p>Intentar nuevamente</p>  </button>
+    </div>
+  </center>
+{% endif %}	
+<!-- Fin if para servicios por roles-->
+
+
+
+    </section><!-- End Services Section -->
+
+    <!-- ======= Why Us Section ======= -->
+    <section class="why-us section-bg" data-aos="fade-up" date-aos-delay="200">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-lg-6 video-box">
+            <img src="{% static 'principal/img/why-us.jpg' %}" class="img-fluid" alt="">
+            <a href="https://www.youtube.com/watch?v=oO7Y8NsnkRg" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a>
+          </div>
+
+          <div class="col-lg-6 d-flex flex-column justify-content-center p-5">
+
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-fingerprint"></i></div>
+              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
+              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+            </div>
+
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-gift"></i></div>
+              <h4 class="title"><a href="">Nemo Enim</a></h4>
+              <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Why Us Section -->
+
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6 footer-links">
+            <h4>Menu</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'ndex' %}">Inicio</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'Contacto' %}">Contacto</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'servicios' %}">Servicios</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-contact">
+            <h4>Contactos</h4>
+            <p>
+              Calle falsa #123 <br>
+              Santiago de Chile<br><br>
+              <strong>Teléfono:</strong> +1 5589 55488 55<br>
+              <strong>Correo:</strong> no_accidentes@gmail.com<br>
+            </p>
+
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-info">
+            <h3>Redes sociales</h3>
+            <p>Estas son nuestras redes socialses oficiales</p>
+            <div class="social-links mt-3">
+              <a href="https://twitter.com" class="twitter"><i class="bx bxl-twitter"></i></a>
+              <a href="https://www.facebook.com" class="facebook"><i class="bx bxl-facebook"></i></a>
+              <a href="https://www.instagram.com" class="instagram"><i class="bx bxl-instagram"></i></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>No + ACCIDENTES</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/ -->
+        Sitio oficial <a href="https://nomasaccidentes.com/">www.nomasaccidentes.cl</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'principal/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'principal/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'principal/vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+  <script src="{% static 'principal/vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'principal/vendor/venobox/venobox.min.js' %}"></script>
+  <script src="{% static 'principal/vendor/waypoints/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'principal/vendor/counterup/counterup.min.js' %}"></script>
+  <script src="{% static 'principal/vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'principal/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'principal/vendor/aos/aos.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'principal/js/main.js' %}"></script>
+  <script src="{% static 'principal/js/mensaje_alerta.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.8.1/dist/sweetalert2.all.min.js"></script>
+
+</body>
+
+</html>

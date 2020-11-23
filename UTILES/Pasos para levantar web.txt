@@ -1,0 +1,21 @@
+LEVANTAR PAGINA WEB
+
+1- Abrir con cmd el directorio del pryecto: c:\usuario\escriotrio\web> (Ejemplo)
+2- Iniciar env: env\Scripts\activate
+3- Instalar liberias: pip install Djnago - pip install cx_oracle (Solo una vez, despues no es requerido)/ pip install --upgrade sweetify
+4- Crear usuario PRUEBALOCAL (MANUALMENTE)
+5- Ejecutar Scripts de CREAR USUARIO
+6- Ejecutar Scripts de crear base de datos, tablas
+7- iniciar servidor local: python manage.py runserver
+8- Si aparece algun error de listerner es debido a la BD no iniciada
+
+COMANDOS
+
+a- python manage.py makemigrations (Cambio en los modelos)
+b- manage.py migrate (para finalizar cambios, admin.py)
+c.python manage.py inspectdb >.\ruta\models.py (Migracion BD aws a django - automatico)
+
+SUPER USUARIO DJANGO
+admin/duoc123456
+
+Extra: Instalar motor base de datos ORACLE
