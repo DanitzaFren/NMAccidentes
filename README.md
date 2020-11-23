@@ -1,4 +1,1 @@
-"# Portafolio" 
-"# Web" 
-"# Web" 
-"# Web" 
+pip install -r requirements.txt
