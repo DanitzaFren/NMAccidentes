@@ -6,14 +6,16 @@ is
 begin
 	insert into asesoria(fecha,id_solicitud)
 	values(v_1,v_2);
+    update solicitud_asesoria set id_estado=2 where id_solicitud=v_2;
 	commit;
     v_salida:=1; 
 
     exception
 
-    when others then
+    when others then 
         v_salida:=0;
 end;
+
 create or replace NONEDITIONABLE procedure agregar_capacitacion(
 	v_1 in date,
     v_2 in number,
@@ -24,6 +26,7 @@ is
 begin
 	insert into capacitacion(fecha,asistentes,id_solicitud,descripcion_capa)
 	values(v_1,v_2,v_4,v_3);
+    update solicitud_asesoria set id_estado=2 where id_solicitud=v_4;
 	commit;
     v_salida:=1; 
 
@@ -116,11 +119,12 @@ is
 begin
 	insert into visita(fecha,id_solicitud,descripcion,nro_checklist)
 	values(v_1,v_2,v_3,v_4);
+    update solicitud_asesoria set id_estado=2 where id_solicitud=v_2;
 	commit;
     v_salida:=1; 
 
     exception
-
+ 
     when others then
         v_salida:=0;
 end;
@@ -486,7 +490,7 @@ IS
 BEGIN
 open tiposolicitud for SELECT solicitud_asesoria.id_solicitud, cliente.nombre FROM tipo_solicitud,solicitud_asesoria,cliente 
 where tipo_solicitud.id_tiposolicitud=solicitud_asesoria.tipo_solicitud
-and cliente.id_cliente=solicitud_asesoria.id_cliente  and solicitud_asesoria.tipo_solicitud=1
+and cliente.id_cliente=solicitud_asesoria.id_cliente  and solicitud_asesoria.id_estado=1 and solicitud_asesoria.tipo_solicitud=1
 and solicitud_asesoria.id_profesional=v_1 ;
 END;
 
@@ -497,7 +501,7 @@ IS
 BEGIN
 open tiposolicitud for SELECT solicitud_asesoria.id_solicitud, cliente.nombre FROM tipo_solicitud,solicitud_asesoria,cliente 
 where tipo_solicitud.id_tiposolicitud=solicitud_asesoria.tipo_solicitud
-and cliente.id_cliente=solicitud_asesoria.id_cliente  and solicitud_asesoria.tipo_solicitud=2
+and cliente.id_cliente=solicitud_asesoria.id_cliente  and solicitud_asesoria.id_estado=1 and solicitud_asesoria.tipo_solicitud=2
 and solicitud_asesoria.id_profesional=v_1 ;
 END;
 
@@ -508,7 +512,7 @@ IS
 BEGIN
 open tiposolicitud for SELECT solicitud_asesoria.id_solicitud, cliente.nombre FROM tipo_solicitud,solicitud_asesoria,cliente 
 where tipo_solicitud.id_tiposolicitud=solicitud_asesoria.tipo_solicitud
-and cliente.id_cliente=solicitud_asesoria.id_cliente  and solicitud_asesoria.tipo_solicitud=4
+and cliente.id_cliente=solicitud_asesoria.id_cliente and solicitud_asesoria.id_estado=1 and solicitud_asesoria.tipo_solicitud=4
 and solicitud_asesoria.id_profesional=v_1 ;
 END;
 
@@ -531,8 +535,8 @@ checklist.nro_checklist
 FROM tipo_solicitud,solicitud_asesoria,cliente, checklist
 where tipo_solicitud.id_tiposolicitud=solicitud_asesoria.tipo_solicitud
 and cliente.id_cliente=solicitud_asesoria.id_cliente  
-and solicitud_asesoria.tipo_solicitud=3 and
-checklist.id_cliente=cliente.id_cliente
+and solicitud_asesoria.tipo_solicitud=3 
+and solicitud_asesoria.id_estado=1
+and checklist.id_cliente=cliente.id_cliente
 and solicitud_asesoria.id_profesional=v_1 ;
 END;
-

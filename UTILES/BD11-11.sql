@@ -226,7 +226,8 @@ CREATE TABLE solicitud_asesoria (
     id_cliente            VARCHAR2(50) NOT NULL,
     id_profesional            VARCHAR2(50) NOT NULL,
     tipo_solicitud         NUMBER NOT NULL,
-    descripcion_asesoria  VARCHAR2(500) NOT NULL
+    descripcion_asesoria  VARCHAR2(500) NOT NULL,
+    id_estado        NUMBER(1) NOT NULL 
 );
 
 ALTER TABLE solicitud_asesoria ADD CONSTRAINT solicitud_asesoria_pk PRIMARY KEY ( id_solicitud );
@@ -241,6 +242,10 @@ CREATE TABLE visita (
 );
 
 ALTER TABLE visita ADD CONSTRAINT visita_pk PRIMARY KEY ( id_visita );
+
+ALTER TABLE solicitud_asesoria
+    ADD CONSTRAINT estado_solicitud_fk FOREIGN KEY ( id_estado )
+        REFERENCES estado_actividad ( id_estado );
 
 ALTER TABLE visita
     ADD CONSTRAINT visita_solicitud_asesoria_fk FOREIGN KEY ( id_solicitud )

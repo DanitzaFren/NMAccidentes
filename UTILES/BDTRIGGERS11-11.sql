@@ -311,3 +311,13 @@ BEGIN
   INTO :new.id_d
   FROM dual;
 END;
+
+create or replace NONEDITIONABLE TRIGGER estadosol_on_insert
+  BEFORE INSERT ON solicitud_asesoria
+  FOR EACH ROW
+BEGIN
+
+  SELECT 1
+  INTO :new.id_estado
+  FROM dual;
+END;
