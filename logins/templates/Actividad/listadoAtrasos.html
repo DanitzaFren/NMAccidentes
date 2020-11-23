@@ -104,6 +104,7 @@
                     <th>Rut Cliente</th>
                     <th>Nombre Empresa</th>
                     <th>Fecha vencimiento Pago</th>
+                    <th>correo</th>
                     <th>Acción</th>
                   </tr>
               </thead>
@@ -114,7 +115,8 @@
                     <td>{{ atraso.1 }}</td>
                     <td>{{ atraso.2 }}</td>
                     <td>{{ atraso.3 }}</td>   
-                    <td> <a href="{#}" class="button button7" >Notificar</a></td>
+                    <td>{{ atraso.4 }}</td>  
+                    <td> <a href="{% url 'enviarCorreo' atraso.4 %}" class="button button7" >Notificar</a></td>
                   </tr>
                   {% endfor %}
                </tbody>

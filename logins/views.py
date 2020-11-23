@@ -14,6 +14,8 @@ from .utils import render_to_pdf, link_callback
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.contrib.auth.models import User,Group
+from django.core.mail import send_mail
+from django.conf import settings
 # profesional prueba como logeado rut= 172876595
 # cliente prueba cmo logeado rut=2003901
 
@@ -1079,3 +1081,11 @@ def register3(request):
     return render(request, 'registration/register_Administrador.html', {'form': form})
 
 ####################################################################
+
+def enviarCorreo(request,correo):
+    subject='Información No + Accidentes'
+    message='Comunicamos a usted que a la fecha mantiene una cuenta impaga de No+accidentes. Recuerde pagar sus cuentas a tiempo y evitará estos molestos contactos de cobranza.'
+    email_from=settings.EMAIL_HOST_USER
+    recipient_list=[correo]
+    send_mail(subject,message,email_from,recipient_list,)
+    return redirect(to="listadoAtrasos")
