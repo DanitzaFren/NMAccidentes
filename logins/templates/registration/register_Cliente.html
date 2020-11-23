@@ -100,6 +100,10 @@
             <form method="POST">
               {% csrf_token %}
               <p>
+                <label for="id_email">Correo:</label>
+                {{ form.email }}
+              </p>
+              <p>
                 <label for="id_username">Nombre del usuario:</label>
                 {{ form.username }}
               </p>
@@ -111,6 +115,7 @@
                 <label for="id_password2">Validar Contraseña:</label>
                 {{ form.password2 }}
               </p>
+              
               <center>
                 <button type="submit" class="button button6">Registrar</button>
               

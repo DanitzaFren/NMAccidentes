@@ -37,44 +37,36 @@ class ResetPasswordForm(forms.Form):
 class ProfesionalForm(forms.ModelForm):
     class Meta:
         model = Profesional
-        fields = ['rut_profesional', 'nombre', 'paterno', 'materno', 'correo', 'id_admin']
+        fields = ['rut_profesional', 'nombre', 'paterno', 'materno']
         labels = {
           'rut_profesional': 'Rut profesional',
           'nombre ': 'Nombre',
           'paterno ': 'Apellido Paterno',
           'materno': 'Apellido Materno',
-          'correo': 'Correo',
-          'id_admin': 'Administrador asignado',
           }
         widgets = {
             'rut_profesional': forms.TextInput(attrs={'class': 'form-control', 'name':'rut_profesional'}),
             'nombre'          : forms.TextInput(attrs={'class': 'form-control', 'name':'nombre'}),
             'paterno'         : forms.TextInput(attrs={'class': 'form-control', 'name':'paterno'}),
             'materno'         : forms.TextInput(attrs={'class': 'form-control', 'name':'materno'}),
-            'correo'          : forms.EmailInput(attrs={'class': 'form-control', 'name':'contrasena'}),
-            'id_admin '       : forms.TextInput(attrs={'class': 'form-control','name':'id_admin'}),
         }
 
 class ClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
-        fields = ['id_cliente', 'nombre', 'rubro','direccion', 'correo', 'id_admin']
+        fields = ['id_cliente', 'nombre', 'rubro','direccion']
         labels = {
 
           'id_cliente': 'Rut Empresa',
           'nombre': 'Nombre Empresa',
           'direccion': 'Dirección',
           'rubro': 'Rubro',
-          'correo': 'Correo Electrónico',
-          'id_admin': 'Administrador asignado',
           }
         widgets = {
             'id_cliente' : forms.TextInput(attrs={'class': 'form-control'}),
             'direccion' : forms.TextInput(attrs={'class': 'form-control'}),
             'nombre'     : forms.TextInput(attrs={'class': 'form-control'}),
             'rubro'      : forms.TextInput(attrs={'class': 'form-control', 'name':'rubro'}),
-            'correo'     : forms.TextInput(attrs={'class': 'form-control'}),
-            #id_admin  = forms.CharField(widget=forms.Select(attrs={'class': 'form-control'}))
         }
 
 
@@ -107,9 +99,8 @@ class VisitaForm(forms.ModelForm):
 class SolicitudForm(forms.ModelForm):
     class Meta:
         model = SolicitudAsesoria
-        fields = ['solicitud', 'id_cliente', 'id_profesional', 'tipo_solicitud', 'descripcion_asesoria']
+        fields = [ 'id_cliente', 'id_profesional', 'tipo_solicitud', 'descripcion_asesoria']
 
-    solicitud               = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     #id_cliente             = forms.CharField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
     tipo_solicitud           = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     descripcion_asesoria    = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))

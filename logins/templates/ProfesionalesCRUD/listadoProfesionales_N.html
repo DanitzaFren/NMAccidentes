@@ -104,7 +104,6 @@
                       <th>Nombre</th>
                       <th>Apellidos</th>
                       <th>Estado</th>
-                      <th>Admin Asociado</th>
                       <th>Opciones</th>
                   </tr>
               </thead>
@@ -119,7 +118,6 @@
                       {% else %}
                       <td>Activo</td>
                       {% endif %}
-                      <td>{{ profesional.id_admin }}</td>
       
                       <td>
                       <a href="{% url 'editarProfesionales' profesional.rut_profesional %}" class="button button7" >Editar</a>
