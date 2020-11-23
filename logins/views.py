@@ -196,7 +196,7 @@ def crear_visita(fecha,id_solicitud,descripcion,nro_checklist):
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
     cursor.callproc('AGREGAR_VISITA',[ fecha,id_solicitud,descripcion,nro_checklist,salida])
-
+    return salida.getvalue()
 
 def editarVisitas(request, id_visita):
     visita = Visita.objects.get(id_visita = id_visita) #Error obligatorio, si compila
@@ -341,7 +341,6 @@ def crearAsesorias(request):
             data['mensaje'] = 'Asesoria Creada'
             return redirect('listadoAsesorias')
         else:
-            return redirect('listadoAsesorias')
             data['mensaje'] = 'error'
 
     return render(request, "AsesoriasCRUD/crearAsesorias.html", data)
@@ -351,7 +350,7 @@ def crear_asesoria(fecha,id_solicitud):
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
     cursor.callproc('AGREGAR_ASESORIA',[ fecha,id_solicitud,salida])
-
+    return salida.getvalue()
 def editarAsesorias(request, id_asesoria):
     asesoria = Asesoria.objects.get(id_asesoria = id_asesoria) #Error obligatorio, si compila
     formularioAsesorias = {   
@@ -597,6 +596,7 @@ def check_listo(idcheck):
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
     cursor.callproc('checklisto',[ idcheck,salida])
+    return salida.getvalue()
 
 def completardetalle(act_mejora, estado , iddetalle):
     django_cursor = connection.cursor()
@@ -668,7 +668,7 @@ def crearCondicion(request):
             return redirect('listadoCondicion')
         else:
             data['mensaje'] = 'error'
-            return redirect('listadoCondicion')
+            
     return render(request, "CondicionCRUD/crearCondicion.html", data)
 
 def crear_condicion(nom_condicion):
@@ -676,7 +676,7 @@ def crear_condicion(nom_condicion):
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
     cursor.callproc('AGREGAR_CONDICION',[ nom_condicion,salida])
-
+    return salida.getvalue()
 def editarCondicion(request, id_condicion):
     condicion = Condicion.objects.get(id_condicion = id_condicion) #Error obligatorio, si compila
     formularioCon = {   
@@ -730,7 +730,7 @@ def crear_contrato(fecha_inicio,fecha_termino,id_cliente,id_profesional):
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
     cursor.callproc('AGREGAR_CONTRATO',[ fecha_inicio, fecha_termino, id_cliente, id_profesional,salida])           
-
+    return salida.getvalue()
 def editarContrato(request, id_servicio):
     contrato = ContratoServicio.objects.get(id_servicio = id_servicio) #Error obligatorio, si compila
     formularioCon = {   
@@ -761,7 +761,7 @@ def reportarAccidente(id_cliente, descripcion):
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
     cursor.callproc('SP_REPORT_ACCIDENT',[ id_cliente, descripcion,salida])
-
+    return salida.getvalue()
 
 def reporteAccidente(request):
     accidente = ""
