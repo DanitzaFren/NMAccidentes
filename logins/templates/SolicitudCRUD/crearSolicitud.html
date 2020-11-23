@@ -94,16 +94,14 @@
       <div class="container">
 
         <div class="row">
-
+          {{mensaje}}
           <div class="col-lg-12">
             <form method="POST">
               {% csrf_token %}
-              <p class="p">Asunto:
-                <input type="text" name="solicitud" class="form-control">
                 <p class="p">Rut cliente:
-                <input type="number" name="id_cliente" class="form-control" value=2003901 readonly>
+                <input type="text" name="id_cliente" class="form-control" value=2003901 readonly>
                 <p class="p">profesional:
-                  <input type="number" name="id_profesional" class="form-control" value=172876595 readonly>
+                  <input type="text" name="id_profesional" class="form-control" value=172876595 readonly>
                 <p class="p">Tipo Solicitud:
                   <select class="form-control" name= "tipo_solicitud" type="number" >
                     <option value="0">Seleccione </option>

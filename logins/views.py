@@ -390,23 +390,22 @@ def crearSolicitud(request):
         'tiposolicitud': listado_tiposolicitud(),
     }
     if request.method == 'POST':
-        solicitud = request.POST.get('solicitud')
         id_cliente = request.POST.get('id_cliente')
         id_profesional = request.POST.get('id_profesional')
         tipo_solicitud = request.POST.get('tipo_solicitud')
         descripcion_asesoria = request.POST.get('descripcion')
-        salida = crear_solicitud(solicitud, id_cliente, id_profesional,tipo_solicitud,descripcion_asesoria)
+        salida = crear_solicitud(id_cliente, id_profesional,tipo_solicitud,descripcion_asesoria)
         if salida == 1:
             data['mensaje'] = 'agregado'
         else:
             data['mensaje'] = 'error'
     return render(request, "SolicitudCRUD/crearSolicitud.html", data)
 
-def crear_solicitud(solicitud, id_cliente, id_profesional,tipo_solicitud,descripcion_asesoria):
+def crear_solicitud( id_cliente, id_profesional,tipo_solicitud,descripcion_asesoria):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
-    cursor.callproc('AGREGAR_SOLICITUD',[ solicitud, id_cliente, id_profesional,tipo_solicitud,descripcion_asesoria,salida])
+    cursor.callproc('AGREGAR_SOLICITUD',[ id_cliente, id_profesional,tipo_solicitud,descripcion_asesoria,salida])
     
     return salida.getvalue()
 

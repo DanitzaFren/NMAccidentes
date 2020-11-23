@@ -99,9 +99,8 @@ class VisitaForm(forms.ModelForm):
 class SolicitudForm(forms.ModelForm):
     class Meta:
         model = SolicitudAsesoria
-        fields = ['solicitud', 'id_cliente', 'id_profesional', 'tipo_solicitud', 'descripcion_asesoria']
+        fields = [ 'id_cliente', 'id_profesional', 'tipo_solicitud', 'descripcion_asesoria']
 
-    solicitud               = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     #id_cliente             = forms.CharField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
     tipo_solicitud           = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     descripcion_asesoria    = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))

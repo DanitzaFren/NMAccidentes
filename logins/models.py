@@ -83,7 +83,6 @@ class Profesional(models.Model):
 
 class SolicitudAsesoria(models.Model):
     id_solicitud = models.AutoField(primary_key=True)
-    solicitud = models.CharField(max_length=50)
     id_cliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='id_cliente')
     id_profesional = models.ForeignKey(Profesional, models.DO_NOTHING, db_column='id_profesional')
     tipo_solicitud = models.ForeignKey(TipoSolicitud, models.DO_NOTHING, db_column='tipo_solicitud')

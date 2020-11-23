@@ -38,19 +38,17 @@ create or replace NONEDITIONABLE procedure agregar_cliente(
     v_3 in VARCHAR2,
     v_4 in varchar2,
     v_5 in number,
-    v_6 in varchar2,
-    v_7 in number,
     v_salida out number)
 is
 begin
-	insert into cliente(id_cliente,direccion,nombre,rubro,correo,id_admin)
-	values(v_2, v_3,v_4,v_5,v_6,v_7);
+	insert into cliente(id_cliente,direccion,nombre,rubro)
+	values(v_2, v_3,v_4,v_5);
 	commit;
     v_salida:=1; 
 
     exception
 
-    when others then
+    when others then 
         v_salida:=0;
 end;
 
@@ -73,8 +71,8 @@ end;
 create or replace NONEDITIONABLE procedure agregar_contrato(
     v_1 in contrato_servicio.fecha_inicio%type,
     v_2 in contrato_servicio.fecha_termino%type,
-    v_4 in number,
-    v_5 in number,
+    v_4 in VARCHAR2,
+    v_5 in VARCHAR2,
     v_salida out number)
 is
 begin
@@ -87,23 +85,22 @@ begin
 
     when others then
         v_salida:=0;
-end;
+end; 
 
 create or replace NONEDITIONABLE procedure agregar_solicitud(
-    v_1 in VARCHAR2,
-    v_2 in number,
-    v_4 in number,
+    v_2 in VARCHAR2,
+    v_4 in VARCHAR2,
     v_5 in number,
     v_3 in VARCHAR2,
     v_salida out number)
 is
 begin
-	insert into solicitud_asesoria(solicitud, id_cliente, id_profesional,tipo_solicitud,descripcion_asesoria)
-	values(v_1,v_2,v_4,v_5,v_3);
+	insert into solicitud_asesoria( id_cliente, id_profesional,tipo_solicitud,descripcion_asesoria)
+	values(v_2,v_4,v_5,v_3);
 	commit;
     v_salida:=1; 
 
-    exception
+    exception 
 
     when others then
         v_salida:=0;
