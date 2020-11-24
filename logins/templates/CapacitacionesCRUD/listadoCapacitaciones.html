@@ -103,25 +103,25 @@
                       <th>N°</th>
                       <th>Fecha</th>
                       <th>Cantidad asistentes</th>
-                      <th>Capacitacion para cliente N°</th>
-                      <th>Profesional responsable</th>
-                      <th>Descripcion</th>
+                      <th>Empresa Cliente</th>
+                      <th>Estado capacitación</th>
                       <th>Opciones</th>
                   </tr>
               </thead>
               <tbody>
-                  {% for capacitacion in capacitaciones %}
+                  {% for capacitacion in capacitacion %}
                   <tr>
-                      <td>{{ capacitacion.nro_capacitacion }}</td>
-                      <td>{{ capacitacion.fecha }}</td>
-                      <td>{{ capacitacion.asistentes }} </td>
-                      <td>{{ capacitacion.id_cliente }}</td>
-                      <td>{{ capacitacion.rut_profesional }}</td>
-                      <td>{{ capacitacion.descripcion_capa }}</td>
-
+                      <td>{{ capacitacion.0 }}</td>
+                      <td>{{ capacitacion.1 }}</td>
+                      <td>{{ capacitacion.2 }} </td>
+                      <td>{{ capacitacion.3 }}</td>
+                      {% if capacitacion.4 == 1 %}
+                      <td>Pendiente</td>
+                      {% else %}
+                      <td>Listo</td>
+                      {% endif %}
                       <td>
-                      <a href="{% url 'editarCapacitaciones' capacitacion.nro_capacitacion %}" class="button button7" >Editar</a>
-                      <a input type="button" class="button button8" href="{% url 'eliminarCapacitaciones' capacitacion.nro_capacitacion %}" onclick="return confirm('¿Estás seguro de querer eliminar este dato?')">Eliminar registro</a>
+                      <a input type="button" class="button button8" href="{% url 'eliminarCapacitaciones' capacitacion.0 %}" onclick="return confirm('¿Estás seguro de querer eliminar este dato?')">Listo</a>
                       </td>
       
                   </tr>

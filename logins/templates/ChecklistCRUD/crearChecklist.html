@@ -101,7 +101,7 @@
                 <p>Ingrese una descripción a su Checklist:</p>
                 <textarea class="form-control" name="descripcion_check" required></textarea>
                 <p class="p">Clientes:
-                  <select class="form-control" name= "idcliente" type="number" >
+                  <select class="form-control" name= "idcliente" type="text" >
                     <option value="0">Seleccione </option>
                     {% for cliente in cliente %}
                     <option  value="{{cliente.0}}">{{cliente.1}} </option>

@@ -38,14 +38,7 @@ def Somos(request):
     return render(request, "logins/Somos.html")
 
 ######################################################################## CAPACITACION
-def listadoCapacitaciones(request):
 
-    capacitaciones = Capacitacion.objects.all() #Error boligatorio, si compila 
-    datoscapa = {
-        'capacitaciones':capacitaciones
-    }
-
-    return render(request, "CapacitacionesCRUD/listadoCapacitaciones.html", datoscapa)
 
 def solicitudesC(x):
     django_cursor = connection.cursor()
@@ -57,9 +50,9 @@ def solicitudesC(x):
         lista.append(fila)
     return lista
 
-def crearCapacitaciones(request):
+def crearCapacitaciones(request,id):
     data = {
-        'solicitudes' : solicitudesC(172876595),
+        'solicitudes' : solicitudesC(id),
     }
 
     if request.method == 'POST':
@@ -70,7 +63,6 @@ def crearCapacitaciones(request):
         salida = agregarcapacitacion(fecha,asistentes,id_solicitud,descripcion_capa)
         if salida == 1:
             data['mensaje'] = 'agregado'
-            return redirect('listadoCapacitaciones')
         else:
             data['mensaje'] = 'error'
 
@@ -155,13 +147,6 @@ def eliminarProfesionales(request, rut_profesional):
 
 ######################################################################## VISITAS
 
-def listadoVisitas(request):
-
-    visitas = Visita.objects.all() #Error boligatorio, si compila
-    datosvisi = {
-        'visitas':visitas
-    }
-    return render(request, "VisitasCRUD/listadoVisitas.html", datosvisi)
 
 def solicitudesV(x):
     django_cursor = connection.cursor()
@@ -174,10 +159,10 @@ def solicitudesV(x):
     return lista
 
 
-def crearVisitas(request):
+def crearVisitas(request,id):
     
     data = {
-        'solicitudes': solicitudesV(172876595),
+        'solicitudes': solicitudesV(id),
     }
     if request.method == 'POST':
         fecha = request.POST.get('fecha')
@@ -187,7 +172,6 @@ def crearVisitas(request):
         salida = crear_visita(fecha,id_solicitud,descripcion,nro_checklist)
         if salida == 1:
             data['mensaje'] = 'Visita Creada'
-            return redirect('listadoVisitas')
         else:
             data['mensaje'] = 'error'
 
@@ -301,9 +285,9 @@ def eliminarClientes(request, id_cliente):
 
 ######################################################################## ASESORIAS
 
-def listadoAsesorias(request):
+def listadoAsesorias(request,id):
     data = {
-        'asesoria':listado_Asesorias(172876595)
+        'asesoria':listado_Asesorias(id)
     }
     return render(request, 'AsesoriasCRUD/listadoAsesorias.html',data)
 
@@ -330,10 +314,10 @@ def solicitudesA(x):
     return lista
 
 
-def crearAsesorias(request):
+def crearAsesorias(request,id):
     
     data = {
-        'solicitudes': solicitudesA(172876595),
+        'solicitudes': solicitudesA(id),
     }
     if request.method == 'POST':
         fecha = request.POST.get('fecha')
@@ -388,9 +372,10 @@ def listado_tiposolicitud():
     return lista
 
 
-def crearSolicitud(request):
+def crearSolicitud(request,id):
     data = {
         'tiposolicitud': listado_tiposolicitud(),
+        'info': infocontrato(id),
     }
     if request.method == 'POST':
         id_cliente = request.POST.get('id_cliente')
@@ -403,6 +388,16 @@ def crearSolicitud(request):
         else:
             data['mensaje'] = 'error'
     return render(request, "SolicitudCRUD/crearSolicitud.html", data)
+
+def infocontrato(request,id)
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor() 
+    cursor.callproc("contratoprocli", [x,out_cur])
+    lista = []
+    for fila in out_cur: 
+        lista.append(fila)
+    return lista
 
 def crear_solicitud( id_cliente, id_profesional,tipo_solicitud,descripcion_asesoria):
     django_cursor = connection.cursor()
@@ -425,10 +420,10 @@ def listado_clienteProfesional(x):
         lista.append(fila)
     return lista
 ################ID PROF3ESIONAL LOGEAOO PLSS (REQUEST, ID)
-def crearChecklist(request):
+def crearChecklist(request,id):
     
     data = {
-        'cliente' : listado_clienteProfesional(172876595),
+        'cliente' : listado_clienteProfesional(id),
     }
     if request.method == 'POST':
         descripcion = request.POST.get('descripcion_check')
@@ -766,10 +761,11 @@ def reportarAccidente(id_cliente, descripcion):
     cursor.callproc('SP_REPORT_ACCIDENT',[ id_cliente, descripcion,salida])
     return salida.getvalue()
 
-def reporteAccidente(request):
+def reporteAccidente(request,id):
     accidente = ""
     data = {
         'mensaje': accidente,
+        'info': infocontrato(id),
     }
     if request.method == 'POST':
         id_cliente = request.POST.get('id_cliente')
@@ -781,11 +777,9 @@ def reporteAccidente(request):
             data['mensaje'] = 'Error Reporte NO enviado'
     return render(request, 'Accident/reportarAccidente.html',data)
 
-def listadoAccidente(request):
-
+def listadoAccidente(request,id):
     data = {
-        #Para cuando el incio usuario este bien
-        'accidente':listado_accidentes(172876595)
+        'accidente':listado_accidentes(id)
     }
     return render(request, 'Accident/listadoAccidentes.html',data)
 
@@ -904,9 +898,9 @@ def actividadesAdmin():
     return lista
 
 ####################################################################listado actividades Cliente
-def listadoActividadCliente(request):
+def listadoActividadCliente(request,id):
     #reemplazar con el idcliente logiao
-    activity = actividadesCliente(2003901)
+    activity = actividadesCliente(id)
     datosclien = {
         'activity':activity
     }
@@ -960,9 +954,9 @@ def atrasos():
     return lista
 
 ###################################################################CLIENTES DEL PROFESIONAL
-def listadoMisClientes(request):
+def listadoMisClientes(request,id):
     #reemplazar pa cuando se logee el profesional
-    cliente = misclientes(172876595)
+    cliente = misclientes(id)
     datos = {
         'cliente':cliente
     }
@@ -1000,9 +994,9 @@ def render_pdf_view(request, id):
     return response
 
 ###################################################################ID CLIENTE LOGEADO
-def verChecklistCliente(request):
+def verChecklistCliente(request,id):
     data = {
-        'checklist' : listado_checklistcliente(2003901),
+        'checklist' : listado_checklistcliente(id),
      
     }
     return render(request, 'ChecklistCRUD/listadoChecklistCliente.html',data)
@@ -1089,3 +1083,58 @@ def enviarCorreo(request,correo):
     recipient_list=[correo]
     send_mail(subject,message,email_from,recipient_list,)
     return redirect(to="listadoAtrasos")
+
+    ##############################################################
+
+def listadoCapacitaciones(request,id):
+    datoscapa = {
+        'capacitacion':listado_capacitacion(id)
+    }
+    return render(request, "CapacitacionesCRUD/listadoCapacitaciones.html", datoscapa)
+
+def listado_capacitacion(id_pro):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor() 
+    cursor.callproc("SP_LISTAR_capacitacion", [id_pro,out_cur])
+
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+    return lista
+
+def listadoVisitas(request,id):
+    visitas=listado_visita(id)
+    datosvisi = {
+        'visitas':visitas
+    }
+    return render(request, "VisitasCRUD/listadoVisitas.html", datosvisi)
+
+def listado_visita(id_pro):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor() 
+    cursor.callproc("SP_LISTAR_visita", [id_pro,out_cur])
+
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+    return lista
+
+def listsolcliente(request,id):
+    soli=list_solcliente(id)
+    datossoli = {
+        'soli':soli
+    }
+    return render(request, "SolicitudCRUD/listadosolcliente.html", datossoli)
+
+def list_solcliente(id_pro):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor() 
+    cursor.callproc("list_solicitudcliente", [id_pro,out_cur])
+
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+    return lista
