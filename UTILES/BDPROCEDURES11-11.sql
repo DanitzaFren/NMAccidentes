@@ -259,11 +259,11 @@ open actividades for SELECT asesoria.id_asesoria, asesoria.fecha, asesoria.id_es
                 where asesoria.id_solicitud=solicitud_asesoria.id_solicitud and solicitud_asesoria.id_cliente=cliente.id_cliente
                 and cliente.id_user=v_1
                 UNION
-                SELECT  capacitacion.nro_capacitacion, capacitacion.fecha,asesoria.id_estado, 'Capacitación' from capacitacion, cliente, solicitud_asesoria
+                SELECT  capacitacion.nro_capacitacion, capacitacion.fecha,capacitacion.id_estado, 'Capacitación' from capacitacion, cliente, solicitud_asesoria
                 where capacitacion.id_solicitud=solicitud_asesoria.id_solicitud and solicitud_asesoria.id_cliente=cliente.id_cliente
-                and cliente.id_user=v_1;
+                and cliente.id_user=v_1
                 UNION
-                SELECT  visita.id_visita, visita.fecha,asesoria.id_estado, 'visita' from visita, cliente, solicitud_asesoria
+                SELECT  visita.id_visita, visita.fecha,visita.id_estado, 'visita' from visita, cliente, solicitud_asesoria
                 where visita.id_solicitud=solicitud_asesoria.id_solicitud and solicitud_asesoria.id_cliente=cliente.id_cliente
                 and cliente.id_user=v_1;
         commit;
