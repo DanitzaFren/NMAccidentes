@@ -101,29 +101,26 @@
                 <tr>
                   <th>ID Visita</th>
                   <th>Fecha</th>
-                  <th>Rut Profesional</th>
-                  <th>ID cliente</th>
-                  <th>N° Checklist</th>
-                  <th>Materiales</th>
-                  <th>Participantes</th>
                   <th>Descripcion</th>
-                  <th>Opciones</th>
+                  <th>Estado visita</th>
+                  <th>Nombre empresa</th>
+                  <th>Acción</th>
                 </tr>
               </thead>
               <tbody>
                 {% for visita in visitas %}
                   <tr>
-                    <td>{{ visita.id_visita }}</td>
-                    <td>{{ visita.fecha }}</td>
-                    <td>{{ visita.rut_profesional }}</td>
-                    <td>{{ visita.id_cliente }}</td>
-                    <td>{{ visita.nro_checklist }}</td>
-                    <td>{{ visita.materiales }}</td>
-                    <td>{{ visita.participantes }}</td>
-                    <td>{{ visita.descripcion }}</td>            
+                    <td>{{ visita.0 }}</td>
+                    <td>{{ visita.1 }}</td>
+                    <td>{{ visita.2 }}</td>
+                    {% if visita.3 == 1 %}
+                    <td>Pendiente</td>
+                    {% else %}
+                    <td>Listo</td>
+                    {% endif %}
+                    <td>{{ visita.4 }}</td>        
                     <td>
-                    <a href="{% url 'editarVisitas' visita.id_visita %}" class="button button7" >Editar</a>
-                    <a input type="button" class="button button8" href="{% url 'eliminarVisitas' visita.id_visita %}" onclick="return confirm('¿Estás seguro de querer eliminar este dato?')">Eliminar registro</a>
+                    <a input type="button" class="button button8" href="{% url 'eliminarVisitas' visita.0 %}" onclick="return confirm('¿Estás seguro de querer eliminar este dato?')">Listo</a>
                     </td>
                   </tr>
                   {% endfor %}

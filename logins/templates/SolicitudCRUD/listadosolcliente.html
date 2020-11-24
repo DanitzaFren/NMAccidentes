@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Listado Actividades</title>
+  <title>No + Accidentes</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -27,7 +27,7 @@
   <link href="{% static 'principal/vendor/aos/aos.css' %}" rel="stylesheet">
   <link href="{% static 'principal/css/servicios.css' %}" rel="stylesheet">
   <!-- Template Main CSS File -->
-  <link rel="stylesheet" type="text/css" href="{% static 'principal/css/style.css' %}"/>
+  <link href="{% static 'principal/css/style.css' %}" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Moderna - v2.1.0
@@ -37,7 +37,7 @@
   ======================================================== -->
 </head>
 
-<body >
+<body>
 
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top ">
@@ -75,11 +75,11 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Lista Actividades</h2>
+          <h2>Lista de Solicitudes</h2>
           <ol>
             <li><a href="{% url 'ndex' %}">Home</a></li>
-            <li><a href="{% url 'servicios' %}">Servicios</a></li>
-            <li>Lista Activididades</li>
+            <li><a href="servicios.html">Servicios</a></li>
+            <li>Lista de solicitudes</li>
           </ol>
         </div>
 
@@ -91,63 +91,49 @@
       <div>
         <!-- ======= Copiar aqui loco ======= -->
         <center>
-          {% if perms.logins.view_pago %}
+          {% if perms.logins.view_solicitud_asesoria %}
       
           
-          <h1>Lista Actividades</h1>
-      
+        <h1>Solicitudes</h1>     
         <div>
           <table>
               <thead>
                   <tr>
-                    <th>ID actividad</th>
-                    <th>Tipo actividad</th>
-                    <th>Fecha actividad</th>
-                    <th>Nombre Empresa</th>
-                    <th>Estado actividad</th>
+                      <th>Número solicitud</th>
+                      <th>Tipo de solicitud</th>
+                      <th>Descripción</th>
+                      <th>Estado</th>
+                      <th>Acción</th>
                   </tr>
               </thead>
               <tbody>
-                {% for activity in activity %}
+                
+                  {% for soli in soli %}
+
                   <tr>
-                    <td>{{ activity.0 }}</td>
-                    <td>{{ activity.2 }}</td>
-                    <td>{{ activity.1 }}</td>
-                    <td>{{ activity.3 }}</td> 
-                    {% if activity.4 == 1 %}  
-                    <td>Pendiente</td> 
-                    {% else %}
-                    <td>Listo</td>  
+                    <td>{{ soli.0 }}</td>   
+                    <td>{{ soli.1 }}</td>
+                    <td>{{ soli.2 }}</td>
+                    {% if soli.3 == 1 %}
+                    <td>Aún no agendada</td>
+                      {% else %}
+                      <td>Agendada</td>                     
                     {% endif %}
                   </tr>
                   {% endfor %}
-               </tbody>
+                </tbody> 
           </table>
+        
         </div>
           <div>
             <a href="{% url 'servicios' %}" class="button button6">Atrás</a>
           </div>
    
-          {% else %}
-
-          <script type="text/javascript">
-            function mensaje() {
-              Swal.fire({
-              icon: 'error',
-              title: 'Algo salio mal...',
-              allowOutsideClick :false,
-              alloEscapeKey:false,
-              text: 'No tiene privilegios para administrar este sitio',
-              footer: '<a href="/servicios" >¿Volver a la seccion de servicios?</a>'
-              });
-            }
-            
-            window.onload = mensaje;
-          </script>
-            
+        {% else %}
 
           <div class="col-lg-3">
             <button id="btn1" class="btn btn-outline-danger btn-lg btn-block"> Error <p>Intentar nuevamente</p>  </button>
+          
           </div>
       
         {% endif %}
@@ -171,7 +157,7 @@
             <ul>
               <li><i class="bx bx-chevron-right"></i> <a href="{% url 'ndex' %}">Inicio</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="{% url 'Contacto' %}">Contacto</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'servicios' %}">Servicios</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="servicios.html">Servicios</a></li>
             </ul>
           </div>
 
