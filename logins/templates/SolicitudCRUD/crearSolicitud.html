@@ -98,10 +98,12 @@
           <div class="col-lg-12">
             <form method="POST">
               {% csrf_token %}
+              {% for info in info %}
                 <p class="p">Rut cliente:
-                <input type="text" name="id_cliente" class="form-control" value=2003901 readonly>
+                <input type="text" name="id_cliente" class="form-control" value="{{info.0}}" readonly>
                 <p class="p">profesional:
-                  <input type="text" name="id_profesional" class="form-control" value=172876595 readonly>
+                  <input type="text" name="id_profesional" class="form-control" value="{{info.1}}" readonly>
+              {% endfor %}
                 <p class="p">Tipo Solicitud:
                   <select class="form-control" name= "tipo_solicitud" type="number" >
                     <option value="0">Seleccione </option>

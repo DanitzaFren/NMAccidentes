@@ -565,3 +565,17 @@ and cliente.id_cliente=solicitud_asesoria.id_cliente
 and profesional.rut_profesional=solicitud_asesoria.id_profesional
 and profesional.id_user=v_1;
 END;
+
+create or replace NONEDITIONABLE procedure contratoprocli(
+v_id in number, 
+contrato_servicio out 
+sys_refcursor) 
+IS
+BEGIN
+open contrato_servicio for Select contrato_servicio.id_profesional, contrato_servicio.id_cliente
+        FROM profesional, contrato_servicio, cliente
+        WHERE contrato_servicio.id_cliente=cliente.id_cliente
+        and contrato_servicio.id_profesional=profesional.rut_profesional
+        and cliente.id_user;
+        commit;
+END;

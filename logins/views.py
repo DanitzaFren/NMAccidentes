@@ -372,9 +372,10 @@ def listado_tiposolicitud():
     return lista
 
 
-def crearSolicitud(request):
+def crearSolicitud(request,id):
     data = {
         'tiposolicitud': listado_tiposolicitud(),
+        'info': infocontrato(id),
     }
     if request.method == 'POST':
         id_cliente = request.POST.get('id_cliente')
@@ -387,6 +388,16 @@ def crearSolicitud(request):
         else:
             data['mensaje'] = 'error'
     return render(request, "SolicitudCRUD/crearSolicitud.html", data)
+
+def infocontrato(request,id)
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor() 
+    cursor.callproc("contratoprocli", [x,out_cur])
+    lista = []
+    for fila in out_cur: 
+        lista.append(fila)
+    return lista
 
 def crear_solicitud( id_cliente, id_profesional,tipo_solicitud,descripcion_asesoria):
     django_cursor = connection.cursor()

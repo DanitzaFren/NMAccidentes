@@ -278,8 +278,8 @@
       <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up">
         <div class="icon-box icon-box-pink">
           <div class="icon"><i class="bx bx-calendar-check"></i></div>
-          <h4 class="title"><a href='crearSolicitud.html'>Solicitar servicio</a></h4>
-          <div><input type="button" onclick="location.href='crearSolicitud.html';" value="Solicitar" class="button button5"/></div>
+          <h4 class="title"><a href="">Solicitar servicio</a></h4>
+          <div><input type="button" onclick="location.href='{% url 'crearSolicitud' user.id %}'" value="Solicitar" class="button button5"/></div>
           <!-- <div><input type="button" onclick="location.href='listadoVisitas.html';" value="Ver listado" class="button button6"/></div>  -->
           <p class="description">Realize una solicitud para capacitacion, asesoria o visita.</p>
           <div><input type="button" onclick="location.href='crearSolicitud.html';" value="ver" class="button button5"/></div>
