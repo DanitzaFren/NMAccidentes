@@ -581,7 +581,7 @@ open contrato_servicio for Select contrato_servicio.id_profesional, contrato_ser
         FROM profesional, contrato_servicio, cliente
         WHERE contrato_servicio.id_cliente=cliente.id_cliente
         and contrato_servicio.id_profesional=profesional.rut_profesional
-        and cliente.id_user;
+        and cliente.id_user=v_id;
         commit;
 END;
 
