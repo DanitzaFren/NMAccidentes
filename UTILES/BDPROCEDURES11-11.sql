@@ -187,7 +187,8 @@ checklist out
 sys_refcursor) 
 IS
 BEGIN
-open checklist for SELECT nro_checklist, cliente.nombre,checklist.id_estado FROM checklist, cliente where checklist.id_cliente = cliente.id_cliente and cliente.id_cliente= v_id ;
+open checklist for SELECT nro_checklist, cliente.nombre,checklist.id_estado FROM checklist, cliente 
+where checklist.id_cliente = cliente.id_cliente and cliente.id_user= v_id ;
 
 END;
 
@@ -254,13 +255,17 @@ actividades out
 sys_refcursor) 
 IS
 BEGIN
-open actividades for SELECT asesoria.id_asesoria, asesoria.fecha, 'Asesoria' from asesoria, cliente,solicitud_asesoria 
+open actividades for SELECT asesoria.id_asesoria, asesoria.fecha, asesoria.id_estado, 'Asesoria' from asesoria, cliente,solicitud_asesoria 
                 where asesoria.id_solicitud=solicitud_asesoria.id_solicitud and solicitud_asesoria.id_cliente=cliente.id_cliente
-                and cliente.id_cliente=v_1
+                and cliente.id_user=v_1
                 UNION
-                SELECT  capacitacion.nro_capacitacion, capacitacion.fecha, 'Capacitación' from capacitacion, cliente, solicitud_asesoria
+                SELECT  capacitacion.nro_capacitacion, capacitacion.fecha,asesoria.id_estado, 'Capacitación' from capacitacion, cliente, solicitud_asesoria
                 where capacitacion.id_solicitud=solicitud_asesoria.id_solicitud and solicitud_asesoria.id_cliente=cliente.id_cliente
-                and cliente.id_cliente=v_1;
+                and cliente.id_user=v_1;
+                UNION
+                SELECT  visita.id_visita, visita.fecha,asesoria.id_estado, 'visita' from visita, cliente, solicitud_asesoria
+                where visita.id_solicitud=solicitud_asesoria.id_solicitud and solicitud_asesoria.id_cliente=cliente.id_cliente
+                and cliente.id_user=v_1;
         commit;
 END;
 
@@ -578,4 +583,15 @@ open contrato_servicio for Select contrato_servicio.id_profesional, contrato_ser
         and contrato_servicio.id_profesional=profesional.rut_profesional
         and cliente.id_user;
         commit;
+END;
+
+create or replace NONEDITIONABLE procedure list_solicitudcliente(v_id in number,
+solicitud_asesoria out 
+sys_refcursor) 
+IS
+BEGIN
+open solicitud_asesoria for SELECT solicitud_asesoria.id_solicitud, solicitud_asesoria.tipo_solicitud,solicitud_asesoria.descripcion_asesoria,solicitud_asesoria.id_estado
+ FROM solicitud_asesoria, cliente 
+where solicitud_asesoria.id_cliente = cliente.id_cliente and cliente.id_user= v_id ;
+
 END;

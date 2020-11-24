@@ -12,7 +12,7 @@ from .views import  crearSolicitud
 from . import views
 from .views import crearCondicion, listadoCondicion, editarCondicion, eliminarCondicion
 from .views import crearContrato,listadoContrato, editarContrato, reporteAccidente, listadoAccidente, listadoPagos, actualizarPago, listadoActividadAdm, listadoAtrasos
-from .views import enviarCorreo
+from .views import enviarCorreo,listsolcliente
 # Definicion de las Urls
 urlpatterns = [
     path('', views.inicio, name="ndex"),
@@ -80,16 +80,17 @@ urlpatterns = [
     path('actualizarPago/<id>', actualizarPago, name = 'actualizarPago'),
     
     path('listadoActividadAdmin.html', views.listadoActividadAdm, name="listadoActAdmin"),
-    path('listadoActividadCliente.html', views.listadoActividadCliente, name="listadoActCliente"),
+    path('listadoActividadCliente.html/<id>', views.listadoActividadCliente, name="listadoActCliente"),
     path('listadoActividadProfesional.html', views.listadoActividadAdm, name="listadoActProfesional"),
     path('listadoAtrasos.html', views.listadoAtrasos, name="listadoAtrasos"),
     path('listadoMisClientes.html/<id>', views.listadoMisClientes, name="listadoMisClientes"),
 
     path("verChecklistPDF.html/<id>", views.render_pdf_view, name="verChecklistPDF"),
 
-    path("listadoChecklistCliente.html", views.verChecklistCliente, name="listadoChecklistCliente"),
+    path("listadoChecklistCliente.html/<id>", views.verChecklistCliente, name="listadoChecklistCliente"),
     path("verChecklistsCliente/<id>", views.verChecklistCl, name="verChecklistCliente"),
 
     path('enviarCorreo/<correo>', enviarCorreo, name = 'enviarCorreo'),
-     path('listadoMisClientes.html/<id>', views.listadoMisClientes, name="listadoMisClientes"),
+    path('listadoMisClientes.html/<id>', views.listadoMisClientes, name="listadoMisClientes"),
+    path('listadosolcliente.html/<id>', views.listsolcliente, name="listsolcliente"),
 ]

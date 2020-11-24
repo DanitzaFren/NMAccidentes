@@ -898,9 +898,9 @@ def actividadesAdmin():
     return lista
 
 ####################################################################listado actividades Cliente
-def listadoActividadCliente(request):
+def listadoActividadCliente(request,id):
     #reemplazar con el idcliente logiao
-    activity = actividadesCliente(2003901)
+    activity = actividadesCliente(id)
     datosclien = {
         'activity':activity
     }
@@ -994,9 +994,9 @@ def render_pdf_view(request, id):
     return response
 
 ###################################################################ID CLIENTE LOGEADO
-def verChecklistCliente(request):
+def verChecklistCliente(request,id):
     data = {
-        'checklist' : listado_checklistcliente(2003901),
+        'checklist' : listado_checklistcliente(id),
      
     }
     return render(request, 'ChecklistCRUD/listadoChecklistCliente.html',data)
@@ -1121,3 +1121,20 @@ def listado_visita(id_pro):
         lista.append(fila)
     return lista
 
+def listsolcliente(request,id):
+    soli=list_solcliente(id)
+    datossoli = {
+        'soli':soli
+    }
+    return render(request, "SolicitudCRUD/listadosolcliente.html", datossoli)
+
+def list_solcliente(id_pro):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor() 
+    cursor.callproc("list_solicitudcliente", [id_pro,out_cur])
+
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+    return lista
