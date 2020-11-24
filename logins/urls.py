@@ -72,7 +72,7 @@ urlpatterns = [
     path('listadoContrato.html', views.listadoContrato, name="listadoContrato"),
     path('editarContrato/<id_servicio>', editarContrato, name='editarContrato'), 
 
-    path("reportarAccidente.html", views.reporteAccidente, name="reporteAccidente"),
+    path("reportarAccidente.html/<id>", views.reporteAccidente, name="reporteAccidente"),
     path('listadoAccidentes.html/<id>', listadoAccidente, name="listadoAccidente"),
     path('listadoAccidentibilidad.html', views.listadoAccidentibilidad, name="listadoAccidentibilidad"),
     path('listadoClientePago.html', views.listadoClientePago, name="listadoClientePago"),

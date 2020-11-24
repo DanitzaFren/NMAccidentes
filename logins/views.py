@@ -761,10 +761,11 @@ def reportarAccidente(id_cliente, descripcion):
     cursor.callproc('SP_REPORT_ACCIDENT',[ id_cliente, descripcion,salida])
     return salida.getvalue()
 
-def reporteAccidente(request):
+def reporteAccidente(request,id):
     accidente = ""
     data = {
         'mensaje': accidente,
+        'info': infocontrato(id),
     }
     if request.method == 'POST':
         id_cliente = request.POST.get('id_cliente')
