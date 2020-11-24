@@ -917,9 +917,9 @@ def actividadesCliente(x):
     return lista
 
 ####################################################################listado actividades Profesional
-def listadoActividadPro(request):
+def listadoActividadPro(request,id):
     #reemplazar con el idprofesional logiao
-    activity = actividadesPro(172876595)
+    activity = actividadesPro(id)
     datosclien = {
         'activity':activity
     }

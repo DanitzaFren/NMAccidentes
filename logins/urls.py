@@ -81,7 +81,7 @@ urlpatterns = [
     
     path('listadoActividadAdmin.html', views.listadoActividadAdm, name="listadoActAdmin"),
     path('listadoActividadCliente.html/<id>', views.listadoActividadCliente, name="listadoActCliente"),
-    path('listadoActividadProfesional.html', views.listadoActividadAdm, name="listadoActProfesional"),
+    path('listadoActividadProfesional.html/<id>', views.listadoActividadPro, name="listadoActProfesional"),
     path('listadoAtrasos.html', views.listadoAtrasos, name="listadoAtrasos"),
     path('listadoMisClientes.html/<id>', views.listadoMisClientes, name="listadoMisClientes"),
 

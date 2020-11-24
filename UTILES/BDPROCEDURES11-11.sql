@@ -598,5 +598,100 @@ where solicitud_asesoria.id_cliente = cliente.id_cliente and cliente.id_user= v_
 
 END;
 
+----------ESTE ES PARA MOSTRAR LAS ACTIVIDADES DEL PROFESIONAL, FALTA MODIFICARlo en el codigo
+create or replace NONEDITIONABLE procedure sp_act_profesional( v_1 in number,
+actividades out 
+sys_refcursor) 
+IS
+BEGIN
+open actividades for SELECT asesoria.id_asesoria, asesoria.fecha, estado_actividad.nom_est_actividad, 'Asesoria',cliente.nombre
+                from asesoria, profesional,solicitud_asesoria, estado_actividad,cliente
+                where asesoria.id_solicitud=solicitud_asesoria.id_solicitud 
+                and estado_actividad.id_estado=asesoria.id_estado
+                and solicitud_asesoria.id_solicitud=asesoria.id_solicitud
+                and cliente.id_cliente=solicitud_asesoria.id_cliente
+                and profesional.rut_profesional=solicitud_asesoria.id_profesional
+                and profesional.id_user=v_1
+                UNION
+             SELECT  capacitacion.nro_capacitacion, capacitacion.fecha, estado_actividad.nom_est_actividad,'Capacitación',cliente.nombre 
+                from capacitacion, profesional, solicitud_asesoria, estado_actividad,cliente
+                where capacitacion.id_solicitud=solicitud_asesoria.id_solicitud
+                and estado_actividad.id_estado=capacitacion.id_estado
+                and solicitud_asesoria.id_solicitud=capacitacion.id_solicitud
+                and cliente.id_cliente=solicitud_asesoria.id_cliente
+                and profesional.rut_profesional=solicitud_asesoria.id_profesional
+                and profesional.id_user=v_1
+                UNION
+                SELECT  visita.id_visita, visita.fecha, estado_actividad.nom_est_actividad,'visita',cliente.nombre 
+                from visita, profesional, solicitud_asesoria, estado_actividad,cliente
+                where visita.id_solicitud=solicitud_asesoria.id_solicitud 
+                and estado_actividad.id_estado=visita.id_estado
+                and solicitud_asesoria.id_solicitud=visita.id_solicitud
+                and cliente.id_cliente=solicitud_asesoria.id_cliente
+                and profesional.rut_profesional=solicitud_asesoria.id_profesional
+                and profesional.id_user=v_1;
+        commit;
+END;
+
+----------ESTE ES PARA MOSTRAR LAS ACTIVIDADES DEL admin, FALTA MODIFICARlo en el codigo
+create or replace NONEDITIONABLE procedure SPACTIVIDADESADMIN(
+actividades out 
+sys_refcursor) 
+IS
+BEGIN
+open actividades for SELECT  solicitud_asesoria.id_solicitud,cliente.nombre,profesional.nombre ||' '|| profesional.paterno, solicitud_asesoria.fecha ,
+                estado_actividad.nom_est_actividad, 'Solicitud' ||' '|| tipo_solicitud.nom_solicitud 
+                from solicitud_asesoria,estado_actividad,tipo_solicitud, cliente,profesional
+                where estado_actividad.id_estado=solicitud_asesoria.id_estado 
+                and solicitud_asesoria.id_estado=1 
+                and solicitud_asesoria.tipo_solicitud=tipo_solicitud.id_tiposolicitud
+                and cliente.id_cliente=solicitud_asesoria.id_cliente
+                and profesional.rut_profesional=solicitud_asesoria.id_profesional
+                UNION
+                SELECT  visita.id_visita, cliente.nombre,profesional.nombre ||' '|| profesional.paterno, visita.fecha,estado_actividad.nom_est_actividad, 'visita' 
+                from visita,estado_actividad, cliente,profesional,solicitud_asesoria
+                where estado_actividad.id_estado=visita.id_estado
+                and solicitud_asesoria.id_solicitud=visita.id_solicitud
+                and cliente.id_cliente=solicitud_asesoria.id_cliente
+                and profesional.rut_profesional=solicitud_asesoria.id_profesional
+                UNION
+
+                SELECT  capacitacion.nro_capacitacion, cliente.nombre,profesional.nombre ||' '|| profesional.paterno,capacitacion.fecha,estado_actividad.nom_est_actividad, 'Capacitación' 
+                from capacitacion,estado_actividad, cliente,profesional,solicitud_asesoria
+                where estado_actividad.id_estado=capacitacion.id_estado 
+                and solicitud_asesoria.id_solicitud=capacitacion.id_solicitud
+                and cliente.id_cliente=solicitud_asesoria.id_cliente
+                and profesional.rut_profesional=solicitud_asesoria.id_profesional
+                
+                UNION
+
+                SELECT asesoria.id_asesoria, cliente.nombre,profesional.nombre ||' '|| profesional.paterno,asesoria.fecha, estado_actividad.nom_est_actividad, 'Asesoria' from asesoria,estado_actividad, cliente,profesional,solicitud_asesoria
+                where estado_actividad.id_estado=asesoria.id_estado 
+                and solicitud_asesoria.id_solicitud=asesoria.id_solicitud
+                and cliente.id_cliente=solicitud_asesoria.id_cliente
+                and profesional.rut_profesional=solicitud_asesoria.id_profesional
+
+                UNION
+                SELECT accidente.id_accidente, cliente.nombre,profesional.nombre ||' '|| profesional.paterno,accidente.fecha, estado_actividad.nom_est_actividad, 'Accidente' from accidente,estado_actividad, cliente,profesional,contrato_servicio
+                where estado_actividad.id_estado=accidente.id_estado 
+                and contrato_servicio.id_cliente=accidente.id_cliente
+                and cliente.id_cliente=contrato_servicio.id_cliente
+                and profesional.rut_profesional=contrato_servicio.id_profesional
+                ;
+
+
+        commit;
+END;
+agregar_asesoria
+agregar_capacitacion
+agregar_cliente
+agregar_condicion
+agregar_contrato
+agregar_solicitud
+agregar_visita
+checklisto
+clientes
 SP_LISTAR_ASESORIA
 SP_MISCLIENTES
+list_solicitudcliente
+sp_report_accident
