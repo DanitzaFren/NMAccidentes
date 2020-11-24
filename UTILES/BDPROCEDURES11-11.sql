@@ -363,8 +363,10 @@ sys_refcursor)
 IS
 BEGIN
 open asesoria for SELECT asesoria.id_asesoria,asesoria.id_solicitud, solicitud_asesoria.descripcion_asesoria, cliente.nombre, asesoria.fecha, asesoria.id_estado
-FROM asesoria,solicitud_asesoria,cliente where asesoria.id_solicitud=solicitud_asesoria.id_solicitud and solicitud_asesoria.tipo_solicitud = 1
-and cliente.id_cliente=solicitud_asesoria.id_cliente and solicitud_asesoria.id_profesional=v_1 ; 
+FROM asesoria,solicitud_asesoria,cliente ,profesional
+where asesoria.id_solicitud=solicitud_asesoria.id_solicitud and solicitud_asesoria.tipo_solicitud = 1
+and cliente.id_cliente=solicitud_asesoria.id_cliente and solicitud_asesoria.id_profesional=profesional.rut_profesional 
+and profesional.id_user=v_1 ; 
 
 END;
 
@@ -449,8 +451,8 @@ cliente out
 sys_refcursor) 
 IS
 BEGIN
-open cliente for select cliente.id_cliente, cliente.nombre, cliente.rubro, cliente.direccion from cliente, contrato_servicio,profesional 
-where cliente.id_cliente=contrato_servicio.id_cliente
+open cliente for select cliente.id_cliente, cliente.nombre, rubro.nom_rubro, cliente.direccion from cliente, contrato_servicio,profesional, rubro
+where cliente.id_cliente=contrato_servicio.id_cliente and rubro.id_rubro=cliente.rubro
 and profesional.rut_profesional=contrato_servicio.id_profesional and profesional.id_user=v_1;
         commit;
 END;
@@ -595,3 +597,6 @@ open solicitud_asesoria for SELECT solicitud_asesoria.id_solicitud, solicitud_as
 where solicitud_asesoria.id_cliente = cliente.id_cliente and cliente.id_user= v_id ;
 
 END;
+
+SP_LISTAR_ASESORIA
+SP_MISCLIENTES

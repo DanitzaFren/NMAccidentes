@@ -51,7 +51,7 @@ urlpatterns = [
     path('editarCliente/<id_cliente>', editarClientes, name='editarCliente'), 
     path('eliminarCliente/<id_cliente>', eliminarClientes, name = 'eliminarCliente'),
 
-    path('crearSolicitud.html/<id>', crearSolicitud, name = 'crearSolicitud'),
+    path('crearSolicitud.html/<id>', views.crearSolicitud, name = 'crearSolicitud'),
 
     path("listadoChecklist.html", views.listadoChecklist, name="listadoChecklist"),
     path("crearChecklist.html/<id>", views.crearChecklist, name="crearChecklist"),
