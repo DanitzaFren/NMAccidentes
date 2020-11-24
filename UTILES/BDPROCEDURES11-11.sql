@@ -629,6 +629,15 @@ open actividades for SELECT asesoria.id_asesoria, asesoria.fecha, estado_activid
                 and solicitud_asesoria.id_solicitud=visita.id_solicitud
                 and cliente.id_cliente=solicitud_asesoria.id_cliente
                 and profesional.rut_profesional=solicitud_asesoria.id_profesional
+                and profesional.id_user=v_1
+                UNION 
+                SELECT  solicitud_asesoria.id_solicitud, solicitud_asesoria.fecha, estado_actividad.nom_est_actividad,'Solicitud' ||' '|| tipo_solicitud.nom_solicitud ,cliente.nombre 
+                from  profesional, solicitud_asesoria, estado_actividad,cliente,tipo_solicitud
+                where estado_actividad.id_estado=solicitud_asesoria.id_estado
+                 and solicitud_asesoria.id_estado=1 
+                and cliente.id_cliente=solicitud_asesoria.id_cliente
+                and profesional.rut_profesional=solicitud_asesoria.id_profesional
+                 and solicitud_asesoria.tipo_solicitud=tipo_solicitud.id_tiposolicitud
                 and profesional.id_user=v_1;
         commit;
 END;
