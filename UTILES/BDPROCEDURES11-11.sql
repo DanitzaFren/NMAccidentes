@@ -691,16 +691,3 @@ open actividades for SELECT  solicitud_asesoria.id_solicitud,cliente.nombre,prof
 
         commit;
 END;
-agregar_asesoria
-agregar_capacitacion
-agregar_cliente
-agregar_condicion
-agregar_contrato
-agregar_solicitud
-agregar_visita
-checklisto
-clientes
-SP_LISTAR_ASESORIA
-SP_MISCLIENTES
-list_solicitudcliente
-sp_report_accident
