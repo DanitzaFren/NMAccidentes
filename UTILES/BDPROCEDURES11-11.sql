@@ -37,7 +37,7 @@ begin
 end;
 
 create or replace NONEDITIONABLE procedure agregar_cliente(
-	v_2 in number,
+	v_2 in VARCHAR2,
     v_3 in VARCHAR2,
     v_4 in varchar2,
     v_5 in number,

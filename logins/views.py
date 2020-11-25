@@ -717,7 +717,7 @@ def crearContrato(request):
         salida = crear_contrato(fecha_inicio, fecha_termino, id_cliente, id_profesional)
         if salida == 1:
             data['mensaje'] = 'agregado'
-            return redirect('listadoContrato')
+            return redirect('https://www.flow.cl/btn.php?token=eglyf2g')
         else:
             data['mensaje'] = 'Este Cliente ya se encuentra asociado a un contrato'
     return render(request, "ContratoCRUD/crearContrato.html", data)

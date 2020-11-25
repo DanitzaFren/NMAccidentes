@@ -31,9 +31,9 @@
         <div class="errornote flex-sb-m w-full p-b-30 ">   
           {% if form.non_field_errors %}
           {% for error in form.non_field_errors %}
-          <p  style="border: #8E073C 3px solid; margin: 10px; padding: 10px;">
-              Nombre de usuario o contraseña incorrecta, por favor inténtelo nuevamente. :D!
-          </p>
+		  <div class="alert alert-danger">
+			<strong>Danger!</strong> Nombre de usuario o contraseña incorrecta, inténtelo nuevamente. :D
+		  </div>
           {% endfor %}
           {% endif %}
         </div>

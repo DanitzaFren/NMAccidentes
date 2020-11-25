@@ -34,8 +34,8 @@ class Rubro(models.Model):
         return 'id rubro '+ str(self.id_rubro)
 
 class Cliente(models.Model):
-    id_cliente = models.IntegerField(primary_key=True)
-    direccion = models.CharField(max_length=50)
+    id_cliente = models.CharField(primary_key=True, max_length=10)
+    direccion = models.CharField(max_length=200)
     nombre = models.CharField(max_length=50)
     rubro = models.ForeignKey(Rubro, models.DO_NOTHING, db_column='rubro')
 
@@ -68,7 +68,7 @@ class EstadoContrato(models.Model):
         return 'Id estado '+ str(self.id_estado_contrat)
 
 class Profesional(models.Model):
-    rut_profesional = models.IntegerField(primary_key=True)
+    rut_profesional = models.CharField(primary_key=True, max_length=10)
     nombre = models.CharField(max_length=50)
     paterno = models.CharField(max_length=50)
     materno = models.CharField(max_length=50, blank=True, null=True)

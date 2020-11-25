@@ -78,7 +78,7 @@
           <h2>Listado Contrato</h2>
           <ol>
             <li><a href="{% url 'ndex' %}">Home</a></li>
-            <li><a href="servicios.html">Servicios</a></li>
+            <li><a href="{% url 'servicios' %}">Servicios</a></li>
             <li>Listado Contrato</li>
           </ol>
         </div>
@@ -89,7 +89,7 @@
     <!-- ======= Contact Section ======= -->
     <section class="contact" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
       <div>
-        <!-- ======= Copiar aqui loco ======= -->
+
         <center>
           {% if perms.logins.view_condicion %}
           

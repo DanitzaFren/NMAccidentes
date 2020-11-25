@@ -93,14 +93,15 @@
       <div class="container">
 
         <div class="row">
-
+          <div class="alert alert-info">
+            <strong>Asesoría: </strong>{{mensaje}}
+          </div>
           <div class="col-lg-12">
             <form method="POST">
               {% csrf_token %}
-              {{mensaje}}
               <div>
                 <p>Fecha de la Asesoría:</p>
-                <input type="date" class="form-control" name="fecha" required></input>
+                <input type="date" class="form-control" id="datefield" name="fecha" required></input>
                 <p class="p">Solicitud:
                   <select class="form-control" name= "id_solicitud" type="number" >
                     <option value="0">Seleccione </option>
@@ -234,6 +235,7 @@
   <script src="{% static 'principal/js/main.js' %}"></script>
   <script src="{% static 'principal/js/mensaje_alerta.js' %}"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.8.1/dist/sweetalert2.all.min.js"></script>
+  <script src="{% static 'principal/js/fecha.js' %}">  </script>
   
 </body>
 
