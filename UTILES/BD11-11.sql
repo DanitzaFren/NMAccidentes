@@ -141,7 +141,7 @@ ALTER TABLE checklist ADD CONSTRAINT checklist_pk PRIMARY KEY ( nro_checklist );
 
 CREATE TABLE cliente (
     id_cliente  VARCHAR2(50) NOT NULL,
-    direccion   VARCHAR2(50) NOT NULL,
+    direccion   VARCHAR2(200) NOT NULL,
     nombre      VARCHAR2(50) NOT NULL,
     rubro       NUMBER NOT NULL,
     id          NUMBER (8),
