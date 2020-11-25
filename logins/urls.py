@@ -51,7 +51,7 @@ urlpatterns = [
     path('editarCliente/<id_cliente>', editarClientes, name='editarCliente'), 
     path('eliminarCliente/<id_cliente>', eliminarClientes, name = 'eliminarCliente'),
 
-    path('crearSolicitud.html/<id>', crearSolicitud, name = 'crearSolicitud'),
+    path('crearSolicitud.html/<id>', views.crearSolicitud, name = 'crearSolicitud'),
 
     path("listadoChecklist.html", views.listadoChecklist, name="listadoChecklist"),
     path("crearChecklist.html/<id>", views.crearChecklist, name="crearChecklist"),
@@ -81,7 +81,7 @@ urlpatterns = [
     
     path('listadoActividadAdmin.html', views.listadoActividadAdm, name="listadoActAdmin"),
     path('listadoActividadCliente.html/<id>', views.listadoActividadCliente, name="listadoActCliente"),
-    path('listadoActividadProfesional.html', views.listadoActividadAdm, name="listadoActProfesional"),
+    path('listadoActividadProfesional.html/<id>', views.listadoActividadPro, name="listadoActProfesional"),
     path('listadoAtrasos.html', views.listadoAtrasos, name="listadoAtrasos"),
     path('listadoMisClientes.html/<id>', views.listadoMisClientes, name="listadoMisClientes"),
 

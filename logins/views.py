@@ -325,7 +325,6 @@ def crearAsesorias(request,id):
         salida = crear_asesoria(fecha,id_solicitud)
         if salida == 1:
             data['mensaje'] = 'Asesoria Creada'
-            return redirect('listadoAsesorias')
         else:
             data['mensaje'] = 'error'
 
@@ -373,9 +372,10 @@ def listado_tiposolicitud():
 
 
 def crearSolicitud(request,id):
+    info = infocontrato(id)
     data = {
         'tiposolicitud': listado_tiposolicitud(),
-        'info': infocontrato(id),
+        'info': info,
     }
     if request.method == 'POST':
         id_cliente = request.POST.get('id_cliente')
@@ -389,7 +389,7 @@ def crearSolicitud(request,id):
             data['mensaje'] = 'error'
     return render(request, "SolicitudCRUD/crearSolicitud.html", data)
 
-def infocontrato(request,id)
+def infocontrato(x):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     out_cur = django_cursor.connection.cursor() 
@@ -551,7 +551,7 @@ def eliminarChecklist(request, id ):
         data['mensaje'] = 'error'
             
 
-    return redirect(to="crearChecklist")
+    return redirect(to="servicios")
 
 def eliminardet(iddetalle):
     django_cursor = connection.cursor()
@@ -917,9 +917,9 @@ def actividadesCliente(x):
     return lista
 
 ####################################################################listado actividades Profesional
-def listadoActividadPro(request):
+def listadoActividadPro(request,id):
     #reemplazar con el idprofesional logiao
-    activity = actividadesPro(172876595)
+    activity = actividadesPro(id)
     datosclien = {
         'activity':activity
     }
@@ -997,6 +997,7 @@ def render_pdf_view(request, id):
 def verChecklistCliente(request,id):
     data = {
         'checklist' : listado_checklistcliente(id),
+
      
     }
     return render(request, 'ChecklistCRUD/listadoChecklistCliente.html',data)

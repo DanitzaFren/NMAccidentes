@@ -91,7 +91,7 @@
       <div>
         <!-- ======= Copiar aqui loco ======= -->
         <center>
-          {% if perms.logins.view_solicitud_asesoria %}
+          {% if user.is_authenticated %}	
       
           
         <h1>Solicitudes</h1>     
@@ -103,7 +103,6 @@
                       <th>Tipo de solicitud</th>
                       <th>Descripción</th>
                       <th>Estado</th>
-                      <th>Acción</th>
                   </tr>
               </thead>
               <tbody>
@@ -111,8 +110,16 @@
                   {% for soli in soli %}
 
                   <tr>
-                    <td>{{ soli.0 }}</td>   
-                    <td>{{ soli.1 }}</td>
+                    <td>{{ soli.0 }}</td>  
+                    {% if soli.1 == 1 %}
+                    <td>Asesoría</td>
+                      {% elif soli.1 == 3 %}
+                      <td>visita</td>     
+                      {% elif soli.1 == 2 %}
+                      <td>Capacitacion</td>
+                      {% else %}
+                      <td>Modificar checklist</td>                 
+                    {% endif %} 
                     <td>{{ soli.2 }}</td>
                     {% if soli.3 == 1 %}
                     <td>Aún no agendada</td>

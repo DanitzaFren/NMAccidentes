@@ -331,3 +331,13 @@ BEGIN
   INTO :new.pago
   FROM dual;
 END;
+
+create or replace NONEDITIONABLE TRIGGER solicitudfecha_on_insert
+  BEFORE INSERT ON SOLICITUD_ASESORIA
+  FOR EACH ROW
+BEGIN
+
+  SELECT sysdate
+  INTO :new.fecha
+  FROM dual;
+END;
