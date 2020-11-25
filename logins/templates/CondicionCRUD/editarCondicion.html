@@ -97,8 +97,7 @@
             <form method="POST">
               {% csrf_token %}
               <div>
-                <p>Ingrese la descripción:</p>
-                <textarea class="form-control" name="nom_condicion" required></textarea>
+                {{ form.as_p }}
                
               </div>  
               <a href="{% url 'listadoCondicion' %}" class="button button7">Atrás</a>

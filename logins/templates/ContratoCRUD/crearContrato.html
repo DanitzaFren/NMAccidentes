@@ -99,7 +99,7 @@
               <p class="p">Fecha Inicio:
               <input type="text" name="fecha_inicio" id="date" class="form-control" readonly>
               <p class="p">Fecha Termino:
-              <input type="date" name="fecha_termino" class="form-control">
+              <input type="date" name="fecha_termino" id="datefield" class="form-control" >
               <p class="p">Cliente:
                 <select class="form-control" name= "id_cliente" type="number" >
                   <option value="0">Seleccione </option>
@@ -114,6 +114,10 @@
                     <option  value="{{profesional.0}}">{{profesional.1}} {{profesional.2}} </option>
                     {% endfor %}  
                   </select>
+
+                  <a href='https://www.flow.cl/btn.php?token=eglyf2g' target='_blank'>
+                    <img src='https://www.flow.cl/img/botones/btn-pagar-negro.png'>
+                  </a>
               <center>
                 <button type="submit" class="button button6">Crear</button>
                 
@@ -222,6 +226,10 @@
   <script src="{% static 'principal/js/fecha.js' %}"></script>
   <!-- Template Main JS File -->
   <script src="{% static 'principal/js/main.js' %}"></script>
+  <script src="{% static 'principal/js/mensaje_alerta.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.8.1/dist/sweetalert2.all.min.js"></script>
+  <script src="{% static 'principal/js/fechaTres.js' %}">  </script>
+  <script src="{% static 'principal/js/fechaHoy.js' %}">  </script>
 
 </body>
 
