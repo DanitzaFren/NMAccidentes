@@ -133,7 +133,7 @@ ALTER TABLE capacitacion ADD CONSTRAINT capacitacion_pk PRIMARY KEY ( nro_capaci
 CREATE TABLE checklist (
     nro_checklist      NUMBER(4) NOT NULL,
     descripcion_check  VARCHAR2(500) NOT NULL,
-    id_cliente         VARCHAR2(50) NOT NULL,
+    id_cliente         VARCHAR2(50) NOT NULL UNIQUE,
     id_estado          NUMBER(1) NOT NULL
 );
 
@@ -227,7 +227,8 @@ CREATE TABLE solicitud_asesoria (
     id_profesional            VARCHAR2(50) NOT NULL,
     tipo_solicitud         NUMBER NOT NULL,
     descripcion_asesoria  VARCHAR2(500) NOT NULL,
-    id_estado        NUMBER(1) NOT NULL 
+    id_estado        NUMBER(1) NOT NULL,
+    fecha            DATE,
 );
 
 ALTER TABLE solicitud_asesoria ADD CONSTRAINT solicitud_asesoria_pk PRIMARY KEY ( id_solicitud );

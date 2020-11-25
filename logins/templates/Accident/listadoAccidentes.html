@@ -95,9 +95,7 @@
       
           
           <h1>Lista Accidentes</h1>
-          {% if user.is_authenticated %}	
-          <p name="id">Profesional {{user.id}}</p>
-          {% endif %}
+
         <div>
           <table>
               <thead>
@@ -106,6 +104,8 @@
                     <th>ID Cliente</th>
                     <th>Descripcion</th>
                     <th>Fecha de reporte</th>
+                    <th>Estado</th>
+                    <th>Atender</th>
                   </tr>
               </thead>
               <tbody>
@@ -114,7 +114,14 @@
                     <td>{{ accidente.0 }}</td>
                     <td>{{ accidente.1 }}</td>
                     <td>{{ accidente.2 }}</td>
-                    <td>{{ accidente.3 }}</td>   
+                    <td>{{ accidente.3 }}</td> 
+                    {% if accidente.4  == 1 %}
+                    <td>Pendiente</td>
+                    <td> <a input type="button" class="button button8" href="{#}">ok</a>  </td> 
+                    {% else %}
+                    <td>Listo</td>
+                    <td>Atendido</td>
+                    {% endif %}      
                   </tr>
                   {% endfor %}
                </tbody>
