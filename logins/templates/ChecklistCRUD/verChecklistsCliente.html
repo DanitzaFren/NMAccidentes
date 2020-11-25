@@ -138,10 +138,10 @@
                 </table>
                
                
-     
+                {% if user.is_authenticated %}	
               <center> 
-                <a class="button button8" href="{% url 'listadoChecklistCliente' %}"" >Volver</a>
-               
+                <a class="button button8" href="{% url 'listadoChecklistCliente' user.id  %}"" >Volver</a>
+                {% endif %}
               </center> 
              
           </div>

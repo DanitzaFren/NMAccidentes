@@ -258,6 +258,14 @@
     <p class="description">Vea todos los reportes de accidentes junto al nombre de la empresa, descripción y fecha del accidente. </p>
   </div>
 </div>
+<div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+  <div class="icon-box icon-box-cyan">
+    <div class="icon"><i class="bx bxs-bell-ring"></i></div>
+    <h4 class="title"><a href="">Mis servicios</a></h4>
+    <div><input type="button" onclick="location.href='{% url 'listadoActProfesional' user.id %}'" value="Ver" class="button button5"/></div>
+    <p class="description">Vea todos los reportes de accidentes junto al nombre de la empresa, descripción y fecha del accidente. </p>
+  </div>
+</div>
 {% endif %}
 {%endif%}
 {% endfor %}
@@ -278,11 +286,11 @@
       <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up">
         <div class="icon-box icon-box-pink">
           <div class="icon"><i class="bx bx-calendar-check"></i></div>
-          <h4 class="title"><a href='crearSolicitud.html'>Solicitar servicio</a></h4>
-          <div><input type="button" onclick="location.href='crearSolicitud.html';" value="Solicitar" class="button button5"/></div>
+          <h4 class="title"><a href="">Solicitar servicio</a></h4>
+          <div><input type="button" onclick="location.href='{% url 'crearSolicitud' user.id %}'" value="Solicitar" class="button button5"/></div>
           <!-- <div><input type="button" onclick="location.href='listadoVisitas.html';" value="Ver listado" class="button button6"/></div>  -->
           <p class="description">Realize una solicitud para capacitacion, asesoria o visita.</p>
-          <div><input type="button" onclick="location.href='crearSolicitud.html';" value="ver" class="button button5"/></div>
+          <div><input type="button" onclick="location.href='{% url 'listsolcliente' user.id %}'" value="ver" class="button button5"/></div>
         </div>
       </div>
 
@@ -291,7 +299,7 @@
     <div class="icon-box icon-box-cyan">
       <div class="icon"><i class="bx bx-like"></i></div>
       <h4 class="title"><a href="">Servicios</a></h4>
-      <div><input type="button" onclick="location.href='listadoActividadCliente.html';" value="Ver" class="button button5"/></div>
+      <div><input type="button" onclick="location.href='{% url 'listadoActCliente' user.id %}'" value="Ver" class="button button5"/></div>
       <p class="description">Puede ver todas las capacitaciones, asesorias y visitas que estén asociadas a su empresa.</p>
     </div>
   </div>
@@ -300,7 +308,7 @@
   <div class="icon-box icon-box-green">
     <div class="icon"><i class="bx bx-bell"></i></div>
     <h4 class="title"><a href="">Reportar Accidente</a></h4>
-    <div><input type="button" onclick="location.href='reportarAccidente.html';" value="Reportar" class="button button5"/></div>
+    <div><input type="button"  onclick="location.href='{% url 'reporteAccidente' user.id %}'" value="Reportar" class="button button5"/></div>
     <p class="description">Esta alerta debe abre un canal de
       comunicación entre su empresa y el profesional asignado para que de inmediato se puedan prestar
       las asesorías necesarias para tal efecto.</p>
@@ -312,7 +320,7 @@
   <div class="icon-box icon-box-blue">
     <div class="icon"><i class="bx bx-check-square"></i></div>
     <h4 class="title"><a href="">Checklists</a></h4>
-    <div><input type="button" onclick="location.href='listadoChecklistCliente.html';" value="Ver" class="button button5"/></div>
+    <div><input type="button" onclick="location.href='{% url 'listadoChecklistCliente' user.id %}'" value="Ver" class="button button5"/></div>
     <p class="description">Puede ver los checklists completados por el profesional en la visita a su empresa, tambien tiene la opción de descargarlo.</p>
   </div>
 </div>

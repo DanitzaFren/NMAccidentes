@@ -12,7 +12,7 @@ from .views import  crearSolicitud
 from . import views
 from .views import crearCondicion, listadoCondicion, editarCondicion, eliminarCondicion
 from .views import crearContrato,listadoContrato, editarContrato, reporteAccidente, listadoAccidente, listadoPagos, actualizarPago, listadoActividadAdm, listadoAtrasos
-from .views import enviarCorreo
+from .views import enviarCorreo,listsolcliente
 # Definicion de las Urls
 urlpatterns = [
     path('', views.inicio, name="ndex"),
@@ -51,7 +51,7 @@ urlpatterns = [
     path('editarCliente/<id_cliente>', editarClientes, name='editarCliente'), 
     path('eliminarCliente/<id_cliente>', eliminarClientes, name = 'eliminarCliente'),
 
-    path('crearSolicitud.html', crearSolicitud, name = 'crearSolicitud'),
+    path('crearSolicitud.html/<id>', views.crearSolicitud, name = 'crearSolicitud'),
 
     path("listadoChecklist.html", views.listadoChecklist, name="listadoChecklist"),
     path("crearChecklist.html/<id>", views.crearChecklist, name="crearChecklist"),
@@ -72,7 +72,7 @@ urlpatterns = [
     path('listadoContrato.html', views.listadoContrato, name="listadoContrato"),
     path('editarContrato/<id_servicio>', editarContrato, name='editarContrato'), 
 
-    path("reportarAccidente.html", views.reporteAccidente, name="reporteAccidente"),
+    path("reportarAccidente.html/<id>", views.reporteAccidente, name="reporteAccidente"),
     path('listadoAccidentes.html/<id>', listadoAccidente, name="listadoAccidente"),
     path('listadoAccidentibilidad.html', views.listadoAccidentibilidad, name="listadoAccidentibilidad"),
     path('listadoClientePago.html', views.listadoClientePago, name="listadoClientePago"),
@@ -80,16 +80,17 @@ urlpatterns = [
     path('actualizarPago/<id>', actualizarPago, name = 'actualizarPago'),
     
     path('listadoActividadAdmin.html', views.listadoActividadAdm, name="listadoActAdmin"),
-    path('listadoActividadCliente.html', views.listadoActividadCliente, name="listadoActCliente"),
-    path('listadoActividadProfesional.html', views.listadoActividadAdm, name="listadoActProfesional"),
+    path('listadoActividadCliente.html/<id>', views.listadoActividadCliente, name="listadoActCliente"),
+    path('listadoActividadProfesional.html/<id>', views.listadoActividadPro, name="listadoActProfesional"),
     path('listadoAtrasos.html', views.listadoAtrasos, name="listadoAtrasos"),
     path('listadoMisClientes.html/<id>', views.listadoMisClientes, name="listadoMisClientes"),
 
     path("verChecklistPDF.html/<id>", views.render_pdf_view, name="verChecklistPDF"),
 
-    path("listadoChecklistCliente.html", views.verChecklistCliente, name="listadoChecklistCliente"),
+    path("listadoChecklistCliente.html/<id>", views.verChecklistCliente, name="listadoChecklistCliente"),
     path("verChecklistsCliente/<id>", views.verChecklistCl, name="verChecklistCliente"),
 
     path('enviarCorreo/<correo>', enviarCorreo, name = 'enviarCorreo'),
-     path('listadoMisClientes.html/<id>', views.listadoMisClientes, name="listadoMisClientes"),
+    path('listadoMisClientes.html/<id>', views.listadoMisClientes, name="listadoMisClientes"),
+    path('listadosolcliente.html/<id>', views.listsolcliente, name="listsolcliente"),
 ]

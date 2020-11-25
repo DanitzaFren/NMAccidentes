@@ -96,7 +96,9 @@
             <form method="POST">
               {% csrf_token %}
               <p>Cliente:</p>
-              <input type="text" class="form-control" name="id_cliente" value=2003901 readonly >
+              {% for info in info %}
+              <input type="text" class="form-control" name="id_cliente" value="{{info.1}}" readonly >
+              {% endfor %}
               <div>
                 <br>
 
