@@ -45,7 +45,7 @@ class ProfesionalForm(forms.ModelForm):
           'materno': 'Apellido Materno',
           }
         widgets = {
-            'rut_profesional': forms.TextInput(attrs={'class': 'form-control', 'name':'rut_profesional'}),
+            'rut_profesional': forms.TextInput(attrs={'class': 'form-control', 'name':'rut_profesional',"onkeyup":"modifyText()" ,"id":"txtRut" , 'placeholder':'Formato: xxxxxxxx-x', "maxlength":"10"}),
             'nombre'          : forms.TextInput(attrs={'class': 'form-control', 'name':'nombre'}),
             'paterno'         : forms.TextInput(attrs={'class': 'form-control', 'name':'paterno'}),
             'materno'         : forms.TextInput(attrs={'class': 'form-control', 'name':'materno'}),
@@ -63,8 +63,8 @@ class ClienteForm(forms.ModelForm):
           'rubro': 'Rubro',
           }
         widgets = {
-            'id_cliente' : forms.TextInput(attrs={'class': 'form-control'}),
-            'direccion' : forms.TextInput(attrs={'class': 'form-control'}),
+            'id_cliente' : forms.TextInput(attrs={'class': 'form-control', 'id':'txtRut',"onkeyup":"modifyText()" , 'placeholder':'Formato: xxxxxxxx-x', "maxlength":"10"}),
+            'direccion' : forms.TextInput(attrs={'class': 'form-control', 'id':'search_input'}),
             'nombre'     : forms.TextInput(attrs={'class': 'form-control'}),
             'rubro'      : forms.TextInput(attrs={'class': 'form-control', 'name':'rubro'}),
         }
@@ -80,16 +80,15 @@ class AsesoriasForm(forms.ModelForm):
 class VisitaForm(forms.ModelForm):
     class Meta:
         model = Visita
-        fields = ['fecha', 'id_solicitud','descripcion',  'fecha', 'id_estado']
+        fields = ['fecha', 'id_solicitud','descripcion', 'fecha', 'id_estado']
         labels = {
-          'fecha': 'Fecha de la Visita',
           'id_solicitud': 'id solicitud',
           'descripcion': 'Descripcion',
-          'fecha': 'Fecha',
+          'fecha': 'Fecha de la Visita',
           'id_estado': 'Id estado',
           }
         widgets = {
-            'fecha': forms.DateInput(attrs={'class': 'form-control','type':'date'}),
+            'fecha': forms.DateInput(attrs={'class': 'form-control','type':'date',"id":"datefield"}),
             'descripcion'   : forms.TextInput(attrs={'class': 'form-control'}),
         }
 
@@ -126,7 +125,14 @@ class CondicionForm(forms.ModelForm):
     class Meta:
         model = Condicion
         fields = ['nom_condicion']
-        nom_condicion = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
+        labels = {
+          'nom_condicion': 'Descripcion condicion',
+          }
+        widgets = {
+            'nom_condicion': forms.Textarea(attrs={'class': 'form-control'}),
+
+        }
+
 
 
 class ContratoForm(forms.ModelForm):
@@ -173,7 +179,7 @@ class UserCreationFor(UserCreationForm):
     class Meta:
         model = User
         fields = ('username','password1','password2','email')
-        username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-        password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-        password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-        email =     forms.CharField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    email =     forms.CharField(widget=forms.EmailInput(attrs={'class': 'form-control'}))

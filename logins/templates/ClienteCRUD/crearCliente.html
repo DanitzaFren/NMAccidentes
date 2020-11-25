@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="utf-8">
@@ -26,6 +26,11 @@
   <link href="{% static 'principal/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
   <link href="{% static 'principal/vendor/aos/aos.css' %}" rel="stylesheet">
   <link href="{% static 'principal/css/servicios.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- Google Maps JavaScript library -->
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyD_Ou8rJ4Qw5V2-4hxrzJFRftzPZyrzFDI"></script>
   <!-- Template Main CSS File -->
   <link href="{% static 'principal/css/style.css' %}" rel="stylesheet">
 
@@ -98,7 +103,7 @@
             <form method="POST">
               {% csrf_token %}
               <p class="p">Rut Empresa:
-              <input type="text" name="id_cliente" class="form-control">
+              <input type="text" name="id_cliente" class="form-control" onkeyup=modifyText() id="txtRut" maxlength="10" placeholder="Formato: xxxxxxxx-x">
               <p class="p">Nombre Empresa:
               <input type="text" name="nombre" class="form-control">
               <p class="p">Rubro:
@@ -108,8 +113,10 @@
                   <option  value="{{rubros.0}}">{{rubros.1}} </option>
                   {% endfor %}  
                 </select>
+                <!-- Autocomplete location search input --> 
                 <p class="p">Direccion Empresa:
-                  <input type="text" name="direccion" class="form-control">
+                <input type="text" id="search_input" name="direccion" class="form-control" placeholder="Ingrese direccion">
+
               <center>
                 <button type="submit" class="button button6">Crear</button>
               
@@ -118,7 +125,7 @@
           </div>
 
         </div>
-
+      
 
       </div>
       {% else %}
@@ -146,6 +153,7 @@
     
     {% endif %}
   </center>
+
 
   <!-- ======= Footer ======= -->
   <footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
@@ -218,6 +226,10 @@
 
   <!-- Template Main JS File -->
   <script src="{% static 'principal/js/main.js' %}"></script>
+  <script src="{% static 'principal/js/mensaje_alerta.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.8.1/dist/sweetalert2.all.min.js"></script>
+  <script src="{% static 'principal/js/rut.js' %}">  </script>
+  <script src="{% static 'principal/js/ubicacion.js' %}">  </script>
 
 </body>
 
