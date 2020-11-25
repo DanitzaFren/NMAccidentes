@@ -91,7 +91,9 @@
       <div class="container">
 
         <div class="row">
-          {{mensaje}}
+          <div class="alert alert-info">
+            <strong>Accidente: </strong>{{mensaje}}
+          </div>
           <div class="col-lg-12">
             <form method="POST">
               {% csrf_token %}
