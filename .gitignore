@@ -10,3 +10,4 @@ logins/__pycache__/forms.cpython-38.pyc
 docker-compose.yml
 Dockerfile
 Jenkinsfile
+env/
