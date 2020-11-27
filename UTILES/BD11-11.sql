@@ -228,7 +228,7 @@ CREATE TABLE solicitud_asesoria (
     tipo_solicitud         NUMBER NOT NULL,
     descripcion_asesoria  VARCHAR2(500) NOT NULL,
     id_estado        NUMBER(1) NOT NULL,
-    fecha            DATE,
+    fecha            DATE
 );
 
 ALTER TABLE solicitud_asesoria ADD CONSTRAINT solicitud_asesoria_pk PRIMARY KEY ( id_solicitud );
