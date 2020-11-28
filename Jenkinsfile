@@ -27,8 +27,8 @@ pipeline {
         }   
         //stage('TestApp') {
           //  steps {
-            	//sh '''                      aqui van las pruebas unitarias de la pagina web
-            		
+            	//sh '''            consele          aqui van las pruebas unitarias de la pagina web
+            		                
                 //'''
             //}
         //}  
