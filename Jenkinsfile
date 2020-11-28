@@ -4,7 +4,7 @@ pipeline {
  stages {
         stage('Checkout-git'){
                steps{
-		git poll: true, url: 'git@github.com:andresgh10/Web.git'
+		git poll: true, url: 'git@github.com:daniifreen/NMAccidentes.git'
                }
         }
         
@@ -42,16 +42,16 @@ pipeline {
         stage('ConstruirDocker') {
             steps {
             	sh '''
-            		docker build -t prueba .
+            		docker build -t prueba1 .
                 '''
             }
         } 
     stage('SubirImagenDocker') {
             steps {
             	sh '''
-            		docker tag prueba:latest daniifreen/prueba:latest
-			        docker push daniifreen/prueba:latest
-			        docker rmi prueba:latest
+            		docker tag prueba1:latest daniifreen/prueba1:latest
+			        docker push daniifreen/prueba1:latest
+			        docker rmi prueba1:latest
                 '''
             }
         } 
