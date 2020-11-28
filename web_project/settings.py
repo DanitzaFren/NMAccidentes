@@ -100,10 +100,13 @@ WSGI_APPLICATION = 'web_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'XE',
-        'USER': 'PRUEBALOCAL',
+        #'NAME': 'XE',
+        'NAME': 'ORCL',
+        #'USER': 'PRUEBALOCAL',
+        'USER': 'admin',
         'PASSWORD': 'DUOC123456',
-        'HOST': 'localhost',
+        #'HOST': 'localhost',
+        'HOST': 'db1.cz3rpgvs8ilc.us-east-1.rds.amazonaws.com',
         'PORT': '1521',
     }
 }
