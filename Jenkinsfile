@@ -42,16 +42,16 @@ pipeline {
         stage('ConstruirDocker') {
             steps {
             	sh '''
-            		docker build -t web_web:latest .
+            		docker build -t prueba:latest .
                 '''
             }
         } 
     stage('SubirImagenDocker') {
             steps {
             	sh '''
-            		docker tag web_web:latest daniifreen/web_web:latest
-			        docker push daniifreen/web_web:latest
-			        docker rmi web_web:latest
+            		docker tag prueba:latest daniifreen/prueba:latest
+			        docker push daniifreen/prueba:latest
+			        docker rmi prueba:latest
                 '''
             }
         } 
