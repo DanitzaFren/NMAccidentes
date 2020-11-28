@@ -42,7 +42,7 @@ pipeline {
         stage('ConstruirDocker') {
             steps {
             	sh '''
-            		docker build -t prueba:latest .
+            		docker build -t prueba .
                 '''
             }
         } 
