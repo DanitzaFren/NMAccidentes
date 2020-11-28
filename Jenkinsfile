@@ -27,7 +27,7 @@ pipeline {
         }   
         //stage('TestApp') {
           //  steps {
-            	//sh '''            consele          aqui van las pruebas unitarias de la pagina web
+            	//sh '''            conselenium          aqui van las pruebas unitarias de la pagina web
             		                
                 //'''
             //}
