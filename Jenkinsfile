@@ -4,7 +4,7 @@ pipeline {
  stages {
         stage('Checkout-git'){
                steps{
-		git poll: true, url: 'git@github.com:daniifreen/NMAccidentes.git'
+		git poll: true, url: 'git@github.com:andresgh10/Web.git'
                }
         }
         
@@ -27,8 +27,8 @@ pipeline {
         }   
         //stage('TestApp') {
           //  steps {
-            	//sh '''            conselenium          aqui van las pruebas unitarias de la pagina web
-            		                
+            	//sh '''                      aqui van las pruebas unitarias de la pagina web
+            		
                 //'''
             //}
         //}  
@@ -42,16 +42,16 @@ pipeline {
         stage('ConstruirDocker') {
             steps {
             	sh '''
-            		docker build -t prueba1 .
+            		docker build -t web_web:latest .
                 '''
             }
         } 
     stage('SubirImagenDocker') {
             steps {
             	sh '''
-            		docker tag prueba1:latest daniifreen/prueba1:latest
-			        docker push daniifreen/prueba1:latest
-			        docker rmi prueba1:latest
+            		docker tag web_web:latest daniifreen/web_web:latest
+			        docker push daniifreen/web_web:latest
+			        docker rmi web_web:latest
                 '''
             }
         } 
