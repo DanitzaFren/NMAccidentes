@@ -304,7 +304,7 @@ atrasos out
 sys_refcursor) 
 IS
 BEGIN
-open atrasos for select pago.id_pago,contrato_servicio.id_cliente, cliente.nombre ,fecha_vencimiento,auth_user.email from pago, contrato_servicio,cliente,auth_user where pago.id_servicio=contrato_servicio.id_servicio
+open atrasos for select pago.id_pago,contrato_servicio.id_cliente, cliente.nombre ,fecha_vencimiento,auth_user.email from pago, contrato_servicio,cliente,auth_user where pago.id_cliente=contrato_servicio.id_cliente
 and cliente.id_cliente=contrato_servicio.id_cliente and cliente.id_user = auth_user.id and fecha_vencimiento < sysdate and pago <=0;
         commit;
 END;
@@ -432,15 +432,14 @@ open pago for SELECT * FROM pago where id_pago = v_id ;
 END;
 
 create or replace NONEDITIONABLE procedure sp_listarpagos(
-v_id in number, 
+v_id in varchar2, 
 PAGO out 
 sys_refcursor) 
 IS
 BEGIN
 open PAGO for Select *
-        FROM pago, contrato_servicio,cliente
-        WHERE pago.id_servicio = contrato_servicio.id_servicio
-        AND contrato_servicio.id_cliente = cliente.id_cliente
+        FROM pago, cliente
+        WHERE pago.id_cliente = cliente.id_cliente
         AND cliente.id_cliente=v_id
         order by pago.id_pago;
         commit;

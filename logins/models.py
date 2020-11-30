@@ -226,7 +226,7 @@ class Pago(models.Model):
     pago = models.IntegerField('Monto del pago')
     fecha_pago = models.DateField(blank=True, null=True)
     fecha_vencimiento = models.DateField()
-    id_servicio = models.ForeignKey(ContratoServicio, models.DO_NOTHING, db_column='id_servicio')
+    id_cliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='id_cliente')
     total_pagar = models.DateField()
 
     class Meta:
