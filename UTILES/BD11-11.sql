@@ -199,7 +199,7 @@ CREATE TABLE pago (
     pago               NUMBER(6) ,
     fecha_pago         DATE,
     fecha_vencimiento  DATE NOT NULL,
-    id_servicio        NUMBER(4) NOT NULL,
+    id_cliente         varchar2(50) NOT NULL,
     total_pagar        NUMBER(6)
 );
 
@@ -270,8 +270,8 @@ ALTER TABLE det_checklist
         REFERENCES condicion ( id_condicion );
 
 ALTER TABLE pago
-    ADD CONSTRAINT pago_contrato_servicio_fk FOREIGN KEY ( id_servicio )
-        REFERENCES contrato_servicio ( id_servicio );
+    ADD CONSTRAINT pago_contrato_servicio_fk FOREIGN KEY ( id_cliente )
+        REFERENCES cliente ( id_cliente );
 
 ALTER TABLE solicitud_asesoria
     ADD CONSTRAINT solicitud_asesoria_cliente_fk FOREIGN KEY ( id_cliente )
