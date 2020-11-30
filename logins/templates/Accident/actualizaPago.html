@@ -98,11 +98,15 @@
               {% csrf_token %}
               {% for pago in pago %}      
               <p >Nro:   
-              <input type="number" name="idpago" class="form-control" value="{{pago.0}}" readonly>    
-              {% endfor %} 
+              <input type="number" name="idpago" class="form-control" value="{{pago.0}}" readonly> 
+              <p >Pago:   
+                <input type="number" name="pago" class="form-control" value="{{pago.5}}" readonly> 
+                
               <p>Ingrese el total pagado:</p>
-              <input type="text" name="pago" class="form-control" >
+              <input type="text" name="pago" value="{{pago.1}}" class="form-control" >
               <br>
+              {% endfor %} 
+              
               <p>Ingrese la fecha del pago realizado:</p>
               <input type="date" name="fecha_pago" class="form-control">
               <center>
