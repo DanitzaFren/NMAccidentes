@@ -857,6 +857,7 @@ def actualizarPago(request, id):
         else:
             data['mensaje'] = 'error'
 
+
     return render(request, 'Accident/actualizaPago.html',data)
 
 ####################################################################LISTAR EL PAGO PARA TRAER ID DEL PAGO 
