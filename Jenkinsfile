@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout-git'){
                steps{
 		git poll: true, url: 'git@github.com:daniifreen/NMAccidentes.git',
-        git branch: principal
+        branch: principal
                }
         }
         
