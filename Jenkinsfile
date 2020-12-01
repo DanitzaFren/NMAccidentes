@@ -4,8 +4,10 @@ pipeline {
  stages {
         stage('Checkout-git'){
                steps{
-		git poll: true, url: 'git@github.com:daniifreen/NMAccidentes.git',branch: principal
+		git poll: true, url: 'git@github.com:daniifreen/NMAccidentes.git'
                }
+              steps{
+		branch: principal}
         }
         
         stage('crearEntornoVirtual') {
