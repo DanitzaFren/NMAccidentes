@@ -14,3 +14,4 @@ admin.site.register(Profesional)
 admin.site.register(SolicitudAsesoria)       
 admin.site.register(Visita) 
 admin.site.register(AuthUser) 
+
