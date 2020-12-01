@@ -7,6 +7,5 @@ logins/__pycache__/forms.cpython-38.pyc
 logins/__pycache__/forms.cpython-38.pyc
 logins/__pycache__/forms.cpython-38.pyc
 *.pyc
-docker-compose.yml
-Dockerfile
-Jenkinsfile
+env/
+web_project/settings.py
