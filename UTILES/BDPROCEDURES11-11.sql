@@ -151,7 +151,7 @@ open clientes for SELECT
 END;
 
 create or replace NONEDITIONABLE procedure crear_checklist(
-	v_1 in varchar2, v_2 in number,
+	v_1 in varchar2, v_2 in varchar2,
     v_salida out number)
 is
 begin
@@ -457,7 +457,7 @@ and profesional.rut_profesional=contrato_servicio.id_profesional and profesional
 END;
 
 create or replace NONEDITIONABLE procedure sp_report_accident(
-	v_nrocliente in number, v_2 in varchar2, v_salida out number
+	v_nrocliente in varchar2, v_2 in varchar2, v_salida out number
     )
 is
 begin
