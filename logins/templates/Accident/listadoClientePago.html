@@ -106,13 +106,18 @@
                   </tr>
               </thead>
               <tbody>
-                {% for cliente in cliente %}
-                  <tr>
-                    <td>{{ cliente.id_cliente }}</td>
-                    <td>{{ cliente.nombre }}</td>
-                    <td><a href="{% url 'verPagos' cliente.id_cliente %}" class="button button7" >Ver</a></td>
-                  </tr>
+                {% if cliente %}
+
+                  {% for cliente in cliente %}
+                    <tr>
+                      <td>{{ cliente.id_cliente }}</td>
+                      <td>{{ cliente.nombre }}</td>
+                      <td><a href="{% url 'verPagos' cliente.id_cliente %}" class="button button7" >Ver</a></td>
+                    </tr>
                   {% endfor %}
+                {% else %}
+                  <h3>No hay registros</h3>
+                {% endif %}
                </tbody>
           </table>
         </div>

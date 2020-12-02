@@ -109,6 +109,7 @@
                   </tr>
               </thead>
               <tbody>
+                {% if asesoria %}
                   {% for capacitacion in capacitacion %}
                   <tr>
                       <td>{{ capacitacion.0 }}</td>
@@ -121,10 +122,13 @@
                       <td>Listo</td>
                       {% endif %}
                       <td>
-                      <a input type="button" class="button button8" href="{% url 'eliminarCapacitaciones' capacitacion.0 %}" onclick="return confirm('¿Estás seguro de querer eliminar este dato?')">Listo</a>
+                      <a input type="button" class="button button8" href="{% url 'caplisto' capacitacion.0 %}">Listo</a>
                       </td>
       
                   </tr>
+                  {% else %}
+                  <h3>No hay registros</h3>
+                {% endif %}
                   {% endfor %}
                </tbody>
           </table>

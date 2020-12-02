@@ -107,6 +107,7 @@
                   </tr>
               </thead>
               <tbody>
+                {% if contrato %}
                   {% for contrato in contrato %}
                   <tr>
                       <td>{{ contrato.id_servicio}}</td>
@@ -118,6 +119,9 @@
                       </td>
                   </tr>
                   {% endfor %}
+                  {% else %}
+                  <h3>No hay registros</h3>
+                {% endif %}
                </tbody>
           </table>
         </div>

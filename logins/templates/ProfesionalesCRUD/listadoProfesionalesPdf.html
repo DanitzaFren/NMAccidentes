@@ -1,0 +1,71 @@
+{% load static %}
+
+
+<body >
+
+ 
+
+  <main id="main">
+
+    <!-- ======= Contact Section ======= -->
+    <section class="breadcrumbs">
+    
+    </section><!-- End Contact Section -->
+
+    <!-- ======= Contact Section ======= -->
+    <section class="contact" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+      <div>
+        <!-- ======= Copiar aqui loco ======= -->
+        <center>
+         
+      
+          
+          <h1>Lista Profesionales</h1>
+      
+        <div>
+          <table>
+              <thead>
+                  <tr>
+                      <th>Rut</th>
+                      <th>Nombre</th>
+                      <th>Apellidos</th>
+                      <th>Estado</th>
+                      <th>Opciones</th>
+                  </tr>
+              </thead>
+              <tbody>
+                {% if profesionales %}
+                  {% for profesionales in profesionales %}
+                  <tr>
+                    <td>{{ profesionales.0 }}</td>
+                    <td>{{ profesionales.1 }}</td>
+                    <td>{{ profesionales.2 }} {% if profesionales.3 == null %} {% else %}{{ profesionales.3 }}{% endif %}</td>
+                    {% if profesionales.4 == 2 %}
+                    <td>Desactivado</td>
+                    {% elif profesionales.4 == 1 %}
+                    <td>Activo</td>
+                    {% endif %}
+                </tr>
+                  {% endfor %}
+                  {% else %}
+                  <h3>No hay registros</h3>
+                  {% endif %}
+               </tbody>
+          </table>
+        </div>
+         
+   
+         
+          
+
+      </center>
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+ 
+
+</body>
+
+</html>

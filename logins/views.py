@@ -99,14 +99,14 @@ def eliminarCapacitaciones(request, nro_capacitacion):
     return redirect(to="listadoCapacitaciones")
 
 ######################################################################## PROFESIONALES
-def listadoProfesionales(request):
 
-    profesionales = Profesional.objects.all() #Error boligatorio, si compila 
-    datosprof = {
-        'profesionales':profesionales
-    }
 
-    return render(request, "ProfesionalesCRUD/listadoProfesionales_N.html", datosprof)
+
+
+
+
+
+
 
 def crearProfesionales(request):
     if request.method == 'GET':
@@ -126,7 +126,7 @@ def crearProfesionales(request):
 def editarProfesionales(request, rut_profesional):
     profesional = Profesional.objects.get(rut_profesional = rut_profesional) #Error obligatorio, si compila
     formularioProfesional = {   
-        'form':ProfesionalForm(instance=profesional)
+        'form':ProfesionalForm(instance=profesional),
     }
 
     if request.method == 'POST':
@@ -707,7 +707,7 @@ def crearContrato(request):
     
     data = {
         'clientes': listado_Clientes(),
-        'profesional': listado_profesional(),
+        'profesional': listado_profesionalac(),
     }
     if request.method == 'POST':
         fecha_inicio = request.POST.get('fecha_inicio')
@@ -717,7 +717,7 @@ def crearContrato(request):
         salida = crear_contrato(fecha_inicio, fecha_termino, id_cliente, id_profesional)
         if salida == 1:
             data['mensaje'] = 'agregado'
-            return redirect('https://www.flow.cl/btn.php?token=eglyf2g')
+            return redirect('ContratoCRUD/crearContrato.html')
         else:
             data['mensaje'] = 'Este Cliente ya se encuentra asociado a un contrato'
     return render(request, "ContratoCRUD/crearContrato.html", data)
@@ -852,7 +852,7 @@ def actualizarPago(request, id):
         idpago = request.POST.get('idpago')
         salida = actualizarunpago(pago, fecha_pago, idpago)
         if salida == 1:
-            data['mensaje'] = 'agregado'
+            data['mensaje'] = 'Actualizado'
             data['listado'] = listado_pago(id)
         else:
             data['mensaje'] = 'error'
@@ -871,7 +871,7 @@ def listado_pago(x):
         lista.append(fila)
     return lista
 ####################################################################PROCEDIMIENTO PARA ACTUALIZAR UN PAGO
-def actualizarunpago(pago, fecha , idpago):
+def actualizarunpago( pago, fecha , idpago):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
@@ -1140,3 +1140,135 @@ def list_solcliente(id_pro):
     for fila in out_cur:
         lista.append(fila)
     return lista
+
+def report(request):
+
+    return render(request, "report/report.html")
+
+class listadoProfesionalesPdf(View):
+    def get(self, request, *args, **kwargs):
+        profesionales = listado_profesional()
+        data = {
+            'profesionales': profesionales
+        }
+        pdf = render_to_pdf("ProfesionalesCRUD/listadoProfesionalesPdf.html", data)
+        return HttpResponse(pdf, content_type='application/pdf')
+
+def listadoClientesPdf(request):
+    data = {
+        'cliente':listado_Clientes()
+    }
+    pdf = render_to_pdf("ClienteCRUD/listadoClientePdf.html", data)
+    return HttpResponse(pdf, content_type='application/pdf')  
+
+class listadoContratosPdf(View):
+    def get(self, request, *args, **kwargs):
+        contrato = ContratoServicio.objects.all()
+        data = {
+            'contrato':contrato
+        }
+        pdf = render_to_pdf("ContratoCRUD/listadoContratoPdf.html", data)
+        return HttpResponse(pdf, content_type='application/pdf')
+
+
+def acclisto(request, id ):
+    salida = acc_listo(id)
+    if salida == 1:
+        return redirect('listadoAccidente')
+        
+    return redirect(to="listadoAccidente")
+
+def acc_listo(idcheck):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    salida = cursor.var(cx_Oracle.NUMBER)
+    cursor.callproc('ACCLISTA',[ idcheck,salida])
+    return salida.getvalue()
+
+def aselisto(request, id ):
+    salida = ase_listo(id)
+    if salida == 1:
+        return redirect('listadoAsesorias')
+            
+    return redirect(to="listadoAsesorias")
+
+def ase_listo(idcheck):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    salida = cursor.var(cx_Oracle.NUMBER)
+    cursor.callproc('ASELISTA',[ idcheck,salida])
+    return salida.getvalue()
+
+def caplisto(request, id ):
+    salida = cap_listo(id)
+    if salida == 1:
+        return redirect('listadoCapacitaciones')
+            
+    return redirect(to="listadoCapacitaciones")
+
+def cap_listo(idcheck):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    salida = cursor.var(cx_Oracle.NUMBER)
+    cursor.callproc('CAPLISTA',[ idcheck,salida])
+    return salida.getvalue()
+
+def vislisto(request, id ):
+    salida = vis_listo(id)
+    if salida == 1:
+        return redirect('listadoVisitas')
+            
+    return redirect(to="listadoVisitas")
+
+def vis_listo(idcheck):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    salida = cursor.var(cx_Oracle.NUMBER)
+    cursor.callproc('VISLISTA',[ idcheck,salida])
+    return salida.getvalue()
+
+def proflisto(request, id ):
+    salida = prof_listo(id)
+    if salida == 1:
+        return redirect('listadoProfesionales')
+
+    return redirect(to="listadoProfesionales")
+
+def prof_listo(idcheck):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    salida = cursor.var(cx_Oracle.NUMBER)
+    cursor.callproc('PROFLISTO',[ idcheck,salida])
+    return salida.getvalue()
+
+def listadoProfesionales(request):
+    data = {
+        'profes':listado_profesional()
+    }
+    return render(request, "ProfesionalesCRUD/listadoProfesionales_N.html", data)
+
+def listado_profesionalac():
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor() 
+    cursor.callproc("profesionalac", [ out_cur])
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+    return lista
+
+def profact(request, id ):
+    salida = prof_act(id)
+    if salida == 1:
+        return redirect('listadoProfesionales')
+
+    return redirect(to="listadoProfesionales")
+
+def prof_act(idcheck):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    salida = cursor.var(cx_Oracle.NUMBER)
+    cursor.callproc('profact',[ idcheck,salida])
+    return salida.getvalue()
+
+    actualizarPago

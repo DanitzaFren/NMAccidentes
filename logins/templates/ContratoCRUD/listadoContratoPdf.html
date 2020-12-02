@@ -1,0 +1,56 @@
+
+
+  <main id="main">
+
+    <!-- ======= Contact Section ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+       
+
+      </div>
+    </section><!-- End Contact Section -->
+
+    <!-- ======= Contact Section ======= -->
+    <section class="contact" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+      <div>
+
+       
+          
+          <h1>Lista Contratos</h1>
+      
+        <div>
+          <table>
+              <thead>
+                  <tr>
+                      <th>ID Contrato</th>
+                      <th>Id cliente</th>
+                      <th>Fecha inicio</th>
+                      <th>Fecha termino</th>
+                      <th>Accion</th>
+                  </tr>
+              </thead>
+              <tbody>
+                {% if contrato %}
+                  {% for contrato in contrato %}
+                  <tr>
+                      <td>{{ contrato.id_servicio}}</td>
+                      <td>{{ contrato.id_cliente}}</td>  
+                      <td>{{ contrato.fecha_inicio}}</td>     
+                      <td>{{ contrato.fecha_termino}}</td>  
+                      <td>
+                      
+                      </td>
+                  </tr>
+                  {% endfor %}
+                  {% else %}
+                  <h3>No hay registros</h3>
+                {% endif %}
+               </tbody>
+          </table>
+        </div>
+        
+   
+          
+</body>
+

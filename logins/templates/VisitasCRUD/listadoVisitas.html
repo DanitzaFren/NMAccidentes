@@ -108,6 +108,7 @@
                 </tr>
               </thead>
               <tbody>
+                {% if visitas %}
                 {% for visita in visitas %}
                   <tr>
                     <td>{{ visita.0 }}</td>
@@ -120,10 +121,13 @@
                     {% endif %}
                     <td>{{ visita.4 }}</td>        
                     <td>
-                    <a input type="button" class="button button8" href="{% url 'eliminarVisitas' visita.0 %}" onclick="return confirm('¿Estás seguro de querer eliminar este dato?')">Listo</a>
+                    <a input type="button" class="button button8" href="{% url 'vislisto' visita.0 %}" >Listo</a>
                     </td>
                   </tr>
                   {% endfor %}
+                  {% else %}
+                  <h3>No hay registros</h3>
+                  {% endif %}
                </tbody>
           </table>
         </div>

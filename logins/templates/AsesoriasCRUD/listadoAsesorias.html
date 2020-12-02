@@ -109,6 +109,7 @@
                   </tr>
               </thead>
               <tbody>
+                {% if asesoria %}
                 {% for asesoria in asesoria %}
                   <tr>
                     <td>{{ asesoria.0 }}</td>
@@ -121,10 +122,13 @@
                     <td>Listo</td>
                     {% endif %}   
                     <td>
-                      <a input type="button" class="button button8" href="{#}">Listo</a>
+                      <a input type="button" class="button button8"  href="{% url 'aselisto' asesoria.0 %}">Listo</a>
                       </td>
                   </tr>
                   {% endfor %}
+                {% else %}
+                  <h3>No hay registros</h3>
+                {% endif %}
                </tbody>
           </table>
         </div>

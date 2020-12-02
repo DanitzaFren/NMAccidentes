@@ -9,3 +9,4 @@ logins/__pycache__/forms.cpython-38.pyc
 *.pyc
 env/
 web_project/settings.py
+Jenkinsfile

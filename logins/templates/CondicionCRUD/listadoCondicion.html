@@ -105,16 +105,19 @@
                   </tr>
               </thead>
               <tbody>
+                {% if condicion %}
                   {% for condicion in condicion %}
                   <tr>
                       <td>{{ condicion.id_condicion}}</td>
                       <td>{{ condicion.nom_condicion}}</td>      
                       <td>
                       <a href="{% url 'editarCondicion' condicion.id_condicion %}" class="button button7" >Editar</a>
-                      <a input type="button" class="button button8" href="{% url 'eliminarCondicion' condicion.id_condicion %}" onclick="return confirm('¿Estás seguro de querer eliminar este dato?')">Eliminar registro</a>
-                      </td>
+                       </td>
                   </tr>
                   {% endfor %}
+                {% else %}
+                  <h3>No hay registros</h3>
+                {% endif %}
                </tbody>
           </table>
         </div>
