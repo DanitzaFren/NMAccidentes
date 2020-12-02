@@ -92,7 +92,10 @@
         <!-- ======= Copiar aqui loco ======= -->
         <center>
           {% if perms.logins.view_pago %}
-      
+          <script type="text/javascript">
+            function ConfirmDemo() {
+            alert("¡El correo será enviado!");} 
+            </script>
           
           <h1>Lista Atrasos</h1>
       
@@ -117,7 +120,7 @@
                     <td>{{ atraso.2 }}</td>
                     <td>{{ atraso.3 }}</td>   
                     <td>{{ atraso.4 }}</td>  
-                    <td> <a href="{% url 'enviarCorreo' atraso.4 %}" class="button button7" >Notificar</a></td>
+                    <td> <a href="{% url 'enviarCorreo' atraso.4 %}" onclick="ConfirmDemo()" class="button button7" >Notificar</a></td>
                   </tr>
                   {% endfor %}
                 {% else %}

@@ -172,7 +172,6 @@ def crearVisitas(request,id):
         salida = crear_visita(fecha,id_solicitud,descripcion,nro_checklist)
         if salida == 1:
             data['mensaje'] = 'Visita Creada'
-            return redirect('crearVisitas')
         else:
             data['mensaje'] = 'error'
 
@@ -326,7 +325,6 @@ def crearAsesorias(request,id):
         salida = crear_asesoria(fecha,id_solicitud)
         if salida == 1:
             data['mensaje'] = 'Asesoria Creada'
-            return redirect('crearAsesorias')
         else:
             data['mensaje'] = 'error'
 
@@ -386,10 +384,9 @@ def crearSolicitud(request,id):
         descripcion_asesoria = request.POST.get('descripcion')
         salida = crear_solicitud(id_cliente, id_profesional,tipo_solicitud,descripcion_asesoria)
         if salida == 1:
-            data['mensaje'] = 'agregado'
-            return redirect('crearSolicitud')
+            data['mensaje'] = 'Solicitud enviada'
         else:
-            data['mensaje'] = 'error'
+            data['mensaje'] = 'Inténtelo nuevamente'
     return render(request, "SolicitudCRUD/crearSolicitud.html", data)
 
 def infocontrato(x):
@@ -719,8 +716,7 @@ def crearContrato(request):
         id_profesional =request.POST.get('id_profesional')
         salida = crear_contrato(fecha_inicio, fecha_termino, id_cliente, id_profesional)
         if salida == 1:
-            data['mensaje'] = 'agregado'
-            return redirect('crearContrato')
+            data['mensaje'] = 'Contrato creado con éxito'
         else:
             data['mensaje'] = 'Este Cliente ya se encuentra asociado a un contrato'
     return render(request, "ContratoCRUD/crearContrato.html", data)
@@ -1177,7 +1173,7 @@ class listadoContratosPdf(View):
 def acclisto(request, id ):
     salida = acc_listo(id)
     if salida == 1:
-        return redirect('listadoAccidente')
+        return redirect('servicios')
         
     return redirect(to="listadoAccidente")
 
@@ -1191,8 +1187,8 @@ def acc_listo(idcheck):
 def aselisto(request, id ):
     salida = ase_listo(id)
     if salida == 1:
-        return redirect('listadoAsesorias')
-            
+        return redirect('servicios')
+           
     return redirect(to="listadoAsesorias")
 
 def ase_listo(idcheck):
@@ -1205,7 +1201,7 @@ def ase_listo(idcheck):
 def caplisto(request, id ):
     salida = cap_listo(id)
     if salida == 1:
-        return redirect('listadoCapacitaciones')
+        return redirect('servicios')
             
     return redirect(to="listadoCapacitaciones")
 
@@ -1219,8 +1215,7 @@ def cap_listo(idcheck):
 def vislisto(request, id ):
     salida = vis_listo(id)
     if salida == 1:
-        return redirect('listadoVisitas')
-            
+        return redirect('servicios')
     return redirect(to="listadoVisitas")
 
 def vis_listo(idcheck):
@@ -1274,4 +1269,3 @@ def prof_act(idcheck):
     cursor.callproc('profact',[ idcheck,salida])
     return salida.getvalue()
 
-    actualizarPago

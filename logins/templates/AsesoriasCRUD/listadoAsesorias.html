@@ -118,12 +118,12 @@
                     <td>{{ asesoria.4 }}</td>   
                     {% if asesoria.5  == 1 %}
                     <td>Pendiente</td>
-                    {% else %}
-                    <td>Listo</td>
-                    {% endif %}   
                     <td>
                       <a input type="button" class="button button8"  href="{% url 'aselisto' asesoria.0 %}">Listo</a>
                       </td>
+                    {% else %}
+                    <td>Listo</td>
+                    {% endif %}   
                   </tr>
                   {% endfor %}
                 {% else %}

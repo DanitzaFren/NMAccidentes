@@ -100,7 +100,6 @@
           <table>
               <thead>
                   <tr>
-                    <th>ID actividad</th>
                     <th>Fecha actividad</th>
                     <th>Estado actividad</th>
                     <th>Tipo de actividad</th>
@@ -110,7 +109,6 @@
                 {% if activity %}
                 {% for activity in activity %}
                   <tr>
-                    <td>{{ activity.0 }}</td>
                     <td>{{ activity.1 }}</td>
                     {% if activity.2 == 1 %}  
                     <td>Pendiente</td> 
