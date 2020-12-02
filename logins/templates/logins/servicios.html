@@ -128,7 +128,7 @@
       <h4 class="title"><a href='listadoCondicion.html'>Condiciones </a></h4>
       <div><input type="button" onclick="location.href='crearCondicion.html';" value="Crear" class="button button5"/></div>
       <div><input type="button" onclick="location.href='listadoCondicion.html';" value="Ver" class="button button5"/></div> 
-      <p class="description">Agregue, elimine o modifique condiciones con las cuales los profesionales evaluarán a las empresas.</p>
+      <p class="description">Agregue o modifique condiciones con las cuales los profesionales evaluarán a las empresas.</p>
     </div>
   </div>
 
@@ -309,8 +309,7 @@
     <div class="icon"><i class="bx bx-bell"></i></div>
     <h4 class="title"><a href="">Reportar Accidente</a></h4>
     <div><input type="button"  onclick="location.href='{% url 'reporteAccidente' user.id %}'" value="Reportar" class="button button5"/></div>
-    <p class="description">Esta alerta debe abre un canal de
-      comunicación entre su empresa y el profesional asignado para que de inmediato se puedan prestar
+    <p class="description">Esta alerta le llega al profesional asignado para que de inmediato se puedan prestar
       las asesorías necesarias para tal efecto.</p>
   </div>
 </div>
@@ -321,7 +320,7 @@
     <div class="icon"><i class="bx bx-check-square"></i></div>
     <h4 class="title"><a href="">Checklists</a></h4>
     <div><input type="button" onclick="location.href='{% url 'listadoChecklistCliente' user.id %}'" value="Ver" class="button button5"/></div>
-    <p class="description">Puede ver los checklists completados por el profesional en la visita a su empresa, tambien tiene la opción de descargarlo.</p>
+    <p class="description">Puede ver su checklist completado por el profesional en la visita a su empresa, también tiene la opción de descargarlo.</p>
   </div>
 </div>
 <!-- End Services Section -->

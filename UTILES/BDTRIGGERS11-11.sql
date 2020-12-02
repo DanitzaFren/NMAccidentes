@@ -344,7 +344,7 @@ END;
 
 create or replace trigger registrar_pago
  after insert
- on cliente
+ on contrato_servicio
  for each row
  begin
   insert into pago (pago,fecha_pago,fecha_vencimiento,id_cliente,total_pagar) values(0,null,(select add_months(sysdate,1) from dual) ,:new.id_cliente,100000);
