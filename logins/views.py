@@ -172,6 +172,7 @@ def crearVisitas(request,id):
         salida = crear_visita(fecha,id_solicitud,descripcion,nro_checklist)
         if salida == 1:
             data['mensaje'] = 'Visita Creada'
+            return redirect('crearVisitas')
         else:
             data['mensaje'] = 'error'
 
@@ -325,6 +326,7 @@ def crearAsesorias(request,id):
         salida = crear_asesoria(fecha,id_solicitud)
         if salida == 1:
             data['mensaje'] = 'Asesoria Creada'
+            return redirect('crearAsesorias')
         else:
             data['mensaje'] = 'error'
 
@@ -385,6 +387,7 @@ def crearSolicitud(request,id):
         salida = crear_solicitud(id_cliente, id_profesional,tipo_solicitud,descripcion_asesoria)
         if salida == 1:
             data['mensaje'] = 'agregado'
+            return redirect('crearSolicitud')
         else:
             data['mensaje'] = 'error'
     return render(request, "SolicitudCRUD/crearSolicitud.html", data)
@@ -717,7 +720,7 @@ def crearContrato(request):
         salida = crear_contrato(fecha_inicio, fecha_termino, id_cliente, id_profesional)
         if salida == 1:
             data['mensaje'] = 'agregado'
-            return redirect('ContratoCRUD/crearContrato.html')
+            return redirect('crearContrato')
         else:
             data['mensaje'] = 'Este Cliente ya se encuentra asociado a un contrato'
     return render(request, "ContratoCRUD/crearContrato.html", data)

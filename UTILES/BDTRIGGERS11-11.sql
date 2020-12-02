@@ -349,3 +349,11 @@ create or replace trigger registrar_pago
  begin
   insert into pago (pago,fecha_pago,fecha_vencimiento,id_cliente,total_pagar) values(0,null,(select add_months(sysdate,1) from dual) ,:new.id_cliente,100000);
  end;
+
+create or replace trigger inabhilitar
+ after update of estado,id_user ON profesional
+ for each row
+ begin
+  update auth_user SET is_active= 0 where :new.estado=2 and id=:old.id_user;
+  update auth_user Set is_active= 1 where :new.estado=1 and id=:old.id_user;
+ end;
