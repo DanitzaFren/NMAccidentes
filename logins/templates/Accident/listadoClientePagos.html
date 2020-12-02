@@ -94,7 +94,7 @@
           {% if perms.logins.view_pago %}
       
           
-          <h1>Lista Clientes</h1>
+          <h1>Lista pagos cliente</h1>
       
         <div>
           <table>
@@ -108,15 +108,23 @@
                   </tr>
               </thead>
               <tbody>
+                {% if pago %}
                 {% for pago in pago %}
                   <tr>
                     <td>{{ pago.0 }}</td>
                     <td>{{ pago.2 }}</td>
                     <td>{{ pago.3 }}</td>
+                    {% if pago.1 == 0 %}
                     <td>{{ pago.1 }}</td>
                     <td><a href="{% url 'actualizarPago' pago.0 %}" class="button button7" >actualizar</a></td>
+                    {% else %}
+                    <td>{{ pago.1 }}</td>
+                    {% endif %}
                   </tr>
                   {% endfor %}
+                {% else %}
+                  <h3>No hay registros</h3>
+                {% endif %}
                </tbody>
           </table>
         </div>

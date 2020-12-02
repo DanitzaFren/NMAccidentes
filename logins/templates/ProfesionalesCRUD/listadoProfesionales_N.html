@@ -97,6 +97,7 @@
           <h1>Lista Profesionales</h1>
       
         <div>
+         
           <table>
               <thead>
                   <tr>
@@ -108,24 +109,33 @@
                   </tr>
               </thead>
               <tbody>
-                  {% for profesional in profesionales %}
+                {% if profes %}
+                  {% for profes in profes %}
                   <tr>
-                      <td>{{ profesional.rut_profesional }}</td>
-                      <td>{{ profesional.nombre }}</td>
-                      <td>{{ profesional.paterno }} {{ profesional.materno }}</td>
-                      {% if profesional.estado == 1 %}
+                      <td>{{ profes.0 }}</td>
+                      <td>{{ profes.1 }}</td>
+                      <td>{{ profes.2 }} {% if profes.3 == null %} {% else %}{{ profes.3 }}{% endif %}</td>
+                      {% if profes.4 == 2 %}
                       <td>Desactivado</td>
-                      {% else %}
+                      <td>
+                        <a input type="button" class="button button8" href="{% url 'profact' profes.0 %}" onclick="return confirm('¿Estás seguro de querer habilitar este profesional?')">Habilitar</a>
+
+                      </td>
+                      {% elif profes.4 == 1 %}
                       <td>Activo</td>
+                      <td>
+                        <a href="{% url 'editarProfesionales' profes.0 %}" class="button button7" >Editar</a>
+                        <a input type="button" class="button button8" href="{% url 'proflisto' profes.0 %}" onclick="return confirm('¿Estás seguro de querer inhabilitar este profesional?')">Inhabilitar</a>
+
+                        </td>
                       {% endif %}
       
-                      <td>
-                      <a href="{% url 'editarProfesionales' profesional.rut_profesional %}" class="button button7" >Editar</a>
-                      <a input type="button" class="button button8" href="{% url 'eliminarProfesionales' profesional.rut_profesional %}" onclick="return confirm('¿Estás seguro de querer eliminar este dato?')">Eliminar registro</a>
-                      </td>
       
                   </tr>
                   {% endfor %}
+                  {% else %}
+                  <h3>No hay registros</h3>
+                  {% endif %}
                </tbody>
           </table>
         </div>

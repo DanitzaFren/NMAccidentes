@@ -109,6 +109,7 @@
                   </tr>
               </thead>
               <tbody>
+                {% if activity %}
                 {% for activity in activity %}
                   <tr>
                     <td>{{ activity.0 }}</td>
@@ -119,6 +120,9 @@
                     <td>{{ activity.5 }}</td>  
                   </tr>
                   {% endfor %}
+                {% else %}
+                  <h3>No hay registros</h3>
+                {% endif %}
                </tbody>
           </table>
         </div>

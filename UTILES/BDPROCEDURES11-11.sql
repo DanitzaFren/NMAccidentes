@@ -273,7 +273,7 @@ create or replace NONEDITIONABLE procedure sp_actualizarpago(v_1 in pago.pago%TY
 IS
 BEGIN
     update pago set pago = v_1, fecha_pago = v_2 
-    where id_pago = v_3 ;
+    where id_pago = v_3 and total_pagar=v_1;
     v_salida:=1;
 
     exception
@@ -690,3 +690,81 @@ open actividades for SELECT  solicitud_asesoria.id_solicitud,cliente.nombre,prof
 
         commit;
 END;
+
+create or replace NONEDITIONABLE procedure caplista(v_1 in number, v_salida out number) 
+IS
+BEGIN
+    update capacitacion set id_estado = 2
+    where nro_capacitacion = v_1 ;
+    v_salida:=1;
+    exception
+    when others then
+        v_salida:= 0;
+END;
+
+create or replace NONEDITIONABLE procedure acclista(v_1 in number, v_salida out number) 
+IS
+BEGIN
+    update accidente set id_estado = 2
+    where id_accidente = v_1 ;
+    v_salida:=1;
+    exception
+    when others then
+        v_salida:= 0;
+END;
+
+create or replace NONEDITIONABLE procedure aselista(v_1 in number, v_salida out number) 
+IS
+BEGIN
+    update asesoria set id_estado = 2
+    where id_asesoria = v_1 ;
+    v_salida:=1;
+    exception
+    when others then
+        v_salida:= 0;
+END;
+
+create or replace NONEDITIONABLE procedure vislista(v_1 in number, v_salida out number) 
+IS
+BEGIN
+    update visita set id_estado = 2
+    where id_visita = v_1 ;
+    v_salida:=1;
+    exception
+    when others then
+        v_salida:= 0;
+END;
+
+create or replace NONEDITIONABLE procedure proflisto(v_1 in varchar2, v_salida out number) 
+IS
+BEGIN
+    update profesional set estado = 2
+    where rut_profesional= v_1 ;
+    v_salida:=1;
+    exception
+    when others then
+        v_salida:= 0;
+END;
+
+
+create or replace NONEDITIONABLE procedure profesionalac(
+profesional out 
+sys_refcursor) 
+IS
+BEGIN
+open profesional for SELECT 
+* FROM profesional where estado=1;
+
+END;
+
+create or replace NONEDITIONABLE procedure profact(v_1 in varchar2, v_salida out number) 
+IS
+BEGIN
+    update profesional set estado = 1
+    where rut_profesional= v_1 ;
+    v_salida:=1;
+    exception
+    when others then
+        v_salida:= 0;
+END;
+

@@ -13,7 +13,7 @@ from . import views
 from .views import crearCondicion, listadoCondicion, editarCondicion, eliminarCondicion
 from .views import crearContrato,listadoContrato, editarContrato, reporteAccidente, listadoAccidente, listadoPagos, actualizarPago, listadoActividadAdm, listadoAtrasos
 from .views import enviarCorreo,listsolcliente
-# Definicion de las Urls
+from .views import aselisto,acclisto,vislisto,proflisto,caplisto,profact
 urlpatterns = [
     path('', views.inicio, name="ndex"),
     path('admin/', admin.site.urls),
@@ -93,4 +93,16 @@ urlpatterns = [
     path('enviarCorreo/<correo>', enviarCorreo, name = 'enviarCorreo'),
     path('listadoMisClientes.html/<id>', views.listadoMisClientes, name="listadoMisClientes"),
     path('listadosolcliente.html/<id>', views.listsolcliente, name="listsolcliente"),
+
+    path('listadoClientePdf.html/', views.listadoClientesPdf, name="listadoClientesPdf"),
+    path("listadoProfesionalesPdf.html/", views.listadoProfesionalesPdf.as_view(), name="listadoProfesionalesPdf"),
+    path("listadoContratoPdf.html/", views.listadoContratosPdf.as_view(), name="listadoContratoPdf"),
+    path('report.html/', views.report, name="reportes"),
+
+    path('aselisto/<id>', aselisto, name = 'aselisto'),
+    path('caplisto/<id>', caplisto, name = 'caplisto'),
+    path('vislisto/<id>', vislisto, name = 'vislisto'),
+    path('proflisto/<id>', proflisto, name = 'proflisto'),
+    path('acclisto/<id>', acclisto, name = 'acclisto'),
+    path('profact/<id>', profact, name = 'profact'),
 ]

@@ -94,7 +94,7 @@
           {% if perms.logins.view_accidentibilidad %}
       
           
-          <h1>Lista % de Accidentibilidad </h1>
+          <h1>Lista de Accidentibilidad </h1>
       <br>
         <div>
           <table>
@@ -106,13 +106,17 @@
                   </tr>
               </thead>
               <tbody>
-                {% for accidente in accidente %}
-                  <tr>
-                    <td>{{ accidente.0 }}</td>
-                    <td>{{ accidente.1 }}</td>
-                    <td>{{ accidente.2 }}</td> 
-                  </tr>
-                  {% endfor %}
+                {% if accidente %}
+                  {% for accidente in accidente %}
+                    <tr>
+                      <td>{{ accidente.0 }}</td>
+                      <td>{{ accidente.1 }}</td>
+                      <td>{{ accidente.2 }}</td> 
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                  <h3>No hay registros</h3>
+                {% endif %}
                </tbody>
           </table>
         </div>

@@ -106,6 +106,7 @@
                   </tr>
               </thead>
               <tbody>
+                 {% if cliente %}
                   {% for cliente in cliente %}
                   <tr>
                       <td>{{ cliente.0}}</td>
@@ -114,11 +115,15 @@
       
                       <td>
                       <a href="{% url 'editarCliente' cliente.0 %}" class="button button7" >Editar</a>
-                      <a input type="button" class="button button8" href="{% url 'eliminarCliente' cliente.0 %}" onclick="return confirm('¿Estás seguro de querer eliminar este dato?')">Eliminar registro</a>
+
                       </td>
-      
+ 
                   </tr>
                   {% endfor %}
+
+                  {% else %}
+                  <h3>No hay registros</h3>
+                {% endif %}
                </tbody>
           </table>
         </div>

@@ -106,20 +106,7 @@
                   </tr>
               </thead>
               <tbody>
-                  <!-- {% for checklist in checklist %}
-                  {% for det_check in det_check %}
-                  {% for condicion in condicion %}
-                    <tr>
-                      <td>{{ checklist.nro_checklist }}</td>   
-                      <td>{{ checklist.descripcion_check }}</td>
-                      <td>{{ checklist.act_mejora }}</td>
-                      <td>{{ det_check.estado }}</td> 
-                      <td>{{ condicion.nom_condicion }}</td>
-                    </tr>
-                  {% endfor %}
-                  {% endfor %}
-                  {% endfor %} -->
-                 
+                  {% if joj %}
                   {% for joj in joj %}
                   <tr>
                     <td>{{ joj.nro_checklist }}</td>   
@@ -128,6 +115,9 @@
                       <a href="{% url 'verChecklist' joj.nro_checklist %}" class="button button7" >Ver</a></td>
                   </tr>
                   {% endfor %}
+                  {% else %}
+                  <h3>No hay registros</h3>
+                {% endif %}
                 </tbody>
                
           </table>

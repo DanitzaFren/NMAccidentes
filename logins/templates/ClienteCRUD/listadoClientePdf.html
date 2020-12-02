@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Listado Cliente</title>
+  <meta content="" name="descriptison">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'principal/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'principal/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'principal/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'principal/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static 'principal/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+  <link href="{% static 'principal/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'principal/vendor/venobox/venobox.css' %}" rel="stylesheet">
+  <link href="{% static 'principal/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+  <link href="{% static 'principal/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'principal/css/servicios.css' %}" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link href="{% static 'principal/css/style.css' %}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Moderna - v2.1.0
+  * Template URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+
+  <main id="main">
+
+    <!-- ======= Contact Section ======= -->
+    <section class="breadcrumbs">
+   
+    </section><!-- End Contact Section -->
+
+    <!-- ======= Contact Section ======= -->
+    <section class="contact" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+      <div>
+        <!-- ======= Copiar aqui loco ======= -->
+        <center>
+      
+          
+          <h1>Lista Cliente</h1>
+      
+        <div>
+          <table>
+              <thead>
+                  <tr>
+                      <th>Rut Empresa</th>
+                      <th>Direccion</th>
+                      <th>Nombre</th>
+                      <th>Acción</th>
+                  </tr>
+              </thead>
+              <tbody>
+                {% if cliente %}
+                  {% for cliente in cliente %}
+                    <tr>
+                        <td>{{ cliente.0}}</td>
+                        <td>{{ cliente.1}}</td>
+                        <td>{{ cliente.2}}</td>
+        
+                      
+        
+                    </tr>
+                  {% endfor %}
+
+                {% else %}
+                <h3>No hay registros</h3>
+              {% endif %}
+               </tbody>
+          </table>
+        </div>
+        
+   
+      
+      
+        
+          
+
+      </center>
+      </div>
+    </section><!-- End Contact Section -->
+
+  

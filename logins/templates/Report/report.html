@@ -1,12 +1,12 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Listado Atrasos</title>
+  <title>Listado Condición</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -27,7 +27,7 @@
   <link href="{% static 'principal/vendor/aos/aos.css' %}" rel="stylesheet">
   <link href="{% static 'principal/css/servicios.css' %}" rel="stylesheet">
   <!-- Template Main CSS File -->
-  <link rel="stylesheet" type="text/css" href="{% static 'principal/css/style.css' %}"/>
+  <link href="{% static 'principal/css/style.css' %}" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Moderna - v2.1.0
@@ -37,7 +37,7 @@
   ======================================================== -->
 </head>
 
-<body >
+<body>
 
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top ">
@@ -75,11 +75,11 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Lista Atrasos</h2>
+          <h2>Lista de reportes</h2>
           <ol>
             <li><a href="{% url 'ndex' %}">Home</a></li>
             <li><a href="{% url 'servicios' %}">Servicios</a></li>
-            <li>Lista Atrasos</li>
+            <li>Listado</li>
           </ol>
         </div>
 
@@ -91,47 +91,52 @@
       <div>
         <!-- ======= Copiar aqui loco ======= -->
         <center>
-          {% if perms.logins.view_pago %}
-      
+          {% if perms.logins.view_condicion %}
           
-          <h1>Lista Atrasos</h1>
+          <h1>Lista </h1>
       
         <div>
           <table>
               <thead>
                   <tr>
-                    <th>Id pago</th>
-                    <th>Rut Cliente</th>
-                    <th>Nombre Empresa</th>
-                    <th>Fecha vencimiento Pago</th>
-                    <th>correo</th>
-                    <th>Acción</th>
+                      <th>Lista</th>
+                      <th>PDF</th>
                   </tr>
               </thead>
               <tbody>
-                {% if atraso %}
-                {% for atraso in atraso %}
                   <tr>
-                    <td>{{ atraso.0 }}</td>
-                    <td>{{ atraso.1 }}</td>
-                    <td>{{ atraso.2 }}</td>
-                    <td>{{ atraso.3 }}</td>   
-                    <td>{{ atraso.4 }}</td>  
-                    <td> <a href="{% url 'enviarCorreo' atraso.4 %}" class="button button7" >Notificar</a></td>
+                      <td>
+                        Clientes
+                        <br>
+                        <br>
+                        <br>
+                        Profesionales
+                        <br>
+                        <br>
+                        <br>
+                        Contratos
+                      </td>
+                      <td> 
+                        <a href="{% url 'listadoClientesPdf' %}" class="button button5">Ver</a>
+                        <br>
+                        <a href="{% url 'listadoProfesionalesPdf' %}" class="button button5">Ver</a>
+                        <br>
+                        <a href="{% url 'listadoContratoPdf' %}" class="button button5">Ver</a>
+                      
+                      </td>  
+                      
+                           
                   </tr>
-                  {% endfor %}
-                {% else %}
-                  <h3>No hay registros</h3>
-                {% endif %}
+                 
                </tbody>
           </table>
         </div>
           <div>
-            <a href="{% url 'servicios' %}" class="button button6">Atrás</a>
+            <a href="{% url 'servicios' %}" class="button button6">Atras</a>
           </div>
    
           {% else %}
-
+          
           <script type="text/javascript">
             function mensaje() {
               Swal.fire({
@@ -146,10 +151,10 @@
             
             window.onload = mensaje;
           </script>
-            
 
           <div class="col-lg-3">
             <button id="btn1" class="btn btn-outline-danger btn-lg btn-block"> Error <p>Intentar nuevamente</p>  </button>
+          
           </div>
       
         {% endif %}
@@ -173,7 +178,7 @@
             <ul>
               <li><i class="bx bx-chevron-right"></i> <a href="{% url 'ndex' %}">Inicio</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="{% url 'Contacto' %}">Contacto</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'servicios' %}">Servicios</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="servicios.html">Servicios</a></li>
             </ul>
           </div>
 
