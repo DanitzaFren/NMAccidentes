@@ -1269,3 +1269,4 @@ def prof_act(idcheck):
     cursor.callproc('profact',[ idcheck,salida])
     return salida.getvalue()
 
+listadoChecklist
