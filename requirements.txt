@@ -11,3 +11,4 @@ Django~=2.2.4
 cx_Oracle
 xhtml2pdf
 selenium
+django-pwa

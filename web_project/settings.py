@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'logins',
+    'pwa',
 ]
 
 MIDDLEWARE = [
@@ -97,16 +98,26 @@ WSGI_APPLICATION = 'web_project.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.oracle',
+#         'NAME': 'XE',
+#         # 'NAME': 'ORCL',
+#         'USER': 'PRUEBALOCAL',
+#         # 'USER': 'admin',
+#         'PASSWORD': 'DUOC123456',
+#         #'HOST': 'localhost',
+#         'HOST': 'db1.cz3rpgvs8ilc.us-east-1.rds.amazonaws.com',
+#         'PORT': '1521',
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
-        #'NAME': 'XE',
-        'NAME': 'ORCL',
-        #'USER': 'PRUEBALOCAL',
-        'USER': 'admin',
+        'NAME': 'XE',
+        'USER': 'PRUEBALOCAL',
         'PASSWORD': 'DUOC123456',
-        #'HOST': 'localhost',
-        'HOST': 'db1.cz3rpgvs8ilc.us-east-1.rds.amazonaws.com',
+        'HOST': 'localhost',
         'PORT': '1521',
     }
 }
@@ -162,3 +173,26 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'misperris20018@gmail.com'
 EMAIL_HOST_PASSWORD = 'andres2018'
+
+
+
+PWA_APP_NAME = "No + accidentes"
+PWA_APP_DESCRIPTION = "Segurito"
+PWA_APP_THEME_COLOR = "#3477f5"
+PWA_APP_BACKGROUND_COLOR = "#6699f7"
+
+PWA_APP_ICONS = [
+    {
+        "src": "../static/principal/img/logologin.png",
+        "sizes": "160x160"
+    }
+]
+
+PWA_APP_ICONS_APPLE = [
+    {
+        "src": "../static/principal/img/logologin.png",
+        "sizes": "160x160"
+    }
+]
+
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, "serviceworker.js")
