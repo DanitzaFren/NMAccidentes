@@ -95,27 +95,18 @@
       <div class="container">
 
         <div class="row">
-
+          <div class="alert alert-info">
+            <strong>Usuario: </strong>{{mensaje}}
+          </div>
           <div class="col-lg-12">
             <form method="POST">
               {% csrf_token %}
-              <p>
-                <label for="id_username">Nombre del usuario:</label>
-                {{ form.username }}
-              </p>
-              <p>
-                <label for="id_password1">Contraseña:</label>
-                {{ form.password1 }}
-              </p>
-              <p>
-                <label for="id_password2">Validar Contraseña:</label>
-                {{ form.password2 }}
-              </p>
+              {{ form.as_p }}
               <center>
                 <button type="submit" class="button button6">Registrar</button>
               
             </form>
-            <p><a href="{% url 'servicios' %}" class="button button5">Atras</a></p>
+            <p><a href="{% url 'servicios' %}" class="button button5">Inicio</a></p>
           </div>
 
         </div>

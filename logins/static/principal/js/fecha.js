@@ -9,5 +9,5 @@ var yyyy = today.getFullYear();
         mm='0'+mm
     } 
 
-today = yyyy+'-'+mm+'-'+dd;
+ today = dd+'-'+mm+'-'+yyyy;
 document.getElementById("datefield").setAttribute("min", today);

@@ -146,9 +146,9 @@
   <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
     <div class="icon-box icon-box-pink">
       <div class="icon"><i class="bx bx-bar-chart-square"></i></div>
-      <h4 class="title"><a href="">Accidentibilidad</a></h4>
+      <h4 class="title"><a href="">Accidentabilidad</a></h4>
       <div><input type="button" onclick="location.href='listadoAccidentibilidad.html';" value="Ver" class="button button5"/></div> 
-      <p class="description">En esta sección puede ver los porcentajes de accidentibilidad de los profesionales.</p>
+      <p class="description">En esta sección puede ver los porcentajes de accidentabilidad de los profesionales.</p>
     </div>
   </div>
   <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
@@ -225,7 +225,7 @@
     <h4 class="title"><a href="">Checklist</a></h4>
     <div><input type="button" onclick="location.href='{% url 'crearChecklist' user.id %}'" value="Crear" class="button button5"/></div>
     <p class="description">Cree un checklist para una empresa a evaluar.</p>
-    <div><input type="button" onclick="location.href='listadoChecklist.html';" value="Ver" class="button button5"/></div>
+    <div><input type="button" onclick="location.href='{% url 'listadoChecklist' user.id %}'" value="Ver" class="button button5"/></div>
     <p class="description">Vea las checklist pendientes y completadas.</p>
   </div>
 </div>
@@ -263,7 +263,7 @@
     <div class="icon"><i class="bx bxs-bell-ring"></i></div>
     <h4 class="title"><a href="">Mis servicios</a></h4>
     <div><input type="button" onclick="location.href='{% url 'listadoActProfesional' user.id %}'" value="Ver" class="button button5"/></div>
-    <p class="description">Vea todos los reportes de accidentes junto al nombre de la empresa, descripción y fecha del accidente. </p>
+    <p class="description">Vea todos las actividades que tenga pendientes o las que ya ha realizado. </p>
   </div>
 </div>
 {% endif %}

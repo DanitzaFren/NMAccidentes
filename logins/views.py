@@ -464,12 +464,10 @@ def siguienteCheck(request):
            return redirect('listadoAsesorias')
     return render(request, "ChecklistCRUD/crearChecklist2.html",formularioChecklist1)
 
-def listadoChecklist(request):
-    det_checklist = DetChecklist.objects.select_related('checklist_nro_checklist','condicion_id_condicion')
-    checklist = Checklist.objects.all()
+def listadoChecklist(request,id):
+    joj = listado_checklistprofesional(id)
     datoscheck = {
-        'checklist' : listado_checklist(),
-         'joj' : checklist,
+         'joj' : listado_checklistprofesional(id),
     }
     return render(request, "ChecklistCRUD/listadoChecklist.html", datoscheck)
 
@@ -1037,13 +1035,10 @@ def register(request):
             user = form.save()
             group = Group.objects.get(name='Cliente')
             user.groups.add(group)
-            return redirect('servicios')
+            mensaje = 'Cliente registrado correctamente.'
     else:
         form = UserCreationFor()
-    form.fields['username'].help_text = None
-    form.fields['password1'].help_text = None
-    form.fields['password2'].help_text = None
-    return render(request, 'registration/register_Cliente.html', {'form': form})
+    return render(request, 'registration/register_Cliente.html', {'form': form, 'mensaje': mensaje})
 
 def register2(request):
     if request.method == 'POST':
@@ -1052,13 +1047,10 @@ def register2(request):
             user = form.save()
             group = Group.objects.get(name='Profesional')
             user.groups.add(group)
-            return redirect('servicios')
+            mensaje = 'Profesional registrado correctamente.'
     else:
         form = UserCreationFor()
-    form.fields['username'].help_text = None
-    form.fields['password1'].help_text = None
-    form.fields['password2'].help_text = None
-    return render(request, 'registration/register_Profesional.html', {'form': form})
+    return render(request, 'registration/register_Profesional.html', {'form': form, 'mensaje': mensaje})
 
 def register3(request):
     if request.method == 'POST':
@@ -1067,13 +1059,10 @@ def register3(request):
             user = form.save()
             group = Group.objects.get(name='Administrador')
             user.groups.add(group)
-            return redirect('servicios')
+            data['mensaje'] = 'Administrador registrado correctamente.'
     else:
         form = UserCreationFor()
-    form.fields['username'].help_text = None
-    form.fields['password1'].help_text = None
-    form.fields['password2'].help_text = None
-    return render(request, 'registration/register_Administrador.html', {'form': form})
+    return render(request, 'registration/register_Administrador.html', {'form': form,'mensaje': mensaje})
 
 ####################################################################
 
@@ -1269,4 +1258,22 @@ def prof_act(idcheck):
     cursor.callproc('profact',[ idcheck,salida])
     return salida.getvalue()
 
-listadoChecklist
+
+
+def listado_checklistprofesional(x):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor() 
+    cursor.callproc("listado_checklistprofesional", [ x,out_cur])
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+    return lista
+
+def fechf_contrato(idcheck):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    salida = cursor.var(cx_Oracle.NUMBER)
+    cursor.callproc('fechafcontrato',[ idcheck,salida])
+    return salida.getvalue()
+

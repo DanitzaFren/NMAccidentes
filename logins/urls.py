@@ -53,7 +53,7 @@ urlpatterns = [
 
     path('crearSolicitud.html/<id>', views.crearSolicitud, name = 'crearSolicitud'),
 
-    path("listadoChecklist.html", views.listadoChecklist, name="listadoChecklist"),
+    path("listadoChecklist/<id>", views.listadoChecklist, name="listadoChecklist"),
     path("crearChecklist.html/<id>", views.crearChecklist, name="crearChecklist"),
     path("crearChecklist2.html", views.listadoDetSP, name="siguienteChecklist"),
     path('eliminarDetalle/<id>', eliminarDetalle, name = 'eliminarDetalle'),
