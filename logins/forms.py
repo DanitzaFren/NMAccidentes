@@ -179,7 +179,7 @@ class UserCreationFor(UserCreationForm):
     class Meta:
         model = User
         fields = ('username','password1','password2','email')
-    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-    email =     forms.CharField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    username = forms.CharField(label='Nombre del usuario:',widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password1 = forms.CharField(label='Contraseña:',widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    password2 = forms.CharField(label='Validar Contraseña:',widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    email =     forms.CharField(label='Correo:',widget=forms.EmailInput(attrs={'class': 'form-control'}))

@@ -1,15 +1,23 @@
-function DtTimeDiff(sender, args) {
-    var startDate = Date.parse(document.getElementById('datefield').value);
-    var endDate = Date.parse(document.getElementById('datefield').value);
-    var timeDiff = endDate - startDate;
+/* Fecha maxima 30 dias despues */
+let dtElem = document.getElementById('fechaterm');
+let minDate = new Date();
+let maxDate = new Date();
+minDate.setDate(maxDate.getDate() + 30);
+maxDate.setDate(minDate.getDate() + 31);
 
-    daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
 
-    if (daysDiff > 90) {
-        args.IsValid = false;
-    }
-    else {
-        args.IsValid = true;
-    }
+dtElem.min = formatDate(minDate);
+dtElem.max = formatDate(maxDate);
 
+console.log(formatDate(minDate));
+console.log(formatDate(maxDate));
+
+
+function formatDate(date) {
+  let dd = String(date.getDate()).padStart(2, '0');
+  let mm = String(date.getMonth() + 1).padStart(2, '0');
+  let yyyy = date.getFullYear();
+  return yyyy+'-'+mm+'-'+dd;
 }
+
+

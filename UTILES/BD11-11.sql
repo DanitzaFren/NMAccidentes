@@ -237,7 +237,7 @@ CREATE TABLE visita (
     id_visita        NUMBER(4) NOT NULL,
     fecha            DATE NOT NULL,
     id_solicitud     NUMBER NOT NULL UNIQUE,
-    descripcion      VARCHAR2(500) ,
+    descripcion      VARCHAR2(500),
     id_estado        NUMBER(1) NOT NULL ,
     nro_checklist    NUMBER NOT NULL
 );

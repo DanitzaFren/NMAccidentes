@@ -109,10 +109,10 @@
                   {% if joj %}
                   {% for joj in joj %}
                   <tr>
-                    <td>{{ joj.nro_checklist }}</td>   
-                    <td>{{ joj.descripcion_check }}</td>
-                    <td> <a href="{% url 'completarChecklist' joj.nro_checklist %}" class="button button7" >Completar</a>
-                      <a href="{% url 'verChecklist' joj.nro_checklist %}" class="button button7" >Ver</a></td>
+                    <td>{{ joj.0 }}</td>   
+                    <td>{{ joj.1 }}</td>
+                    <td> <a href="{% url 'completarChecklist' joj.0 %}" class="button button7" >Completar</a>
+                      <a href="{% url 'verChecklist' joj.0 %}" class="button button7" >Ver</a></td>
                   </tr>
                   {% endfor %}
                   {% else %}
