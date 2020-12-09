@@ -27,7 +27,7 @@ pipeline {
         }   
         stage('TestApp') {
             steps {
-            	sh '''  bash -c " source ${WORKSPACE}/entorno_virtual/bin/python ${WORKSPACE}/Pruebas prueba1.py &"
+            	sh '''   python ${WORKSPACE}/Pruebas prueba1.py 
             		
                 '''
             }

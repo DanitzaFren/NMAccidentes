@@ -112,13 +112,13 @@
                 {% for pago in pago %}
                   <tr>
                     <td>{{ pago.0 }}</td>
-                    <td>{% if pago.2 == none %}Pendiente {% else %} {{ pago.2 }}{% endif %}</td>
-                    <td>{{ pago.3 }}</td>
-                    {% if pago.1 == 0 %}
+                    <td>{% if pago.1 == none %}Pendiente {% else %} {{ pago.1 }}{% endif %}</td>
+                    <td>{{ pago.2 }}</td>
+                    {% if pago.1 == none %}
                     <td>Pendiente</td>
                     <td><a href="{% url 'actualizarPago' pago.0 %}" class="button button7" >actualizar</a></td>
                     {% else %}
-                    <td>{{ pago.1 }}</td>
+                    <td>{{ pago.4 }}</td>
                     {% endif %}
                   </tr>
                   {% endfor %}
