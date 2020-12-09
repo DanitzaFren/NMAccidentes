@@ -15,6 +15,7 @@ class usando_unitest(unittest.TestCase):
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--disable-dev-shm-usage')
         self.driver = webdriver.Chrome('/usr/local/bin/chromedriver',chrome_options=chrome_options)
+        warnings.filterwarnings(action="ignore", message="unclosed", category=ResourceWarning)
 # Inicio de sesion del Administrador
     def test_iniciar_sesion_admin(self):
 
@@ -36,7 +37,7 @@ class usando_unitest(unittest.TestCase):
 
     def tearDown(self):
         self.driver.close()
-        warnings.filterwarnings(action="ignore", message="unclosed", category=ResourceWarning)
+        
 if __name__ == "__main__":
     unittest.main()
 
