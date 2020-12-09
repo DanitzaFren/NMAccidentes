@@ -35,10 +35,7 @@ pipeline {
         stage('TestApp') {
             steps {
                 echo "-=- ejecutando pruebas unitarias Selenium en Chrome -=-"
-                sh "python3 Pruebas/prueba1.py &&
-                    python3 Pruebas/prueba2.py && 
-                    python3 Pruebas/prueba3.py && 
-                    python3 Pruebas/prueba4.py && 
+                sh "python3 Pruebas/prueba1.py && python3 Pruebas/prueba2.py && python3 Pruebas/prueba3.py && python3 Pruebas/prueba4.py && 
                     python3 Pruebas/prueba5.py &&  
                     python3 Pruebas/prueba6.py &&  
                     python3 Pruebas/prueba7.py &&  
