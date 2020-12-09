@@ -67,7 +67,7 @@ pipeline {
                         ${WORKSPACE}/entorno_virtual/bin/python Pruebas/prueba39.py && 
                         ${WORKSPACE}/entorno_virtual/bin/python Pruebas/prueba40.py && 
                         ${WORKSPACE}/entorno_virtual/bin/python Pruebas/prueba41.py && 
-                        ${WORKSPACE}/entorno_virtual/bin/python Pruebas/prueba42.py && "
+                        ${WORKSPACE}/entorno_virtual/bin/python Pruebas/prueba42.py "
             		
                 '''
             }
