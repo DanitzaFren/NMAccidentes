@@ -4,11 +4,15 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.alert import Alert
 import time
-
+from selenium.webdriver.chrome.options import Options
 class usando_unitest(unittest.TestCase):
 
     def setUp(self):
-        self.driver = webdriver.Chrome(executable_path=r"C:\DriveSele\chromedriver.exe")
+        chrome_options = Options()
+        chrome_options.add_argument('--headless')
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.add_argument('--disable-dev-shm-usage')
+        self.driver = webdriver.Chrome('/usr/local/bin/chromedriver',options=chrome_options)
 #ver eliminar profesional
     def test_eliminar_profesional(self):
         driver = self.driver
@@ -16,9 +20,9 @@ class usando_unitest(unittest.TestCase):
         driver.get("http://127.0.0.1:8000/accounts/login/")
         self.assertIn("Login", driver.title)
         usuario = driver.find_element_by_id("id_username")
-        usuario.send_keys("Benja")
+        usuario.send_keys("admin")
         clave = driver.find_element_by_id("id_password")
-        clave.send_keys("duoc123456")
+        clave.send_keys("admin")
         usuario.send_keys(Keys.ENTER)
         time.sleep(1)
         #ir a servicios

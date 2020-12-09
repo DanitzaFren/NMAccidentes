@@ -34,8 +34,10 @@ pipeline {
         } 
                 stage('TestApp') {
             steps {
-                echo "-=- ejecutando pruebas selenium en chrome -=-"
+                echo "-=- ejecutando pruebas unitarias Selenium en Chrome -=-"
                 sh "python3 Pruebas/prueba1.py"
+                sh "python3 Pruebas/prueba2.py"
+                sh "python3 Pruebas/prueba3.py"
             }
         }  
         stage('ConstruirDocker') {

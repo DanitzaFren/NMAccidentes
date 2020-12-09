@@ -2,12 +2,16 @@ import unittest
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
-
+from selenium.webdriver.chrome.options import Options
 #### pruebas de logins
 class usando_unitest(unittest.TestCase):
 
     def setUp(self):
-        self.driver = webdriver.Chrome(executable_path=r"C:\DriveSele\chromedriver.exe")
+        chrome_options = Options()
+        chrome_options.add_argument('--headless')
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.add_argument('--disable-dev-shm-usage')
+        self.driver = webdriver.Chrome('/usr/local/bin/chromedriver',options=chrome_options)
 # Inicio de sesion del profesional
     def test_iniciar_sesion_profesional(self):
         driver = self.driver

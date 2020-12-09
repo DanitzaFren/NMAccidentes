@@ -4,11 +4,15 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.alert import Alert
 import time
-
+from selenium.webdriver.chrome.options import Options
 class usando_unitest(unittest.TestCase):
 
     def setUp(self):
-        self.driver = webdriver.Chrome(executable_path=r"C:\DriveSele\chromedriver.exe")
+        chrome_options = Options()
+        chrome_options.add_argument('--headless')
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.add_argument('--disable-dev-shm-usage')
+        self.driver = webdriver.Chrome('/usr/local/bin/chromedriver',options=chrome_options)
 #ver Capacitaciones ingresadas
     def test_ver_Capacitaciones_ingresadas(self):
         driver = self.driver
