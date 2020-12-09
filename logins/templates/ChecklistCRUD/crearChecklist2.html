@@ -139,7 +139,9 @@
                      </tbody>
                 </table>
               <center>
-                <a class="button button5" href="listadoChecklist.html">Listo</a>
+                {% if user.is_authenticated %}	
+                <a class="button button5" href="{% url 'listadoChecklist' user.id %}">Listo</a>
+                {% endif %}
                 <a input type="button" class="button button8" href="{% url 'eliminarChecklist' checklist.0 %}" onclick="return confirm('¿Estás seguro?')">Volver</a>
               </center> 
               {% endfor %} 

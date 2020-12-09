@@ -196,7 +196,6 @@ ALTER TABLE det_checklist ADD CONSTRAINT det_checklist_pk PRIMARY KEY ( id_detch
 
 CREATE TABLE pago (
     id_pago            NUMBER(4) NOT NULL,
-    pago               NUMBER(6) ,
     fecha_pago         DATE,
     fecha_vencimiento  DATE NOT NULL,
     id_cliente         varchar2(50) NOT NULL,
@@ -338,3 +337,4 @@ ALTER TABLE checklist
     ADD CONSTRAINT checklist_cliente_fk FOREIGN KEY ( id_cliente )
         REFERENCES cliente ( id_cliente );
 
+contrato_servicio

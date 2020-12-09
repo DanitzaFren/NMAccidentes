@@ -322,15 +322,6 @@ BEGIN
   FROM dual;
 END;
 
-create or replace NONEDITIONABLE TRIGGER pago_paago
-  BEFORE INSERT ON pago
-  FOR EACH ROW
-BEGIN
-
-  SELECT 0
-  INTO :new.pago
-  FROM dual;
-END;
 
 create or replace NONEDITIONABLE TRIGGER solicitudfecha_on_insert
   BEFORE INSERT ON SOLICITUD_ASESORIA
@@ -347,7 +338,7 @@ create or replace trigger registrar_pago
  on contrato_servicio
  for each row
  begin
-  insert into pago (pago,fecha_pago,fecha_vencimiento,id_cliente,total_pagar) values(0,null,(select add_months(sysdate,1) from dual) ,:new.id_cliente,100000);
+  insert into pago (fecha_pago,fecha_vencimiento,id_cliente,total_pagar) values(null,(select add_months(sysdate,1) from dual) ,:new.id_cliente,240000);
  end;
 
 create or replace trigger inabhilitar
@@ -358,3 +349,4 @@ create or replace trigger inabhilitar
   update auth_user Set is_active= 1 where :new.estado=1 and id=:old.id_user;
  end;
 
+pago_on_insert

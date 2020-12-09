@@ -140,8 +140,9 @@
                
      
               <center> 
-                <a class="button button8" href="{% url 'listadoChecklist' %}"" >Volver</a>
-               
+                {% if user.is_authenticated %}	
+                <a class="button button8" href="{% url 'listadoChecklist' user.id %}" >Volver</a>
+                {% endif %}
               </center> 
              
           </div>

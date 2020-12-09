@@ -102,8 +102,8 @@
                   <th>ID Visita</th>
                   <th>Fecha</th>
                   <th>Descripcion</th>
-                  <th>Estado visita</th>
                   <th>Nombre empresa</th>
+                  <th>Estado visita</th>
                   <th>Acción</th>
                 </tr>
               </thead>
@@ -114,15 +114,16 @@
                     <td>{{ visita.0 }}</td>
                     <td>{{ visita.1 }}</td>
                     <td>{{ visita.2 }}</td>
+                    <td>{{ visita.4 }}</td>    
                     {% if visita.3 == 1 %}
                     <td>Pendiente</td>
+                    <td>
+                      <a input type="button" class="button button8" href="{% url 'vislisto' visita.0 %}" >Listo</a>
+                      </td>
                     {% else %}
                     <td>Listo</td>
                     {% endif %}
-                    <td>{{ visita.4 }}</td>        
-                    <td>
-                    <a input type="button" class="button button8" href="{% url 'vislisto' visita.0 %}" >Listo</a>
-                    </td>
+    
                   </tr>
                   {% endfor %}
                   {% else %}

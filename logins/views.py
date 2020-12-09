@@ -723,7 +723,8 @@ def crear_contrato(fecha_inicio,fecha_termino,id_cliente,id_profesional):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
-    cursor.callproc('AGREGAR_CONTRATO',[ fecha_inicio, fecha_termino, id_cliente, id_profesional,salida])           
+    cursor.callproc('AGREGAR_CONTRATO',[ fecha_inicio, fecha_termino, id_cliente, id_profesional,salida])          
+
     return salida.getvalue()     
 
 def editarContrato(request, id_servicio):
@@ -1029,6 +1030,7 @@ def verChecklistCl(request, id):
 
 
 def register(request):
+    mensaje = ' '
     if request.method == 'POST':
         form = UserCreationFor(request.POST)
         if form.is_valid():
@@ -1041,6 +1043,7 @@ def register(request):
     return render(request, 'registration/register_Cliente.html', {'form': form, 'mensaje': mensaje})
 
 def register2(request):
+    mensaje = ' '
     if request.method == 'POST':
         form = UserCreationFor(request.POST)
         if form.is_valid():

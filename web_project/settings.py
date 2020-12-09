@@ -86,38 +86,16 @@ WSGI_APPLICATION = 'web_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-##Conexion AWS
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.oracle',
-#         'NAME': 'ORCL',
-#         'USER': 'admin',
-#         'PASSWORD': 'admin321',
-#         'HOST': 'db-d.cevecw8mjm3t.us-east-1.rds.amazonaws.com',
-#         'PORT': '1521',
-#     }
-# }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.oracle',
-#         'NAME': 'XE',
-#         # 'NAME': 'ORCL',
-#         'USER': 'PRUEBALOCAL',
-#         # 'USER': 'admin',
-#         'PASSWORD': 'DUOC123456',
-#         #'HOST': 'localhost',
-#         'HOST': 'db1.cz3rpgvs8ilc.us-east-1.rds.amazonaws.com',
-#         'PORT': '1521',
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'XE',
-        'USER': 'PRUEBALOCAL',
+        #'NAME': 'XE',
+        'NAME': 'ORCL',
+        #'USER': 'PRUEBALOCAL',
+        'USER': 'admin',
         'PASSWORD': 'DUOC123456',
-        'HOST': 'localhost',
+        #'HOST': 'localhost',
+        'HOST': 'db1.cz3rpgvs8ilc.us-east-1.rds.amazonaws.com',
         'PORT': '1521',
     }
 }

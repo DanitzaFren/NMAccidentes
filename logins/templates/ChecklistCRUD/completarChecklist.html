@@ -144,7 +144,9 @@
 
                 </table>
                 <center> 
-                  <a class="button button8" href="{% url 'listadoChecklist' %}" >Volver</a>
+                  {% if user.is_authenticated %}
+                  <a class="button button8" href="{% url 'listadoChecklist' user.id %}"  >Volver</a>
+                  {% endif %}
                   <a class="button button8" href="{% url 'checklisto' checklist.0 %}" >Listo</a>
 
                 </center> 
