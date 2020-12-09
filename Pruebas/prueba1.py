@@ -7,7 +7,7 @@ import time
 class usando_unitest(unittest.TestCase):
 
     def setUp(self):
-        self.driver = webdriver.Chrome(executable_path=r"C:\DriveSele\chromedriver.exe")
+        self.driver = webdriver.Chrome(executable_path=r"/usr/local/bin/chromedriver")
 # Inicio de sesion del Administrador
     def test_iniciar_sesion_admin(self):
         driver = self.driver
@@ -15,9 +15,9 @@ class usando_unitest(unittest.TestCase):
         driver.get("http://127.0.0.1:8000/accounts/login/")
         self.assertIn("Login", driver.title)
         usuario = driver.find_element_by_id("id_username")
-        usuario.send_keys("Benja")
+        usuario.send_keys("admin")
         clave = driver.find_element_by_id("id_password")
-        clave.send_keys("duoc123456")
+        clave.send_keys("admin")
         usuario.send_keys(Keys.ENTER)
         time.sleep(2)
         assert "No se encontro el elemento:" not in driver.page_source
