@@ -7,7 +7,7 @@ import time
 class usando_unitest(unittest.TestCase):
 
     def setUp(self):
-        self.driver = webdriver.Chrome(executable_path=r"/usr/local/bin/chromedriver")
+        self.driver = webdriver.Chrome('/usr/local/bin/chromedriver')
 # Inicio de sesion del Administrador
     def test_iniciar_sesion_admin(self):
         driver = self.driver
