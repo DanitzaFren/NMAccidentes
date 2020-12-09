@@ -28,7 +28,7 @@ pipeline {
         stage('TestApp') {
             steps {
                 echo "-=- ejecutando pruebas selenium en chrome -=-"
-                sh ''' bash -c "${WORKSPACE}/entorno_virtual/bin/python ${WORKSPACE}/manage.py runserver &"'''
+                sh "python3 -m SimpleHTTPServer"
                 sh "python3 Pruebas/prueba1.py"
             }
         }  
