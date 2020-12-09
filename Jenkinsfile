@@ -28,7 +28,7 @@ pipeline {
         stage('TestApp') {
             steps {
                 echo "-=- ejecutando pruebas -=-"
-                sh "python Pruebas/prueba1.py"
+                sh "python3 Pruebas/prueba1.py"
             }
         }  
         stage('RunPagina') {
