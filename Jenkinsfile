@@ -28,7 +28,7 @@ pipeline {
         stage('TestApp') {
             steps {
                 echo "-=- ejecutando pruebas selenium en chrome -=-"
-                sh "python3 -m SimpleHTTPServer"
+                sh "python -m http.server"
                 sh "python3 Pruebas/prueba1.py"
             }
         }  
