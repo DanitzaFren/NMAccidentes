@@ -27,9 +27,8 @@ pipeline {
         }   
         stage('TestApp') {
             steps {
-            	sh '''   python ${WORKSPACE}/Pruebas prueba1.py 
-            		
-                '''
+                echo "-=- ejecutando pruebas -=-"
+                sh "python Pruebas/prueba1.py"
             }
         }  
         stage('RunPagina') {
