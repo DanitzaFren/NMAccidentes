@@ -7,7 +7,7 @@
 # https://askubuntu.com/questions/760085/how-do-you-install-google-chrome-on-ubuntu-16-04
 
 # Versions
-CHROME_DRIVER_VERSION=`curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE_88.0.4324`
+CHROME_DRIVER_VERSION=`curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE`
 SELENIUM_STANDALONE_VERSION=3.9.1
 SELENIUM_SUBDIR=$(echo "$SELENIUM_STANDALONE_VERSION" | cut -d"." -f-2)
 
@@ -43,15 +43,3 @@ sudo chown root:root /usr/local/bin/selenium-server-standalone.jar
 sudo chmod 0755 /usr/local/bin/selenium-server-standalone.jar
 
 
-start-chrome() {
-    xvfb-run java -Dwebdriver.chrome.driver=/usr/local/bin/chromedriver -jar /usr/local/bin/selenium-server-standalone.jar;
-}
-
-start-chrome-debug() {
-    xvfb-run java -Dwebdriver.chrome.driver=/usr/local/bin/chromedriver -jar /usr/local/bin/selenium-server-standalone.jar -debug;
-}
-
-# Run Chrome Headless
-start-chrome-headless() {
-    chromedriver --url-base=/wd/hub;
-}
