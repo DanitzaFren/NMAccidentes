@@ -24,7 +24,7 @@ class usando_unitest(unittest.TestCase):
         clave = driver.find_element_by_id("id_password")
         clave.send_keys("admin")
         usuario.send_keys(Keys.ENTER)
-        time.sleep(2)
+        time.sleep(5)
         assert "No se encontro el elemento:" not in driver.page_source
         if driver.current_url=='http://127.0.0.1:8000/':
             print("Login del administrador correcto ")
