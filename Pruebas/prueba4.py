@@ -27,7 +27,8 @@ class usando_unitest(unittest.TestCase):
         usuario.send_keys(Keys.ENTER)
         time.sleep(1)
         #servicio
-        driver.find_element_by_xpath("//*[@id="header"]/div/nav/ul/li[4]/a").click()
+        service_url = 'http://127.0.0.1:8000/servicios'
+        driver.find_element_by_xpath('//a[@href="'+service_url+'"]').click()
         time.sleep(2)
         #Crear profesiional
         driver.find_element_by_css_selector("#main > section > div > div > div:nth-child(1) > div > div:nth-child(3) > input").click()
@@ -63,5 +64,5 @@ class usando_unitest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-#login_url = 'https://account.domaintools.com/log-in/?r=https%3A%2F%2Freversewhois.domaintools.com%2F%3Frefine'
-#login = driver.find_element_by_xpath('//a[@href="'+login_url+'"]').click()
+#service_url = 'http://127.0.0.1:8000/servicios'
+#service = driver.find_element_by_xpath('//a[@href="'+service_url+'"]').click()
