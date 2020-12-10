@@ -5,7 +5,6 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.alert import Alert
 import time
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support import NoSuchElementException
 from selenium.webdriver.common.by import By
 #### pruebas de ingresar 
 class usando_unitest(unittest.TestCase):
