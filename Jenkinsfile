@@ -35,7 +35,7 @@ pipeline {
         stage('PruebasUnitarias') {
             steps {
                 echo "-=- ejecutando pruebas unitarias Selenium en Chrome -=-"
-                sh "python3 Pruebas/prueba4.py "                  //
+                sh "python3 Pruebas/prueba1.py && python3 Pruebas/prueba2.py && python3 Pruebas/prueba3.py && python3 Pruebas/prueba4.py "                  //
             }
         }  
         stage('ConstruirDocker') {
