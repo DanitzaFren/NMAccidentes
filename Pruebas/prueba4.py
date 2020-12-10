@@ -25,11 +25,9 @@ class usando_unitest(unittest.TestCase):
         clave = driver.find_element_by_id("id_password")
         clave.send_keys("admin")
         usuario.send_keys(Keys.ENTER)
-        time.sleep(1)
-        driver.find_element_by_xpath("/html/body/header/div/nav/ul/li[4]/a").click()
+        driver.get("http://127.0.0.1:8000/servicios")
         time.sleep(2)
-        driver.find_element_by_xpath("/html/body/main/section/div/div/div[1]/div/div[2]/input").click()
-        time.sleep(2)
+        driver.get("http://127.0.0.1:8000/crearProfesionales_N.html")
         self.assertIn("Ingresar Profesional", driver.title)
         rut = driver.find_element_by_id("txtRut")
         rut.send_keys("197927038")
@@ -39,7 +37,7 @@ class usando_unitest(unittest.TestCase):
         paterno.send_keys("Bravo")
         materno = driver.find_element_by_id("id_materno")
         materno.send_keys("Diaz")
-        driver.find_element_by_xpath("/html/body/main/section[2]/div/div/div/form/center/button").click()
+        paterno.send_keys(Keys.ENTER)
         time.sleep(2)
         username = driver.find_element_by_id("id_username")
         username.send_keys("Profesional")
@@ -49,9 +47,9 @@ class usando_unitest(unittest.TestCase):
         contras.send_keys("duoc123456")
         email = driver.find_element_by_id("id_email")
         email.send_keys("prueba@gmail.com")
-        driver.find_element_by_xpath("/html/body/main/section[2]/div/div/div/form/center/button").click()
+        username.send_keys(Keys.ENTER)
         time.sleep(2)
-        if driver.current_url=='http://127.0.0.1:8000/servicios':
+        if driver.current_url=='http://127.0.0.1:8000/crearProfesionales_N.html':
             print("Se a creado el profesional con exito ")
         else:
             print("no se pudo ingresar el profesional")
@@ -61,3 +59,6 @@ class usando_unitest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+#login_url = 'https://account.domaintools.com/log-in/?r=https%3A%2F%2Freversewhois.domaintools.com%2F%3Frefine'
+#login = driver.find_element_by_xpath('//a[@href="'+login_url+'"]').click()
