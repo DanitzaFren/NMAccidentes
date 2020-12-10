@@ -27,7 +27,12 @@ class usando_unitest(unittest.TestCase):
         usuario.send_keys(Keys.ENTER)
         time.sleep(5)
         #servicio
-        driver.find_element_by_xpath("/html/body/header/div/nav/ul/li[4]/a").click()
+        try:
+            driver.find_element_by_xpath("/html/body/header/div/nav/ul/li[4]/a").click()
+        except NoSuchElementException:
+            raise ValueError("Can't login!!! Create a user 'foo' with the permissions"
+                             "'read' and 'create' in your PERMISSIONS in the config") 
+        
         time.sleep(5)
         #Crear profesiional
         driver.find_element_by_xpath("/html/body/main/section/div/div/div[2]/div/div[2]/input").click()
