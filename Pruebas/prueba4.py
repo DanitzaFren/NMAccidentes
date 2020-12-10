@@ -5,6 +5,8 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.alert import Alert
 import time
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support import NoSuchElementException
+from selenium.webdriver.common.by import By
 #### pruebas de ingresar 
 class usando_unitest(unittest.TestCase):
 
@@ -27,12 +29,7 @@ class usando_unitest(unittest.TestCase):
         usuario.send_keys(Keys.ENTER)
         time.sleep(5)
         #servicio
-        try:
-            driver.find_element_by_xpath("/html/body/header/div/nav/ul/li[4]/a").click()
-        except NoSuchElementException:
-            raise ValueError("Can't login!!! Create a user 'foo' with the permissions"
-                             "'read' and 'create' in your PERMISSIONS in the config") 
-        
+        driver.find_element_by_id('servicios')
         time.sleep(5)
         #Crear profesiional
         driver.find_element_by_xpath("/html/body/main/section/div/div/div[2]/div/div[2]/input").click()

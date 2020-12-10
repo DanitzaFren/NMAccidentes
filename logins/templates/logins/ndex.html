@@ -59,7 +59,7 @@
           <li><a href="{% url 'Contacto' %}">Contactos</a></li>
           
           {% if user.is_authenticated %}
-          <li><a href="{% url 'servicios' %}">Servicios</a></li>
+          <li><a href="{% url 'servicios' %}" id="servicios">Servicios</a></li>
           <li><a href="#">Usuario: {{ user.username }}</a></li>
           <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>   
             {% else %}	

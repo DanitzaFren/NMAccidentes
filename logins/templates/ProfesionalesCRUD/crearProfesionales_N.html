@@ -97,7 +97,7 @@
             <strong>Profesional: </strong>{{mensaje}}
           </div>
           <div class="col-lg-12">
-            <form method="POST">
+            <form method="POST" id="profesionalr">
               {% csrf_token %}
               {{ form.as_p }}
               <center>
