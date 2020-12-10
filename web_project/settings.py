@@ -151,7 +151,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'nmaccidentes@gmail.com'
 EMAIL_HOST_PASSWORD = 'nomasaccidentes246'
-PWA_APP_NAME = "No + accidentes"
+PWA_APP_NAME = "No+accidentes"
 PWA_APP_DESCRIPTION = "Segurito"
 PWA_APP_THEME_COLOR = "#3477f5"
 PWA_APP_BACKGROUND_COLOR = "#6699f7"
@@ -159,14 +159,14 @@ PWA_APP_BACKGROUND_COLOR = "#6699f7"
 PWA_APP_ICONS = [
     {
         "src": "../static/principal/img/logologin.png",
-        "sizes": "160x160"
+        "sizes": "192x192"
     }
 ]
 
 PWA_APP_ICONS_APPLE = [
     {
         "src": "../static/principal/img/logologin.png",
-        "sizes": "160x160"
+        "sizes": "192x192"
     }
 ]
 
