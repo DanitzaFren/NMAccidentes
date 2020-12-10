@@ -25,10 +25,10 @@ class usando_unitest(unittest.TestCase):
         clave = driver.find_element_by_id("id_password")
         clave.send_keys("duoc123456")
         usuario.send_keys(Keys.ENTER)
-        time.sleep(1)
+        time.sleep(5)
         #servicio
         driver.find_element_by_xpath('/html/body/header/div/nav/ul/li[4]/a').click()
-        time.sleep(2)
+        time.sleep(5)
         #Crear profesiional
         driver.find_element_by_xpath("/html/body/main/section/div/div/div[2]/div/div[2]/input").click()
         time.sleep(2)
