@@ -4,16 +4,12 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.alert import Alert
 import time
-from selenium.webdriver.chrome.options import Options
+
 #### pruebas de ingresar 
 class usando_unitest(unittest.TestCase):
 
     def setUp(self):
-        chrome_options = Options()
-        chrome_options.add_argument('--headless')
-        chrome_options.add_argument('--no-sandbox')
-        chrome_options.add_argument('--disable-dev-shm-usage')
-        self.driver = webdriver.Chrome('/usr/local/bin/chromedriver',options=chrome_options)
+        self.driver = webdriver.Chrome(executable_path=r"C:\DriveSele\chromedriver.exe")
 # Inicio de crear Cliente
     def test_Crear_Cliente(self):
         driver = self.driver
@@ -21,9 +17,9 @@ class usando_unitest(unittest.TestCase):
         driver.get("http://127.0.0.1:8000/accounts/login/")
         self.assertIn("Login", driver.title)
         usuario = driver.find_element_by_id("id_username")
-        usuario.send_keys("admin")
+        usuario.send_keys("Benja")
         clave = driver.find_element_by_id("id_password")
-        clave.send_keys("admin")
+        clave.send_keys("duoc123456")
         usuario.send_keys(Keys.ENTER)
         time.sleep(1)
         driver.find_element_by_xpath("/html/body/header/div/nav/ul/li[4]/a").click()
