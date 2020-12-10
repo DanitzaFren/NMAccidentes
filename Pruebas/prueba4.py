@@ -14,6 +14,7 @@ class usando_unitest(unittest.TestCase):
         chrome_options.add_argument('--headless')
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--disable-dev-shm-usage')
+        chrome_options.add_argument('window-size=1200x1040')
         self.driver = webdriver.Chrome('/usr/local/bin/chromedriver',options=chrome_options)
 # Inicio de crear Profesional
     def test_Crear_profesional(self):
@@ -28,7 +29,7 @@ class usando_unitest(unittest.TestCase):
         usuario.send_keys(Keys.ENTER)
         time.sleep(5)
         #servicio
-        driver.find_element_by_id('servicios')
+        driver.find_element_by_xpath('//*[@id="header"]/div/nav/ul/li[4]/a').click()
         time.sleep(5)
         #Crear profesiional
         driver.find_element_by_xpath("/html/body/main/section/div/div/div[2]/div/div[2]/input").click()
