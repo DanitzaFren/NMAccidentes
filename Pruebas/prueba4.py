@@ -27,7 +27,7 @@ class usando_unitest(unittest.TestCase):
         usuario.send_keys(Keys.ENTER)
         time.sleep(1)
         #servicio
-        driver.find_element_by_css_selector("#header > div > nav > ul > li:nth-child(4) > a").click()
+        driver.find_element_by_xpath("//*[@id="header"]/div/nav/ul/li[4]/a").click()
         time.sleep(2)
         #Crear profesiional
         driver.find_element_by_css_selector("#main > section > div > div > div:nth-child(1) > div > div:nth-child(3) > input").click()
