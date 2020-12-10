@@ -27,11 +27,10 @@ class usando_unitest(unittest.TestCase):
         usuario.send_keys(Keys.ENTER)
         time.sleep(1)
         #servicio
-        service_url = 'http://127.0.0.1:8000/servicios'
-        driver.find_element_by_xpath('//a[@href="'+service_url+'"]').click()
+        driver.find_element_by_xpath('/html/body/header/div/nav/ul/li[4]/a').click()
         time.sleep(2)
         #Crear profesiional
-        driver.find_element_by_css_selector("#main > section > div > div > div:nth-child(1) > div > div:nth-child(3) > input").click()
+        driver.find_element_by_xpath("/html/body/main/section/div/div/div[2]/div/div[2]/input").click()
         time.sleep(2)
         self.assertIn("Ingresar Profesional", driver.title)
         rut = driver.find_element_by_id("txtRut")
@@ -64,5 +63,5 @@ class usando_unitest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-#service_url = 'http://127.0.0.1:8000/servicios'
-#service = driver.find_element_by_xpath('//a[@href="'+service_url+'"]').click()
+#login_url = 'https://account.domaintools.com/log-in/?r=https%3A%2F%2Freversewhois.domaintools.com%2F%3Frefine'
+#login = driver.find_element_by_xpath('//a[@href="'+login_url+'"]').click()
