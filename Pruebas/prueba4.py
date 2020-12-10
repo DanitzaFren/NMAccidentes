@@ -28,8 +28,6 @@ class usando_unitest(unittest.TestCase):
         usuario.send_keys(Keys.ENTER)
         time.sleep(5)
         #servicio
-        login_url = 'https://account.domaintools.com/log-in/?r=https%3A%2F%2Freversewhois.domaintools.com%2F%3Frefine'
-        login = driver.find_element_by_xpath('//a[@href="'+login_url+'"]').click()
         servicio = driver.find_element_by_xpath('//*[@id="header"]/div/nav/ul/li[4]/a').click()
         time.sleep(5)
         #Crear profesiional
