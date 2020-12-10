@@ -19,6 +19,7 @@ class usando_unitest(unittest.TestCase):
     def test_Crear_profesional(self):
         driver = self.driver
         driver.maximize_window()
+        driver.implicitly_wait(20)
         driver.get("http://127.0.0.1:8000/accounts/login/")
         self.assertIn("Login", driver.title)
         usuario = driver.find_element_by_id("id_username")
@@ -28,7 +29,7 @@ class usando_unitest(unittest.TestCase):
         usuario.send_keys(Keys.ENTER)
         time.sleep(5)
         #servicio
-        servicio = driver.find_element_by_xpath(/html/body/header/div/nav/ul/li[4]/a).click()
+        servicio = driver.find_element_by_xpath("/html/body/header/div/nav/ul/li[4]/a").click()
         time.sleep(5)
         #Crear profesiional
         driver.find_element_by_xpath("/html/body/main/section/div/div/div[2]/div/div[2]/input").click()
