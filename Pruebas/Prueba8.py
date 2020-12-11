@@ -33,7 +33,7 @@ class usando_unitest(unittest.TestCase):
         driver.get("http://127.0.0.1:8000/listadoProfesionales_N.html")
         time.sleep(2)
         if driver.current_url=='http://127.0.0.1:8000/listadoProfesionales_N.html':
-            print("Ver listado de los profesionales ")
+            print("Ver listado de los profesionales.")
         else:
             print("no muestra los profesionales")
 
