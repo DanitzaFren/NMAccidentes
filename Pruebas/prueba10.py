@@ -26,7 +26,7 @@ class usando_unitest(unittest.TestCase):
         clave.send_keys("admin")
         usuario.send_keys(Keys.ENTER)
         time.sleep(1)
-        driver.get("http://127.0.0.1:8000/servicios")
+        driver.get("http://127.0.0.1:8000/servicios.html")
         time.sleep(2)
         driver.get("http://127.0.0.1:8000/crearCliente.html")
         time.sleep(2)

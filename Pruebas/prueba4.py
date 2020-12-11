@@ -25,7 +25,7 @@ class usando_unitest(unittest.TestCase):
         clave = driver.find_element_by_id("id_password")
         clave.send_keys("admin")
         usuario.send_keys(Keys.ENTER)
-        driver.get("http://127.0.0.1:8000/servicios")
+        driver.get("http://127.0.0.1:8000/servicios.html")
         time.sleep(2)
         driver.get("http://127.0.0.1:8000/crearProfesionales_N.html")
         self.assertIn("Ingresar Profesional", driver.title)
@@ -49,7 +49,7 @@ class usando_unitest(unittest.TestCase):
         email.send_keys("prueba12@gmail.com")
         username.send_keys(Keys.ENTER)
         time.sleep(2)
-        if driver.current_url=='http://127.0.0.1:8000/register_Profesional':
+        if driver.current_url=='http://127.0.0.1:8000/register_Profesional.html':
             print("Se ha creado el profesional con éxito en el sistema.")
         else:
             print("no se pudo ingresar el profesional")

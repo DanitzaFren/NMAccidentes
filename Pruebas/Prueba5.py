@@ -22,7 +22,7 @@ class usando_unitest(unittest.TestCase):
         clave.send_keys("duoc123456")
         usuario.send_keys(Keys.ENTER)
         time.sleep(1)
-        driver.get("http://127.0.0.1:8000/servicios")
+        driver.get("http://127.0.0.1:8000/servicios.html")
         time.sleep(2)
         time.sleep(2)
         driver.get("http://127.0.0.1:8000/crearCliente.html")
@@ -50,7 +50,7 @@ class usando_unitest(unittest.TestCase):
         email.send_keys("pruebaClie@gmail.com")
         email.send_keys(Keys.ENTER)
         time.sleep(2)
-        if driver.current_url=='http://127.0.0.1:8000/register_Cliente':
+        if driver.current_url=='http://127.0.0.1:8000/register_Cliente.html':
             print("Se ha creado el Cliente con exito en el sistema ")
         else:
             print("no se pudo ingresar el Cliente")
