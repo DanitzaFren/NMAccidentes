@@ -1,25 +1,23 @@
 /* Fecha obligatoria de hoy */
-function getDate() {
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth()+1; //January is 0!
-    var yyyy = today.getFullYear();
+let dtElem2 = document.getElementById('date');
+let minDate2 = new Date();
+let maxDate2 = new Date();
+minDate2.setDate(maxDate2.getDate() );
+maxDate2.setDate(minDate2.getDate() );
 
 
-    if(dd<10) {
-        dd = '0'+dd
-    } 
-  
-    if(mm<10) {
-        mm = '0'+mm
-    }
-    
+dtElem2.min = formatDate(minDate2);
+dtElem2.max = formatDate(maxDate2);
 
-    today = dd + '-' + mm + '-' + yyyy ;
-    document.getElementById("date").value = today;
-  }
-  
-  
-  window.onload = function() {
-    getDate();
-  };
+console.log(formatDate(minDate2));
+console.log(formatDate(maxDate2));
+
+
+function formatDate(date) {
+  let dd = String(date.getDate()).padStart(2, '0');
+  let mm = String(date.getMonth() + 1).padStart(2, '0');
+  let yyyy = date.getFullYear();
+  return yyyy+'-'+mm+'-'+dd;
+}
+
+
