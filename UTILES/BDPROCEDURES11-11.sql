@@ -146,7 +146,7 @@ sys_refcursor)
 IS
 BEGIN
 open clientes for SELECT 
-* FROM cliente;
+id_cliente, direccion, INITCAP(nombre),id,id_user FROM cliente;
 
 END;
 
@@ -187,7 +187,7 @@ checklist out
 sys_refcursor) 
 IS
 BEGIN
-open checklist for SELECT nro_checklist, cliente.nombre,checklist.id_estado FROM checklist, cliente 
+open checklist for SELECT nro_checklist, INITCAP(cliente.nombre),checklist.id_estado FROM checklist, cliente 
 where checklist.id_cliente = cliente.id_cliente and cliente.id_user= v_id ;
 
 END;
@@ -198,7 +198,7 @@ sys_refcursor)
 IS 
 BEGIN
 open cliente for 
-SELECT cliente.id_cliente,cliente.nombre FROM cliente, profesional,contrato_servicio where contrato_servicio.id_cliente=cliente.id_cliente
+SELECT cliente.id_cliente,INITCAP(cliente.nombre) FROM cliente, profesional,contrato_servicio where contrato_servicio.id_cliente=cliente.id_cliente
 and contrato_servicio.id_profesional=profesional.rut_profesional and profesional.id_user=v_1;
 
 END;
@@ -221,7 +221,7 @@ profesionales out
 sys_refcursor) 
 IS
 BEGIN
-open profesionales for SELECT * FROM profesional;
+open profesionales for SELECT rut_profesional, INITCAP(nombre), INITCAP(paterno),INITCAP(materno),estado,id_d,id_user FROM profesional;
 
 END;
 
@@ -239,14 +239,13 @@ profesional out
 sys_refcursor) 
 IS
 BEGIN
-open profesional for Select profesional.rut_profesional,profesional.nombre || ' '|| profesional.paterno , count(accidente.id_accidente)*100/
+open profesional for Select profesional.rut_profesional,INITCAP(profesional.nombre) || ' '|| INITCAP(profesional.paterno) , count(accidente.id_accidente)*100/
         (select DISTINCT count(id_cliente) from contrato_servicio )|| '%' as 
         FROM accidente, profesional, contrato_servicio, cliente
         WHERE contrato_servicio.id_cliente=cliente.id_cliente
         and contrato_servicio.id_profesional=profesional.rut_profesional
         and accidente.id_cliente=cliente.id_cliente
-        group by profesional.rut_profesional, profesional.nombre || ' '||profesional.paterno, ' ', profesional.paterno, 
-profesional.nombre || ' '|| profesional.paterno order by profesional.rut_profesional;
+        group by profesional.rut_profesional, INITCAP(profesional.nombre) || ' '||INITCAP(profesional.paterno)  order by profesional.rut_profesional;
         commit;
 END;
 
@@ -269,11 +268,11 @@ open actividades for SELECT asesoria.id_asesoria, asesoria.fecha, asesoria.id_es
         commit;
 END;
 
-create or replace NONEDITIONABLE procedure sp_actualizarpago(v_1 in pago.pago%TYPE, v_2 in pago.fecha_pago%TYPE, v_3 in number, v_salida out number) 
+create or replace NONEDITIONABLE procedure sp_actualizarpago( v_2 in pago.fecha_pago%TYPE, v_3 in number, v_salida out number) 
 IS
 BEGIN
-    update pago set pago = v_1, fecha_pago = v_2 
-    where id_pago = v_3 and total_pagar=v_1;
+    update pago set fecha_pago = v_2 
+    where id_pago = v_3;
     v_salida:=1;
 
     exception
@@ -304,8 +303,8 @@ atrasos out
 sys_refcursor) 
 IS
 BEGIN
-open atrasos for select pago.id_pago,contrato_servicio.id_cliente, cliente.nombre ,fecha_vencimiento,auth_user.email from pago, contrato_servicio,cliente,auth_user where pago.id_cliente=contrato_servicio.id_cliente
-and cliente.id_cliente=contrato_servicio.id_cliente and cliente.id_user = auth_user.id and fecha_vencimiento < sysdate and pago <=0;
+open atrasos for select pago.id_pago,contrato_servicio.id_cliente, INITCAP(cliente.nombre) ,fecha_vencimiento,auth_user.email from pago, contrato_servicio,cliente,auth_user where pago.id_cliente=contrato_servicio.id_cliente
+and cliente.id_cliente=contrato_servicio.id_cliente and cliente.id_user = auth_user.id and fecha_vencimiento < sysdate;
         commit;
 END;
 
@@ -347,7 +346,7 @@ accidente out
 sys_refcursor) 
 IS
 BEGIN
-open accidente for Select accidente.id_accidente, cliente.nombre, accidente.descripcion, accidente.fecha,accidente.id_estado
+open accidente for Select accidente.id_accidente, INITCAP(cliente.nombre), accidente.descripcion, accidente.fecha,accidente.id_estado
         FROM accidente, profesional, contrato_servicio, cliente
         WHERE contrato_servicio.id_cliente=cliente.id_cliente
         and contrato_servicio.id_profesional=profesional.rut_profesional
@@ -362,7 +361,7 @@ asesoria out
 sys_refcursor) 
 IS
 BEGIN
-open asesoria for SELECT asesoria.id_asesoria,asesoria.id_solicitud, solicitud_asesoria.descripcion_asesoria, cliente.nombre, asesoria.fecha, asesoria.id_estado
+open asesoria for SELECT asesoria.id_asesoria,asesoria.id_solicitud, solicitud_asesoria.descripcion_asesoria, INITCAP(cliente.nombre), asesoria.fecha, asesoria.id_estado
 FROM asesoria,solicitud_asesoria,cliente ,profesional
 where asesoria.id_solicitud=solicitud_asesoria.id_solicitud and solicitud_asesoria.tipo_solicitud = 1
 and cliente.id_cliente=solicitud_asesoria.id_cliente and solicitud_asesoria.id_profesional=profesional.rut_profesional 
@@ -450,7 +449,7 @@ cliente out
 sys_refcursor) 
 IS
 BEGIN
-open cliente for select cliente.id_cliente, cliente.nombre, rubro.nom_rubro, cliente.direccion from cliente, contrato_servicio,profesional, rubro
+open cliente for select cliente.id_cliente, INITCAP(cliente.nombre), rubro.nom_rubro, cliente.direccion from cliente, contrato_servicio,profesional, rubro
 where cliente.id_cliente=contrato_servicio.id_cliente and rubro.id_rubro=cliente.rubro
 and profesional.rut_profesional=contrato_servicio.id_profesional and profesional.id_user=v_1;
         commit;
@@ -477,11 +476,11 @@ actividades out
 sys_refcursor) 
 IS
 BEGIN
-open actividades for SELECT asesoria.id_asesoria, asesoria.FECHA, 'Asesoria'  as tipo, cliente.nombre 
+open actividades for SELECT asesoria.id_asesoria, asesoria.FECHA, 'Asesoria'  as tipo, INITCAP(cliente.nombre) 
     FROM ASESORIA, solicitud_asesoria,cliente 
     where asesoria.id_solicitud=solicitud_asesoria.id_solicitud and solicitud_asesoria.id_cliente=cliente.id_cliente
 UNION
-SELECT capacitacion.NRO_CAPACITACION, capacitacion.FECHA, 'Capacitacion', cliente.nombre FROM CAPACITACION, cliente,solicitud_asesoria 
+SELECT capacitacion.NRO_CAPACITACION, capacitacion.FECHA, 'Capacitacion', INITCAP(cliente.nombre) FROM CAPACITACION, cliente,solicitud_asesoria 
 where capacitacion.id_solicitud=solicitud_asesoria.id_solicitud and solicitud_asesoria.id_cliente=cliente.id_cliente; 
         commit;
 END;
@@ -492,7 +491,7 @@ tiposolicitud out
 sys_refcursor) 
 IS
 BEGIN
-open tiposolicitud for SELECT solicitud_asesoria.id_solicitud, cliente.nombre FROM tipo_solicitud,solicitud_asesoria,cliente,profesional
+open tiposolicitud for SELECT solicitud_asesoria.id_solicitud, INITCAP(cliente.nombre) FROM tipo_solicitud,solicitud_asesoria,cliente,profesional
 where tipo_solicitud.id_tiposolicitud=solicitud_asesoria.tipo_solicitud
 and cliente.id_cliente=solicitud_asesoria.id_cliente  and solicitud_asesoria.id_estado=1 and solicitud_asesoria.tipo_solicitud=1
 and solicitud_asesoria.id_profesional=profesional.rut_profesional and profesional.id_user=v_1 ;
@@ -503,7 +502,7 @@ tiposolicitud out
 sys_refcursor) 
 IS
 BEGIN
-open tiposolicitud for SELECT solicitud_asesoria.id_solicitud, cliente.nombre FROM tipo_solicitud,solicitud_asesoria,cliente, profesional
+open tiposolicitud for SELECT solicitud_asesoria.id_solicitud, INITCAP(cliente.nombre) FROM tipo_solicitud,solicitud_asesoria,cliente, profesional
 where tipo_solicitud.id_tiposolicitud=solicitud_asesoria.tipo_solicitud
 and cliente.id_cliente=solicitud_asesoria.id_cliente  and solicitud_asesoria.id_estado=1 and solicitud_asesoria.tipo_solicitud=2
 and solicitud_asesoria.id_profesional=profesional.rut_profesional and profesional.id_user=v_1 ;
@@ -514,7 +513,7 @@ tiposolicitud out
 sys_refcursor) 
 IS
 BEGIN
-open tiposolicitud for SELECT solicitud_asesoria.id_solicitud, cliente.nombre FROM tipo_solicitud,solicitud_asesoria,cliente 
+open tiposolicitud for SELECT solicitud_asesoria.id_solicitud, INITCAP(cliente.nombre) FROM tipo_solicitud,solicitud_asesoria,cliente 
 where tipo_solicitud.id_tiposolicitud=solicitud_asesoria.tipo_solicitud
 and cliente.id_cliente=solicitud_asesoria.id_cliente and solicitud_asesoria.id_estado=1 and solicitud_asesoria.tipo_solicitud=4
 and solicitud_asesoria.id_profesional=v_1 ;
@@ -534,7 +533,7 @@ tiposolicitud out
 sys_refcursor) 
 IS
 BEGIN
-open tiposolicitud for SELECT solicitud_asesoria.id_solicitud, cliente.nombre,
+open tiposolicitud for SELECT solicitud_asesoria.id_solicitud, INITCAP(cliente.nombre),
 checklist.nro_checklist
 FROM tipo_solicitud,solicitud_asesoria,cliente, checklist, profesional
 where tipo_solicitud.id_tiposolicitud=solicitud_asesoria.tipo_solicitud
@@ -551,7 +550,7 @@ capacitacion out
 sys_refcursor) 
 IS
 BEGIN
-open capacitacion for SELECT capacitacion.nro_capacitacion,capacitacion.fecha, capacitacion.asistentes, cliente.nombre, capacitacion.id_estado
+open capacitacion for SELECT capacitacion.nro_capacitacion,capacitacion.fecha, capacitacion.asistentes, INITCAP(cliente.nombre), capacitacion.id_estado
 FROM capacitacion,cliente,profesional,solicitud_asesoria where capacitacion.id_solicitud=solicitud_asesoria.id_solicitud
 and cliente.id_cliente=solicitud_asesoria.id_cliente
 and profesional.rut_profesional=solicitud_asesoria.id_profesional
@@ -565,7 +564,7 @@ visita out
 sys_refcursor) 
 IS
 BEGIN
-open visita for SELECT visita.id_visita,visita.fecha, visita.descripcion, visita.id_estado, cliente.nombre, profesional.rut_profesional
+open visita for SELECT visita.id_visita,visita.fecha, visita.descripcion, visita.id_estado, INITCAP(cliente.nombre), profesional.rut_profesional
 FROM visita,cliente,profesional,solicitud_asesoria where visita.id_solicitud=solicitud_asesoria.id_solicitud
 and cliente.id_cliente=solicitud_asesoria.id_cliente
 and profesional.rut_profesional=solicitud_asesoria.id_profesional
@@ -603,7 +602,7 @@ actividades out
 sys_refcursor) 
 IS
 BEGIN
-open actividades for SELECT asesoria.id_asesoria, asesoria.fecha, estado_actividad.nom_est_actividad, 'Asesoria',cliente.nombre
+open actividades for SELECT asesoria.id_asesoria, asesoria.fecha, estado_actividad.nom_est_actividad, 'Asesoria',INITCAP(cliente.nombre)
                 from asesoria, profesional,solicitud_asesoria, estado_actividad,cliente
                 where asesoria.id_solicitud=solicitud_asesoria.id_solicitud 
                 and estado_actividad.id_estado=asesoria.id_estado
@@ -612,7 +611,7 @@ open actividades for SELECT asesoria.id_asesoria, asesoria.fecha, estado_activid
                 and profesional.rut_profesional=solicitud_asesoria.id_profesional
                 and profesional.id_user=v_1
                 UNION
-             SELECT  capacitacion.nro_capacitacion, capacitacion.fecha, estado_actividad.nom_est_actividad,'Capacitación',cliente.nombre 
+             SELECT  capacitacion.nro_capacitacion, capacitacion.fecha, estado_actividad.nom_est_actividad,'Capacitación',INITCAP(cliente.nombre)
                 from capacitacion, profesional, solicitud_asesoria, estado_actividad,cliente
                 where capacitacion.id_solicitud=solicitud_asesoria.id_solicitud
                 and estado_actividad.id_estado=capacitacion.id_estado
@@ -621,7 +620,7 @@ open actividades for SELECT asesoria.id_asesoria, asesoria.fecha, estado_activid
                 and profesional.rut_profesional=solicitud_asesoria.id_profesional
                 and profesional.id_user=v_1
                 UNION
-                SELECT  visita.id_visita, visita.fecha, estado_actividad.nom_est_actividad,'visita',cliente.nombre 
+                SELECT  visita.id_visita, visita.fecha, estado_actividad.nom_est_actividad,'visita',INITCAP(cliente.nombre)
                 from visita, profesional, solicitud_asesoria, estado_actividad,cliente
                 where visita.id_solicitud=solicitud_asesoria.id_solicitud 
                 and estado_actividad.id_estado=visita.id_estado
@@ -647,7 +646,7 @@ actividades out
 sys_refcursor) 
 IS
 BEGIN
-open actividades for SELECT  solicitud_asesoria.id_solicitud,cliente.nombre,profesional.nombre ||' '|| profesional.paterno, solicitud_asesoria.fecha ,
+open actividades for SELECT  solicitud_asesoria.id_solicitud,INITCAP(cliente.nombre), INITCAP(profesional.nombre) ||' '|| INITCAP(profesional.paterno), solicitud_asesoria.fecha ,
                 estado_actividad.nom_est_actividad, 'Solicitud' ||' '|| tipo_solicitud.nom_solicitud 
                 from solicitud_asesoria,estado_actividad,tipo_solicitud, cliente,profesional
                 where estado_actividad.id_estado=solicitud_asesoria.id_estado 
@@ -656,7 +655,7 @@ open actividades for SELECT  solicitud_asesoria.id_solicitud,cliente.nombre,prof
                 and cliente.id_cliente=solicitud_asesoria.id_cliente
                 and profesional.rut_profesional=solicitud_asesoria.id_profesional
                 UNION
-                SELECT  visita.id_visita, cliente.nombre,profesional.nombre ||' '|| profesional.paterno, visita.fecha,estado_actividad.nom_est_actividad, 'visita' 
+                SELECT  visita.id_visita, INITCAP(cliente.nombre), INITCAP(profesional.nombre) ||' '|| INITCAP(profesional.paterno), visita.fecha,estado_actividad.nom_est_actividad, 'visita' 
                 from visita,estado_actividad, cliente,profesional,solicitud_asesoria
                 where estado_actividad.id_estado=visita.id_estado
                 and solicitud_asesoria.id_solicitud=visita.id_solicitud
@@ -664,7 +663,7 @@ open actividades for SELECT  solicitud_asesoria.id_solicitud,cliente.nombre,prof
                 and profesional.rut_profesional=solicitud_asesoria.id_profesional
                 UNION
 
-                SELECT  capacitacion.nro_capacitacion, cliente.nombre,profesional.nombre ||' '|| profesional.paterno,capacitacion.fecha,estado_actividad.nom_est_actividad, 'Capacitación' 
+                SELECT  capacitacion.nro_capacitacion, INITCAP(cliente.nombre), INITCAP(profesional.nombre) ||' '|| INITCAP(profesional.paterno),capacitacion.fecha,estado_actividad.nom_est_actividad, 'Capacitación' 
                 from capacitacion,estado_actividad, cliente,profesional,solicitud_asesoria
                 where estado_actividad.id_estado=capacitacion.id_estado 
                 and solicitud_asesoria.id_solicitud=capacitacion.id_solicitud
@@ -673,14 +672,14 @@ open actividades for SELECT  solicitud_asesoria.id_solicitud,cliente.nombre,prof
                 
                 UNION
 
-                SELECT asesoria.id_asesoria, cliente.nombre,profesional.nombre ||' '|| profesional.paterno,asesoria.fecha, estado_actividad.nom_est_actividad, 'Asesoria' from asesoria,estado_actividad, cliente,profesional,solicitud_asesoria
+                SELECT asesoria.id_asesoria, INITCAP(cliente.nombre), INITCAP(profesional.nombre) ||' '|| INITCAP(profesional.paterno),asesoria.fecha, estado_actividad.nom_est_actividad, 'Asesoria' from asesoria,estado_actividad, cliente,profesional,solicitud_asesoria
                 where estado_actividad.id_estado=asesoria.id_estado 
                 and solicitud_asesoria.id_solicitud=asesoria.id_solicitud
                 and cliente.id_cliente=solicitud_asesoria.id_cliente
                 and profesional.rut_profesional=solicitud_asesoria.id_profesional
 
                 UNION
-                SELECT accidente.id_accidente, cliente.nombre,profesional.nombre ||' '|| profesional.paterno,accidente.fecha, estado_actividad.nom_est_actividad, 'Accidente' from accidente,estado_actividad, cliente,profesional,contrato_servicio
+                SELECT accidente.id_accidente, INITCAP(cliente.nombre), INITCAP(profesional.nombre) ||' '|| INITCAP(profesional.paterno),accidente.fecha, estado_actividad.nom_est_actividad, 'Accidente' from accidente,estado_actividad, cliente,profesional,contrato_servicio
                 where estado_actividad.id_estado=accidente.id_estado 
                 and contrato_servicio.id_cliente=accidente.id_cliente
                 and cliente.id_cliente=contrato_servicio.id_cliente
@@ -767,8 +766,3 @@ BEGIN
     when others then
         v_salida:= 0;
 END;
-
-
-
-
-contrato_servicio

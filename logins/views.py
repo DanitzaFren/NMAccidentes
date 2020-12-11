@@ -702,7 +702,6 @@ def listadoContrato(request):
     return render(request, "ContratoCRUD/listadoContrato.html", datos)
 
 def crearContrato(request):
-    
     data = {
         'clientes': listado_Clientes(),
         'profesional': listado_profesionalac(),
@@ -717,6 +716,7 @@ def crearContrato(request):
             data['mensaje'] = 'Contrato creado con éxito'
         else:
             data['mensaje'] = 'Este Cliente ya se encuentra asociado a un contrato'
+
     return render(request, "ContratoCRUD/crearContrato.html", data)
 
 def crear_contrato(fecha_inicio,fecha_termino,id_cliente,id_profesional):
@@ -848,7 +848,7 @@ def actualizarPago(request, id):
         pago = request.POST.get('pago')
         fecha_pago = request.POST.get('fecha_pago')
         idpago = request.POST.get('idpago')
-        salida = actualizarunpago(pago, fecha_pago, idpago)
+        salida = actualizarunpago( fecha_pago, idpago)
         if salida == 1:
             data['mensaje'] = 'Actualizado'
             data['listado'] = listado_pago(id)
@@ -869,11 +869,11 @@ def listado_pago(x):
         lista.append(fila)
     return lista
 ####################################################################PROCEDIMIENTO PARA ACTUALIZAR UN PAGO
-def actualizarunpago( pago, fecha , idpago):
+def actualizarunpago( fecha , idpago):
     django_cursor = connection.cursor()
     cursor = django_cursor.connection.cursor()
     salida = cursor.var(cx_Oracle.NUMBER)
-    cursor.callproc('SP_ACTUALIZARPAGO',[ pago, fecha, idpago,salida])
+    cursor.callproc('SP_ACTUALIZARPAGO',[ fecha, idpago,salida])
     
     return salida.getvalue()
 

@@ -27,10 +27,10 @@ class usando_unitest(unittest.TestCase):
         usuario.send_keys(Keys.ENTER)
         time.sleep(1)
         #ir a servicios
-        driver.find_element_by_xpath("/html/body/header/div/nav/ul/li[4]/a").click()
+        driver.get("http://127.0.0.1:8000/servicios")
         time.sleep(2)
-        #ir a ver listdo de Clientes
-        driver.find_element_by_xpath("/html/body/main/section/div/div/div[2]/div/div[3]/input").click()
+        #ir a ver listdo de profesionales
+        driver.get("http://127.0.0.1:8000/listadoCliente.html")
         time.sleep(2)
         if driver.current_url=='http://127.0.0.1:8000/listadoCliente.html':
             print("Ver listdo de los clientes ")

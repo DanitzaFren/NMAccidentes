@@ -26,7 +26,7 @@ class usando_unitest(unittest.TestCase):
         time.sleep(2)
         assert "No se encontro el elemento:" not in driver.page_source
         if driver.current_url=='http://127.0.0.1:8000/accounts/login/':
-            print("Validador de usuario correcto ")
+            print("Validador de usuario correcto al intentar ingresar con un usuario no registrado en el sistema.")
         else:
             print("Validador de usuario no funcionando")
 

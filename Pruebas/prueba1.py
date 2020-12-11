@@ -27,7 +27,7 @@ class usando_unitest(unittest.TestCase):
         time.sleep(5)
         assert "No se encontro el elemento:" not in driver.page_source
         if driver.current_url=='http://127.0.0.1:8000/':
-            print("Login del administrador correcto ")
+            print("Login del administrador correctamente validado por las pruebas unitarias con un usuario registrado en el sistema.")
         else:
             print("Login del administrador incorrecto")
 

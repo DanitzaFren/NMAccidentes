@@ -348,5 +348,3 @@ create or replace trigger inabhilitar
   update auth_user SET is_active= 0 where :new.estado=2 and id=:old.id_user;
   update auth_user Set is_active= 1 where :new.estado=1 and id=:old.id_user;
  end;
-
-pago_on_insert

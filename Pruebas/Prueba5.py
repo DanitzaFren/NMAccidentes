@@ -22,9 +22,10 @@ class usando_unitest(unittest.TestCase):
         clave.send_keys("duoc123456")
         usuario.send_keys(Keys.ENTER)
         time.sleep(1)
-        driver.find_element_by_xpath("/html/body/header/div/nav/ul/li[4]/a").click()
+        driver.get("http://127.0.0.1:8000/servicios")
         time.sleep(2)
-        driver.find_element_by_xpath("/html/body/main/section/div/div/div[2]/div/div[2]/input").click()
+        time.sleep(2)
+        driver.get("http://127.0.0.1:8000/crearCliente.html")
         time.sleep(2)
         self.assertIn("Ingresar Cliente", driver.title)
         rut = driver.find_element_by_id("txtRut")
@@ -32,12 +33,12 @@ class usando_unitest(unittest.TestCase):
         nombre = driver.find_element_by_name("nombre")
         nombre.send_keys("Cliente")
  # seleccionar en un select
-        Seleccionar = Select(driver.find_element_by_xpath("/html/body/main/section[2]/div/div/div/form/p[3]/select"))
+        Seleccionar = Select(driver.find_element_by_name("rubro"))
         Seleccionar.select_by_value("4")
         direccion = driver.find_element_by_name("direccion")
         direccion.send_keys("Callefalsa123")
         time.sleep(2)
-        driver.find_element_by_xpath("/html/body/main/section[2]/div/div/div/form/center/button").click()
+        direccion.send_keys(Keys.ENTER)
         time.sleep(2)
         username = driver.find_element_by_id("id_username")
         username.send_keys("Cliente")
@@ -47,10 +48,10 @@ class usando_unitest(unittest.TestCase):
         contras.send_keys("duoc123456")
         email = driver.find_element_by_id("id_email")
         email.send_keys("pruebaClie@gmail.com")
-        driver.find_element_by_xpath("/html/body/main/section[2]/div/div/div/form/center/button").click()
+        email.send_keys(Keys.ENTER)
         time.sleep(2)
-        if driver.current_url=='http://127.0.0.1:8000/servicios':
-            print("Se a creado el Cliente con exito ")
+        if driver.current_url=='http://127.0.0.1:8000/register_Cliente':
+            print("Se ha creado el Cliente con exito en el sistema ")
         else:
             print("no se pudo ingresar el Cliente")
 

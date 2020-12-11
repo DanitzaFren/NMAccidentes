@@ -26,9 +26,9 @@ class usando_unitest(unittest.TestCase):
         clave.send_keys("admin")
         usuario.send_keys(Keys.ENTER)
         time.sleep(1)
-        driver.find_element_by_xpath("/html/body/header/div/nav/ul/li[4]/a").click()
+        driver.get("http://127.0.0.1:8000/servicios")
         time.sleep(2)
-        driver.find_element_by_xpath("/html/body/main/section/div/div/div[2]/div/div[2]/input").click()
+        driver.get("http://127.0.0.1:8000/crearCliente.html")
         time.sleep(2)
         self.assertIn("Ingresar Cliente", driver.title)
         rut = driver.find_element_by_name("id_cliente")
@@ -36,10 +36,10 @@ class usando_unitest(unittest.TestCase):
         nombre = driver.find_element_by_name("nombre")
         nombre.send_keys("Contru. pro")
         time.sleep(2)
-        driver.find_element_by_xpath("/html/body/main/section[2]/div/div/div/form/center/button").click()
+        nombre.send_keys(Keys.ENTER)
         time.sleep(2)
         if driver.current_url=='http://127.0.0.1:8000/crearCliente.html':
-            print("Se a validado los campos del formulario")
+            print("Se ha validado los campos del formulario, no se puede dejar campos en blanco o ingresar tipos de datos incorrectos.")
         else:
             print("Error en validacion del formulario cliente")
 
