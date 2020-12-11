@@ -766,3 +766,4 @@ BEGIN
     when others then
         v_salida:= 0;
 END;
+

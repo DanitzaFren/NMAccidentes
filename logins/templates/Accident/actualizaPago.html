@@ -101,7 +101,7 @@
               {% csrf_token %}
               {% for pago in pago %}      
               <p >Nro:   
-              <input type="number" name="idpago" class="form-control" value="{{pago.0}}" readonly> 
+              <input type="number" name="idpago" class="form-control" value="{{pago.4}}" readonly> 
               <p>Total por pagar:</p>
               <input type="text" name="pago" value="{{pago.5}}" class="form-control" readonly>
               <br>

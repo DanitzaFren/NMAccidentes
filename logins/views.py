@@ -1280,3 +1280,4 @@ def fechf_contrato(idcheck):
     cursor.callproc('fechafcontrato',[ idcheck,salida])
     return salida.getvalue()
 
+listadoPagos
