@@ -105,4 +105,7 @@ urlpatterns = [
     path('proflisto/<id>', proflisto, name = 'proflisto'),
     path('acclisto/<id>', acclisto, name = 'acclisto'),
     path('profact/<id>', profact, name = 'profact'),
+    
+    path('listadoPagosPdf.html/', views.listadoPagosPdf.as_view(), name="listadoPagosPdf"),
+
 ]
