@@ -582,9 +582,9 @@ def completarChecklist(request, id):
 def checklisto(request, id ):
     salida = check_listo(id)
     if salida == 1:
-        return redirect('listadoChecklist')
+        return redirect('servicios')
             
-    return redirect(to="listadoChecklist")
+    return redirect(to="servicios")
 
 def check_listo(idcheck):
     django_cursor = connection.cursor()
@@ -1280,4 +1280,4 @@ def fechf_contrato(idcheck):
     cursor.callproc('fechafcontrato',[ idcheck,salida])
     return salida.getvalue()
 
-listadoPagos
+ 
