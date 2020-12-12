@@ -1,0 +1,74 @@
+
+
+  <main id="main">
+
+    <!-- ======= Contact Section ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+       
+
+      </div>
+    </section><!-- End Contact Section -->
+
+    <!-- ======= Contact Section ======= -->
+    <section class="contact" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+      <div>
+
+       <center>
+          
+          <h1>Lista Pago</h1>
+      
+        <div>
+          <table>
+              <thead>
+                  <tr>
+                      <th>ID Pago</th>
+                      <th>Fecha pago</th>
+                      <th>Fecha vencimiento</th>
+                      <th>Cliente</th>
+                      <th>Total pago</th>
+
+                  </tr>
+              </thead>
+              <tbody>
+                {% if pago %}
+                  {% for pago in pago %}
+                  <tr>
+                      <td>{{ pago.id_pago}}</td>
+                      <td>{{ pago.fecha_pago}}</td>
+                      <td>{{ pago.fecha_vencimiento}}</td>
+                      <td>{{ pago.id_cliente}}</td>
+                      <td>{{ pago.total_pagar}}</td>
+                      <td>
+                      
+
+
+                      </td>
+                  </tr>
+
+
+
+                  {% endfor %}
+                  {% else %}
+                  <h3>No hay registros</h3>
+                {% endif %}
+
+                {% if pago %}
+                {% for pago in pago %}
+                <td>Pago:</td>
+                <td>{{ pago.total_pagar}}"+"{{ pago.total_pagar}}</td>
+                {% endfor %}
+
+                {% else %}
+                <h3>No hay registros</h3>
+              {% endif %}
+
+               </tbody>
+          </table>
+        </div>
+      </center>
+   
+          
+</body>
+

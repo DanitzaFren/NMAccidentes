@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader, RequestContext
 from django.contrib import auth
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Profesional, Visita, Asesoria, Checklist, DetChecklist, Condicion, Cliente, Capacitacion,SolicitudAsesoria, Condicion, ContratoServicio # Llamado a los modelos
+from .models import Profesional, Visita, Asesoria, Checklist, DetChecklist, Condicion, Cliente, Capacitacion,SolicitudAsesoria, Condicion, ContratoServicio, Pago # Llamado a los modelos
 from .forms import VisitaForm, ResetPasswordForm, AsesoriasForm, ProfesionalForm, ChecklistForm, DetChecklistForm,CapacitacionForm , SolicitudForm, ClienteForm, CondicionForm, ContratoForm,UserCreationFor
 from django.urls import reverse_lazy
 from django.db import connection
@@ -1280,4 +1280,11 @@ def fechf_contrato(idcheck):
     cursor.callproc('fechafcontrato',[ idcheck,salida])
     return salida.getvalue()
 
- 
+class listadoPagosPdf(View):
+    def get(self, request, *args, **kwargs):
+        pago = Pago.objects.all()
+        data = {
+            'pago': pago
+        }
+        pdf = render_to_pdf("Accident/listadoPagosPdf.html", data)
+        return HttpResponse(pdf, content_type='application/pdf')
